@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectagc/screens/homePage/pagesClient/historique.dart';
 import 'package:projectagc/screens/homePage/pagesClient/profile.dart';
 import 'package:projectagc/screens/homePage/pagesClient/servicereclamation.dart';
+import 'package:projectagc/screens/homePage/pagesClient/statutB.dart';
 import 'package:projectagc/screens/loginPage/loginPage.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -104,7 +105,11 @@ class NavBarClient extends StatelessWidget {
                   return;
                 },
                 onTap: () {
-                  print('cliquer');
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) {
+                      return StatutBpc();
+                    }),
+                  );
                 },
               ),
             ),

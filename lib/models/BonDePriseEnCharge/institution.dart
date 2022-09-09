@@ -1,7 +1,7 @@
 class Institutions {
-  final int? id;
+  final String? id;
   final String name;
-  final int institutionId;
+  final String institutionId;
   final String ville;
   final String description;
 
@@ -14,10 +14,10 @@ class Institutions {
 
   factory Institutions.fromJson(dynamic json) {
     return Institutions(
-        id: json['id'] as int,
+        id: json['id'] as String,
         name: json['name'] as String,
-        institutionId: json['institution'] as int,
-        ville: json['ville'] as String,
+        institutionId: json['institution'] as String,
+        ville: json['town'] as String,
         description: json['description'] as String);
   }
   static List<Institutions> recipesFromSnapshot(List snapshot) {

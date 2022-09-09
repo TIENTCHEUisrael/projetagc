@@ -6,7 +6,6 @@ import 'package:projectagc/models/BonDePriseEnCharge/locale.dart';
 import 'package:projectagc/providers/providerBpc.dart';
 import 'package:projectagc/widgets/popup.dart';
 import 'package:provider/provider.dart';
-
 import '../../../animations/custum.dart';
 import '../../../providers/providerUser.dart';
 import '../../../themes/constants.dart';
@@ -23,15 +22,20 @@ class BonPriseCharge extends StatefulWidget {
 class _BonPriseChargeState extends State<BonPriseCharge> {
   bool value = false;
   List<Locales>? _locales;
+  Locales? locale;
   List<Institutions>? _intitutions;
   bool _isloading = true;
   bool _isgetting = false;
-  Locales? locale;
   String? ville;
   String? beneficiaire;
   List beneficiaires = ["bene1", "bene2"];
   String? partenaire;
-  List partenaires = ["partenaire1", "partenaire2"];
+  List partenaires = ["...", "..."];
+  bool t1 = true;
+  bool t2 = true;
+  bool t3 = true;
+  bool button = true;
+  bool getPartenaire = false;
   @override
   void initState() {
     super.initState();
@@ -47,7 +51,9 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
 
   Future<void> getpartenaires(Locales l, String s) async {
     _intitutions = await BPCProvider.getPartenaireByVilleLocale(l, s);
-    setState(() {});
+    setState(() {
+      getPartenaire = true;
+    });
   }
 
   @override
@@ -112,7 +118,9 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                             ignoring: false,
                             child: DropdownButton(
                               hint: const Text(
-                                  'Hopitals, Laboratoires,Autre Prestataire'),
+                                'Hopitals, Laboratoires,Autre Prestataire',
+                                style: TextStyle(color: Colors.black),
+                              ),
                               value: locale,
                               dropdownColor: Colors.white,
                               icon: Icon(
@@ -126,6 +134,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                               onChanged: (newvalue) {
                                 setState(() {
                                   locale = newvalue;
+                                  t1 = false;
                                 });
                               },
                               items: _locales!.map(
@@ -160,9 +169,19 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                     Border.all(color: Colors.grey, width: 1),
                                 borderRadius: BorderRadius.circular(15)),
                             child: IgnorePointer(
-                              ignoring: false,
+                              ignoring: t1,
                               child: DropdownButton(
-                                hint: const Text('Ville'),
+                                hint: t1
+                                    ? const Text(
+                                        'Ville',
+                                        style: TextStyle(color: Colors.grey),
+                                      )
+                                    : Text(
+                                        'Ville',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                        ),
+                                      ),
                                 value: ville,
                                 dropdownColor: Colors.white,
                                 icon: const Icon(
@@ -176,7 +195,10 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                 onChanged: (newvalue) {
                                   setState(() {
                                     ville = newvalue.toString();
+                                    t2 = false;
+                                    t3 = false;
                                   });
+                                  getpartenaires(locale!, ville!);
                                 },
                                 items: villes.map(
                                   (valueItem) {
@@ -199,9 +221,17 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                     Border.all(color: Colors.grey, width: 1),
                                 borderRadius: BorderRadius.circular(15)),
                             child: IgnorePointer(
-                              ignoring: false,
+                              ignoring: t2,
                               child: DropdownButton(
-                                hint: const Text('Bénéficiaire'),
+                                hint: t2
+                                    ? const Text(
+                                        'Bénéficiaire',
+                                        style: TextStyle(color: Colors.grey),
+                                      )
+                                    : Text(
+                                        'Bénéficiaire',
+                                        style: TextStyle(color: Colors.black),
+                                      ),
                                 value: beneficiaire,
                                 dropdownColor: Colors.white,
                                 icon: const Icon(
@@ -247,9 +277,17 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                               border: Border.all(color: Colors.grey, width: 1),
                               borderRadius: BorderRadius.circular(15)),
                           child: IgnorePointer(
-                            ignoring: false,
+                            ignoring: t3,
                             child: DropdownButton(
-                              hint: const Text("Choix de l'hopital partenaire"),
+                              hint: t3
+                                  ? const Text(
+                                      "Choix de l'hopital partenaire",
+                                      style: TextStyle(color: Colors.grey),
+                                    )
+                                  : Text(
+                                      "Choix de l'hopital partenaire",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
                               value: partenaire,
                               dropdownColor: Colors.white,
                               icon: const Icon(
@@ -265,12 +303,21 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                   partenaire = newvalue.toString();
                                 });
                               },
-                              items: partenaires.map(
-                                (valueItem) {
-                                  return DropdownMenuItem(
-                                      value: valueItem, child: Text(valueItem));
-                                },
-                              ).toList(),
+                              items: getPartenaire
+                                  ? _intitutions!.map(
+                                      (valueItem) {
+                                        return DropdownMenuItem(
+                                            value: valueItem,
+                                            child: Text(valueItem.name));
+                                      },
+                                    ).toList()
+                                  : partenaires.map(
+                                      (valueItem) {
+                                        return DropdownMenuItem(
+                                            value: valueItem,
+                                            child: Text(valueItem));
+                                      },
+                                    ).toList(),
                             ),
                           ),
                         ),
@@ -280,8 +327,9 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                       height: 10,
                     ),
                     Container(
+                      height: 250,
                       margin: const EdgeInsets.symmetric(horizontal: 10),
-                      padding: const EdgeInsets.only(top: 70, bottom: 70),
+                      /*padding: const EdgeInsets.only(top: 70, bottom: 70),*/
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: const AssetImage("assets/images/png/agc2.png"),
@@ -294,13 +342,32 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                         border: Border.all(color: blue_color),
                       ),
                       child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            const Center(
-                              child: Text('Information sur le partenaire'),
-                            ),
-                          ],
-                        ),
+                        child: t3
+                            ? Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      'Information sur le partenaire',
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Center(
+                                child: Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    const Center(
+                                      child: Text('Information'),
+                                    ),
+                                  ],
+                                ),
+                              ),
                       ),
                     ),
                     const SizedBox(
@@ -324,9 +391,9 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                       ),
                     ),
                     const SizedBox(
-                      height: 5,
+                      height: 15,
                     ),
-                    Row(
+                    /*Row(
                       children: [
                         SizedBox(
                           width: 10,
@@ -336,6 +403,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                           onChanged: (values) {
                             setState(() {
                               this.value = values!;
+                              button = false;
                             });
                           },
                         ),
@@ -344,167 +412,171 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                           style: TextStyle(color: blue_color),
                         ),
                       ],
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        if (ville!.isNotEmpty || partenaire!.isNotEmpty) {
-                          var coupon = Coupon(
-                              ville: ville!,
-                              partenaire: 1,
-                              identifiantclient: auth.user.identifiant);
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              });
+                    ),*/
+                    IgnorePointer(
+                      ignoring: button,
+                      child: GestureDetector(
+                        onTap: getPartenaire
+                            ? () {
+                                var coupon = Coupon(
+                                    ville: ville!,
+                                    partenaire: 1,
+                                    identifiantclient: auth.user.identifiant);
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    });
 
-                          final Future<Map<String, dynamic>?> response1 =
-                              bpcProvider.generateCoupon(coupon);
+                                final Future<Map<String, dynamic>?> response1 =
+                                    bpcProvider.generateCoupon(coupon);
 
-                          response1.then((value) {
-                            if (value!['statut']) {
-                              Fluttertoast.showToast(
-                                msg: "message ${value['message']}",
-                              );
-                              setState(() {
-                                _isgetting = true;
-                              });
-                              /*final Future<
-                                  Map<String,
-                                      dynamic>?> response2 = bpcProvider.sendEmail(
-                                  "AGC assurance",
-                                  "Coupon",
-                                  auth.user.nom,
-                                  "Ton coupon pour le bon de prise en charge est : ${bpcProvider.getCoupon}",
-                                  auth.user.email);
-
-                              response2.then((value1) {
-                                if (value1!['statut']) {
-                                  Fluttertoast.showToast(
-                                    msg:
-                                        "message ${value['message']} and ${value1['message']}",
-                                  );
-                                  setState(() {
-                                    _isgetting = true;
-                                  });
-                                  Navigator.of(context).pop();
-                                  Navigator.push(
-                                    context,
-                                    HeroDialogRoute(
-                                      builder: (context) {
-                                        return CouponPopup(
-                                          contain: Column(
-                                            children: [
-                                              Container(
-                                                child: Center(
-                                                  child: Text(
-                                                      'Votre coupon est : ${bpcProvider.getCoupon}'),
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Navigator.of(context).pop();
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: Card(
-                                                  elevation: 5,
-                                                  child: Text(
-                                                    'OK',
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        color: blue_color),
+                                response1.then((value) {
+                                  if (value!['statut']) {
+                                    Fluttertoast.showToast(
+                                      msg: "message ${value['message']}",
+                                    );
+                                    setState(() {
+                                      _isgetting = true;
+                                    });
+                                    /*final Future<
+                                    Map<String,
+                                        dynamic>?> response2 = bpcProvider.sendEmail(
+                                    "AGC assurance",
+                                    "Coupon",
+                                    auth.user.nom,
+                                    "Ton coupon pour le bon de prise en charge est : ${bpcProvider.getCoupon}",
+                                    auth.user.email);
+                    
+                                response2.then((value1) {
+                                  if (value1!['statut']) {
+                                    Fluttertoast.showToast(
+                                      msg:
+                                          "message ${value['message']} and ${value1['message']}",
+                                    );
+                                    setState(() {
+                                      _isgetting = true;
+                                    });
+                                    Navigator.of(context).pop();
+                                    Navigator.push(
+                                      context,
+                                      HeroDialogRoute(
+                                        builder: (context) {
+                                          return CouponPopup(
+                                            contain: Column(
+                                              children: [
+                                                Container(
+                                                  child: Center(
+                                                    child: Text(
+                                                        'Votre coupon est : ${bpcProvider.getCoupon}'),
                                                   ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  );
-                                } else {
-                                  Fluttertoast.showToast(
-                                    msg:
-                                        "Error ${value['message']} and ${value1['message']}",
-                                  );
-                                }
-                              });*/
-                              Navigator.of(context).pop();
-                              Navigator.push(
-                                context,
-                                HeroDialogRoute(
-                                  builder: (context) {
-                                    return CouponPopup(
-                                      contain: Column(
-                                        children: [
-                                          Container(
-                                            child: Center(
-                                              child: Text(
-                                                  'Votre coupon est : ${bpcProvider.getCoupon}'),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.of(context).pop();
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Card(
+                                                    elevation: 5,
+                                                    child: Text(
+                                                      'OK',
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: blue_color),
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
                                             ),
-                                          ),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-                                          GestureDetector(
-                                            onTap: () {
-                                              Navigator.of(context).pop();
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: Card(
-                                              elevation: 5,
-                                              child: Text(
-                                                'OK',
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    color: blue_color),
-                                              ),
-                                            ),
-                                          )
-                                        ],
+                                          );
+                                        },
                                       ),
                                     );
-                                  },
-                                ),
-                              );
-                            } else {
-                              Fluttertoast.showToast(
-                                msg: "message ${value['message']}",
-                              );
-                              Navigator.of(context).pop();
-                            }
-                          });
-                        } else {
-                          Fluttertoast.showToast(
-                            msg: "error: Enter the information",
-                          );
-                        }
-                      },
-                      child: Hero(
-                        tag: herosystem,
-                        createRectTween: (begin, end) {
-                          return CustomRectTween(begin: begin!, end: end!);
-                        },
-                        child: Card(
-                          elevation: 3.2,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(60),
+                                  } else {
+                                    Fluttertoast.showToast(
+                                      msg:
+                                          "Error ${value['message']} and ${value1['message']}",
+                                    );
+                                  }
+                                });*/
+                                    Navigator.of(context).pop();
+                                    Navigator.push(
+                                      context,
+                                      HeroDialogRoute(
+                                        builder: (context) {
+                                          return CouponPopup(
+                                            contain: Column(
+                                              children: [
+                                                Container(
+                                                  child: Center(
+                                                    child: Text(
+                                                        'Votre coupon est : ${bpcProvider.getCoupon}'),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.of(context).pop();
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Card(
+                                                    elevation: 5,
+                                                    child: Text(
+                                                      'OK',
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: blue_color),
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  } else {
+                                    Fluttertoast.showToast(
+                                      msg: "Error: ${value['message']}",
+                                    );
+                                    Navigator.of(context).pop();
+                                  }
+                                });
+                              }
+                            : () {
+                                Fluttertoast.showToast(
+                                  msg:
+                                      "Error: Des valeurs sont non selectionné}",
+                                );
+                              },
+                        child: Hero(
+                          tag: herosystem,
+                          createRectTween: (begin, end) {
+                            return CustomRectTween(begin: begin!, end: end!);
+                          },
+                          child: Card(
+                            elevation: 3.2,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(60),
+                              ),
                             ),
-                          ),
-                          child: Container(
-                            height: 85,
-                            width: 85,
-                            alignment: Alignment.center,
-                            child: Icon(
-                              Icons.share,
-                              color: blue_color,
-                              size: 60,
+                            child: Container(
+                              height: 85,
+                              width: 85,
+                              alignment: Alignment.center,
+                              child: Icon(
+                                Icons.share,
+                                color: blue_color,
+                                size: 60,
+                              ),
                             ),
                           ),
                         ),
