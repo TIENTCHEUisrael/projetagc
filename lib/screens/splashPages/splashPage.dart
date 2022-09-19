@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/screens/navigationPage/navigationPage.dart';
 
-const tt = "#182983";
+const blue = "#182983";
+const rouge = "#E3001B";
 
 class SplashPage extends StatefulWidget {
+  static const routeNamed = "/SplashPage";
   const SplashPage({super.key});
 
   @override
@@ -18,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
 
-    Timer(const Duration(seconds: 10), () {
+    Timer(const Duration(seconds: 5), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -40,7 +42,7 @@ class _SplashPageState extends State<SplashPage> {
             ),
             Center(
               child: Image.asset(
-                "assets/images/agc2.png",
+                "assets/images/png/agc2.png",
                 height: 250,
                 width: 250,
                 fit: BoxFit.cover,
@@ -54,9 +56,13 @@ class _SplashPageState extends State<SplashPage> {
               child: Text(
                 '20 ans de fidélité déjà, nous vous disons merci',
                 textAlign: TextAlign.center,
-                style: GoogleFonts.poppins(color: Colors.black),
+                style: GoogleFonts.poppins(color: Colors.black, fontSize: 20),
               ),
             ),
+            const SizedBox(
+              height: 35,
+            ),
+            const CircularProgressIndicator(),
           ],
         ),
       ),
