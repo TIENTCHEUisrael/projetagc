@@ -40,8 +40,10 @@ dependencies:
   flutter_svg: ^1.1.1+1
   google_fonts: ^3.0.1
   smooth_page_indicator: ^1.0.0+2
+  
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.10.0
   flutter_test:
     sdk: flutter
 
@@ -51,6 +53,14 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path_ios: "assets/images/png/agc2.png"
+  image_path_android: "assets/images/png/agc2.png"
+  adaptive_icon_background: "assets/images/png/agc2.png"
+  adaptive_icon_foreground: "assets/images/png/agc2.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
