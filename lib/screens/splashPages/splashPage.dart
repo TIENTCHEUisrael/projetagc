@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/screens/navigationPage/navigationPage.dart';
 import 'package:projectagc/themes/constants.dart';
 
+import '../../widgets/bas.dart';
+
 const blue = "#182983";
 const rouge = "#E3001B";
 
@@ -64,6 +66,10 @@ class _SplashPageState extends State<SplashPage> {
               height: 35,
             ),
             const CircularProgressIndicator(),
+            const SizedBox(
+              height: 100,
+            ),
+            bas(),
           ],
         ),
       ),
