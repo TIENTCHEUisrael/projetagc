@@ -52,14 +52,8 @@ class _HomeClientPageState extends State<HomeClientPage> {
           ),
         ],
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            child: Center(
-              child: Text('Home Page'),
-            ),
-          ),
-        ),
+      body: SingleChildScrollView(
+        child: Container(),
       ),
     );
   }

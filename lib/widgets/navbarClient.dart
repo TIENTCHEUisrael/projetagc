@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../screens/homePage/pages/profilePage.dart';
+import '../screens/loginPage/loginPage.dart';
 import '../themes/constants.dart';
 
 class NavBarClient extends StatelessWidget {
@@ -164,7 +166,17 @@ class NavBarClient extends StatelessWidget {
                 return;
               },
               onTap: () {
-                print("Deconnexion");
+                Fluttertoast.showToast(
+                  msg: "Message: Deconnexion",
+                );
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return LoginPage();
+                    },
+                  ),
+                );
               },
             ),
           ),
