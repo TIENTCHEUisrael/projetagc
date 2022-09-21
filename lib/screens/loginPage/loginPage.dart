@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectagc/themes/constants.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,12 +11,12 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.all(5),
-        child: const Center(
-          child: Text('Login Page'),
-        ),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage('assets/images/png/agc1.png'),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(blue_color, BlendMode.darken)),
       ),
     );
   }

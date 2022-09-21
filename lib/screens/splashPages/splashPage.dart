@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/screens/navigationPage/navigationPage.dart';
+import 'package:projectagc/themes/constants.dart';
 
 const blue = "#182983";
 const rouge = "#E3001B";
@@ -56,7 +57,7 @@ class _SplashPageState extends State<SplashPage> {
               child: Text(
                 '20 ans de fidélité déjà, nous vous disons merci',
                 textAlign: TextAlign.center,
-                style: GoogleFonts.poppins(color: Colors.black, fontSize: 20),
+                style: GoogleFonts.poppins(color: blue_color, fontSize: 20),
               ),
             ),
             const SizedBox(
