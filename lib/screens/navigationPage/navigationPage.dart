@@ -7,7 +7,6 @@ import 'package:projectagc/themes/constants.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../animations/buttonAnimation1.dart';
-import '../loginPage/loginPage.dart';
 
 class NavigationPage extends StatefulWidget {
   static const routeNamed = "/NavigatorPage";

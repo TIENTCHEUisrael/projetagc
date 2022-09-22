@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../../../themes/constants.dart';
 
-class ServicePage extends StatefulWidget {
-  const ServicePage({super.key});
+class FAQPage extends StatefulWidget {
+  const FAQPage({super.key});
 
   @override
-  State<ServicePage> createState() => _ServicePageState();
+  State<FAQPage> createState() => _FAQPageState();
 }
 
-class _ServicePageState extends State<ServicePage> {
+class _FAQPageState extends State<FAQPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +17,7 @@ class _ServicePageState extends State<ServicePage> {
         backgroundColor: blue_color,
         title: const Center(
           child: Text(
-            'Service reclamation',
+            'Historique de bon de prise en charge',
             style: TextStyle(color: scaffoldbackground),
             textAlign: TextAlign.center,
           ),
@@ -33,8 +33,10 @@ class _ServicePageState extends State<ServicePage> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Center(
-          child: Text('Service'),
+        child: Container(
+          child: Center(
+            child: Text('FAQ'),
+          ),
         ),
       ),
     );

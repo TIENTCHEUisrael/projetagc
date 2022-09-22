@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:projectagc/screens/homePage/pages/faq.dart';
+import 'package:projectagc/screens/homePage/pages/historique.dart';
+import 'package:projectagc/screens/homePage/pages/servicereclamation.dart';
 import '../screens/homePage/pages/profilePage.dart';
 import '../screens/loginPage/loginPage.dart';
 import '../themes/constants.dart';
@@ -98,7 +101,13 @@ class NavBarClient extends StatelessWidget {
                 return;
               },
               onTap: () {
-                print('historique');
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return HistoriquePage();
+                    },
+                  ),
+                );
               },
             ),
           ),
@@ -121,7 +130,13 @@ class NavBarClient extends StatelessWidget {
                 return;
               },
               onTap: () {
-                print('Service');
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return ServicePage();
+                    },
+                  ),
+                );
               },
             ),
           ),
@@ -144,7 +159,13 @@ class NavBarClient extends StatelessWidget {
                 return;
               },
               onTap: () {
-                print('FAQ');
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return FAQPage();
+                    },
+                  ),
+                );
               },
             ),
           ),
