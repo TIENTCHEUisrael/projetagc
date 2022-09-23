@@ -51,13 +51,21 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             actions: [
-              IconButton(
+              Image.asset(
+                "assets/images/png/agc1.png",
+                height: 40,
+                width: 40,
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              /*IconButton(
                 onPressed: () {},
                 icon: const Icon(
                   Icons.hail,
                   color: Colors.transparent,
                 ),
-              ),
+              ),*/
             ],
           ),
           body: SingleChildScrollView(

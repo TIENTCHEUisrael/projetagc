@@ -14,6 +14,10 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>projectagc</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Need to get your localisation !</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>For the localisation!</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

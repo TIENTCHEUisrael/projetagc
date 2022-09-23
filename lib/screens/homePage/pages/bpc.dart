@@ -23,13 +23,21 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
           ),
         ),
         actions: [
-          IconButton(
+          Image.asset(
+            "assets/images/png/agc1.png",
+            height: 40,
+            width: 40,
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+          /*IconButton(
             onPressed: () {},
             icon: const Icon(
               Icons.e_mobiledata,
               color: Colors.transparent,
             ),
-          ),
+          ),*/
         ],
       ),
       body: SingleChildScrollView(

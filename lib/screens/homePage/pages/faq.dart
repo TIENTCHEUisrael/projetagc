@@ -17,19 +17,27 @@ class _FAQPageState extends State<FAQPage> {
         backgroundColor: blue_color,
         title: const Center(
           child: Text(
-            'Historique de bon de prise en charge',
+            'FAQ',
             style: TextStyle(color: scaffoldbackground),
             textAlign: TextAlign.center,
           ),
         ),
         actions: [
-          IconButton(
+          Image.asset(
+            "assets/images/png/agc1.png",
+            height: 40,
+            width: 40,
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+          /*IconButton(
             onPressed: () {},
             icon: const Icon(
               Icons.e_mobiledata,
               color: Colors.transparent,
             ),
-          ),
+          ),*/
         ],
       ),
       body: SingleChildScrollView(

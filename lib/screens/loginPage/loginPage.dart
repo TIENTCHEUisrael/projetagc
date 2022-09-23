@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/screens/homePage/homeClientPage.dart';
 import 'package:projectagc/themes/constants.dart';
+import 'package:provider/provider.dart';
 
 import '../../animations/buttonAnimation1.dart';
+import '../../providers/providerUser.dart';
 import '../../widgets/bas.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,6 +18,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+  bool isLoading = false;
   var _obscureText = true;
   var _iconchange = Icon(
     Icons.visibility,
@@ -32,7 +36,15 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    idenfifiant.text = "202120TTAD092067";
+    motdepasse.text = "Admin1234";
+  }
+
+  @override
   Widget build(BuildContext context) {
+    AuthProvider auth = Provider.of<AuthProvider>(context);
     return Scaffold(
       backgroundColor: Colors.blue[100],
       body: SingleChildScrollView(
@@ -179,13 +191,32 @@ class _LoginPageState extends State<LoginPage> {
                                 final form = _formKey.currentState;
                                 if (form!.validate()) {
                                   form.save();
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) {
-                                        return HomeClientPage();
-                                      },
-                                    ),
+                                  final Future<Map<String, dynamic>?> response =
+                                      auth.loginUser(
+                                          idenfifiant.text, motdepasse.text);
+                                  response.then(
+                                    (value) {
+                                      if (value!['statut']) {
+                                        Fluttertoast.showToast(
+                                          msg: "message ${value['message']}",
+                                        );
+                                        setState(() {
+                                          isLoading = false;
+                                        });
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) {
+                                              return HomeClientPage();
+                                            },
+                                          ),
+                                        );
+                                      } else {
+                                        Fluttertoast.showToast(
+                                          msg: "Error ${value['message']}",
+                                        );
+                                      }
+                                    },
                                   );
                                 }
                               },
@@ -196,17 +227,22 @@ class _LoginPageState extends State<LoginPage> {
                                   borderRadius: BorderRadius.circular(18),
                                 ),
                                 child: Center(
-                                  child: Text(
-                                    'Connection',
-                                    style: GoogleFonts.poppins(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
-                                  ),
+                                  child: isLoading
+                                      ? const CircularProgressIndicator(
+                                          color: Colors.white,
+                                          strokeWidth: 2,
+                                        )
+                                      : Text(
+                                          'Connection',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16),
+                                        ),
                                 ),
                               ),
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
