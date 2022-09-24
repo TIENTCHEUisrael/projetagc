@@ -63,7 +63,7 @@ class AuthProvider extends ChangeNotifier {
       print('...........................BEGIN......................;');
       _logStatus = Statut.authenticating;
       notifyListeners();
-      final response = await http.get(urlLogin);
+      final response = await http.post(urlLogin);
       if (response.statusCode == 200) {
         print('............................................');
         _logStatus = Statut.authenticated;
@@ -71,12 +71,13 @@ class AuthProvider extends ChangeNotifier {
         var responseb = response.body
             .substring(response.body.indexOf('document.cookie') + 17);
         print(responseb);
-        //var data = jsonDecode(response.body);
-        //print(data);
+        var data = jsonDecode(response.body);
+        print(data);
         notifyListeners();
         result = {
           "statut": true,
           "message": "User authenticated",
+          "user": data
         };
       } else {
         _logStatus = Statut.notauthenticate;

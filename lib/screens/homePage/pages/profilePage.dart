@@ -26,15 +26,15 @@ class _ProfilePageState extends State<ProfilePage> {
       children: [
         Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
+              /*gradient: LinearGradient(
               colors: [
                 Color.fromRGBO(4, 9, 35, 1),
                 Color.fromRGBO(39, 105, 171, 1),
               ],
               begin: FractionalOffset.bottomCenter,
               end: FractionalOffset.topCenter,
-            ),
-          ),
+            ),*/
+              color: Colors.grey[300]),
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
