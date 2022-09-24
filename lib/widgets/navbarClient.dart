@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:projectagc/screens/homePage/pages/faq.dart';
-import 'package:projectagc/screens/homePage/pages/historique.dart';
-import 'package:projectagc/screens/homePage/pages/servicereclamation.dart';
-import '../screens/homePage/pages/profilePage.dart';
+import 'package:projectagc/screens/homePage/pagesClient/faq.dart';
+import 'package:projectagc/screens/homePage/pagesClient/historique.dart';
+import 'package:projectagc/screens/homePage/pagesClient/servicereclamation.dart';
+import '../screens/homePage/pagesClient/profilePage.dart';
 import '../screens/loginPage/loginPage.dart';
 import '../themes/constants.dart';
 

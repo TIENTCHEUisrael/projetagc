@@ -5,7 +5,7 @@ import 'package:projectagc/themes/constants.dart';
 import 'package:projectagc/widgets/navbarClient.dart';
 
 import '../../widgets/bas.dart';
-import 'pages/BonDePriseEnCharge.dart';
+import 'pagesClient/BonDePriseEnCharge.dart';
 
 class HomeClientPage extends StatefulWidget {
   const HomeClientPage({super.key});
