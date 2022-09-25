@@ -11,8 +11,9 @@ class BonPriseCharge extends StatefulWidget {
 }
 
 class _BonPriseChargeState extends State<BonPriseCharge> {
+  bool value = false;
   String? hostoChoose;
-  List hostos = ["items1", "items2", "items3", "items4", "items5"];
+  List hostos = ["Hopital", "Laboratoire"];
   String? ville;
   List villes = ["ville1", "ville2", "ville3", "ville4", "ville5"];
   String? beneficiaire;
@@ -61,29 +62,33 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey, width: 1),
                       borderRadius: BorderRadius.circular(15)),
-                  child: DropdownButton(
-                    hint: const Text('Hopital, Laboratoir,Autre Prestataire'),
-                    value: hostoChoose,
-                    dropdownColor: Colors.white,
-                    icon: Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.black,
-                    ),
-                    iconSize: 36,
-                    underline: SizedBox(),
-                    //isExpanded: true,
-                    style: TextStyle(color: blue_color),
-                    onChanged: (newvalue) {
-                      setState(() {
-                        hostoChoose = newvalue.toString();
-                      });
-                    },
-                    items: hostos.map(
-                      (valueItem) {
-                        return DropdownMenuItem(
-                            value: valueItem, child: Text(valueItem));
+                  child: IgnorePointer(
+                    ignoring: false,
+                    child: DropdownButton(
+                      hint:
+                          const Text('Hopital, Laboratoire,Autre Prestataire'),
+                      value: hostoChoose,
+                      dropdownColor: Colors.white,
+                      icon: Icon(
+                        Icons.arrow_drop_down,
+                        color: Colors.black,
+                      ),
+                      iconSize: 36,
+                      underline: SizedBox(),
+                      //isExpanded: true,
+                      style: TextStyle(color: blue_color),
+                      onChanged: (newvalue) {
+                        setState(() {
+                          hostoChoose = newvalue.toString();
+                        });
                       },
-                    ).toList(),
+                      items: hostos.map(
+                        (valueItem) {
+                          return DropdownMenuItem(
+                              value: valueItem, child: Text(valueItem));
+                        },
+                      ).toList(),
+                    ),
                   ),
                 ),
               ),
@@ -106,29 +111,32 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey, width: 1),
                         borderRadius: BorderRadius.circular(15)),
-                    child: DropdownButton(
-                      hint: const Text('Ville / City'),
-                      value: ville,
-                      dropdownColor: Colors.white,
-                      icon: const Icon(
-                        Icons.arrow_drop_down,
-                        color: Colors.black,
-                      ),
-                      iconSize: 36,
-                      underline: SizedBox(),
-                      //isExpanded: true,
-                      style: TextStyle(color: blue_color),
-                      onChanged: (newvalue) {
-                        setState(() {
-                          ville = newvalue.toString();
-                        });
-                      },
-                      items: villes.map(
-                        (valueItem) {
-                          return DropdownMenuItem(
-                              value: valueItem, child: Text(valueItem));
+                    child: IgnorePointer(
+                      ignoring: false,
+                      child: DropdownButton(
+                        hint: const Text('Ville / City'),
+                        value: ville,
+                        dropdownColor: Colors.white,
+                        icon: const Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.black,
+                        ),
+                        iconSize: 36,
+                        underline: SizedBox(),
+                        //isExpanded: true,
+                        style: TextStyle(color: blue_color),
+                        onChanged: (newvalue) {
+                          setState(() {
+                            ville = newvalue.toString();
+                          });
                         },
-                      ).toList(),
+                        items: villes.map(
+                          (valueItem) {
+                            return DropdownMenuItem(
+                                value: valueItem, child: Text(valueItem));
+                          },
+                        ).toList(),
+                      ),
                     ),
                   ),
                 ),
@@ -140,29 +148,32 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey, width: 1),
                         borderRadius: BorderRadius.circular(15)),
-                    child: DropdownButton(
-                      hint: const Text('Bénéficiaire'),
-                      value: beneficiaire,
-                      dropdownColor: Colors.white,
-                      icon: const Icon(
-                        Icons.arrow_drop_down,
-                        color: Colors.black,
-                      ),
-                      iconSize: 36,
-                      underline: SizedBox(),
-                      //isExpanded: true,
-                      style: TextStyle(color: blue_color),
-                      onChanged: (newvalue) {
-                        setState(() {
-                          beneficiaire = newvalue.toString();
-                        });
-                      },
-                      items: beneficiaires.map(
-                        (valueItem) {
-                          return DropdownMenuItem(
-                              value: valueItem, child: Text(valueItem));
+                    child: IgnorePointer(
+                      ignoring: false,
+                      child: DropdownButton(
+                        hint: const Text('Bénéficiaire'),
+                        value: beneficiaire,
+                        dropdownColor: Colors.white,
+                        icon: const Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.black,
+                        ),
+                        iconSize: 36,
+                        underline: SizedBox(),
+                        //isExpanded: true,
+                        style: TextStyle(color: blue_color),
+                        onChanged: (newvalue) {
+                          setState(() {
+                            beneficiaire = newvalue.toString();
+                          });
                         },
-                      ).toList(),
+                        items: beneficiaires.map(
+                          (valueItem) {
+                            return DropdownMenuItem(
+                                value: valueItem, child: Text(valueItem));
+                          },
+                        ).toList(),
+                      ),
                     ),
                   ),
                 ),
@@ -184,29 +195,32 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey, width: 1),
                       borderRadius: BorderRadius.circular(15)),
-                  child: DropdownButton(
-                    hint: const Text("Choix de l'hopital partenaire"),
-                    value: partenaire,
-                    dropdownColor: Colors.white,
-                    icon: const Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.black,
-                    ),
-                    iconSize: 36,
-                    underline: SizedBox(),
-                    //isExpanded: true,
-                    style: TextStyle(color: blue_color),
-                    onChanged: (newvalue) {
-                      setState(() {
-                        partenaire = newvalue.toString();
-                      });
-                    },
-                    items: partenaires.map(
-                      (valueItem) {
-                        return DropdownMenuItem(
-                            value: valueItem, child: Text(valueItem));
+                  child: IgnorePointer(
+                    ignoring: false,
+                    child: DropdownButton(
+                      hint: const Text("Choix de l'hopital partenaire"),
+                      value: partenaire,
+                      dropdownColor: Colors.white,
+                      icon: const Icon(
+                        Icons.arrow_drop_down,
+                        color: Colors.black,
+                      ),
+                      iconSize: 36,
+                      underline: SizedBox(),
+                      //isExpanded: true,
+                      style: TextStyle(color: blue_color),
+                      onChanged: (newvalue) {
+                        setState(() {
+                          partenaire = newvalue.toString();
+                        });
                       },
-                    ).toList(),
+                      items: partenaires.map(
+                        (valueItem) {
+                          return DropdownMenuItem(
+                              value: valueItem, child: Text(valueItem));
+                        },
+                      ).toList(),
+                    ),
                   ),
                 ),
               ),
@@ -216,10 +230,14 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
             ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
-              padding: const EdgeInsets.only(top: 60, bottom: 60),
+              padding: const EdgeInsets.only(top: 70, bottom: 70),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/png/agc2.png"),
+                  image: const AssetImage("assets/images/png/agc2.png"),
+                  colorFilter: new ColorFilter.mode(
+                    Colors.white.withOpacity(0.1),
+                    BlendMode.dstATop,
+                  ),
                 ),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: blue_color),
@@ -252,9 +270,17 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
               height: 5,
             ),
             Row(
-              children: const [
+              children: [
                 SizedBox(
-                  width: 20,
+                  width: 10,
+                ),
+                Checkbox(
+                  value: this.value,
+                  onChanged: (values) {
+                    setState(() {
+                      this.value = values!;
+                    });
+                  },
                 ),
                 Text(
                   'Formulaire a verifier',
@@ -274,8 +300,8 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                   ),
                 ),
                 child: Container(
-                  height: 90,
-                  width: 90,
+                  height: 85,
+                  width: 85,
                   alignment: Alignment.center,
                   child: Icon(
                     Icons.share,

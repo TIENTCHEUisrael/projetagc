@@ -191,6 +191,9 @@ class _LoginPageState extends State<LoginPage> {
                                 final form = _formKey.currentState;
                                 if (form!.validate()) {
                                   form.save();
+                                  setState(() {
+                                    isLoading = true;
+                                  });
                                   final Future<Map<String, dynamic>?> response =
                                       auth.loginUser(
                                           idenfifiant.text, motdepasse.text);
@@ -233,7 +236,7 @@ class _LoginPageState extends State<LoginPage> {
                                           strokeWidth: 2,
                                         )
                                       : Text(
-                                          'Connection',
+                                          'Connexion',
                                           style: GoogleFonts.poppins(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,

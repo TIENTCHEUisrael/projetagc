@@ -121,7 +121,7 @@ class _ChoicePageState extends State<ChoicePage> {
                       );
                     },
                     child: Text(
-                      'Societe',
+                      'Entreprise',
                       style: GoogleFonts.poppins(fontSize: 22),
                     ),
                   ),
