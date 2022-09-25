@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projectagc/screens/loginPage/loginEntreprise.dart';
 import 'package:projectagc/screens/loginPage/loginPage.dart';
 import 'package:projectagc/themes/constants.dart';
 import '../../animations/buttonAnimation1.dart';
@@ -38,7 +39,7 @@ class _ChoicePageState extends State<ChoicePage> {
                     bottom: 10,
                   ),
                   child: Text(
-                    'Statut :',
+                    'Connexion en tand que :',
                     style: GoogleFonts.poppins(
                       fontSize: 18,
                     ),
@@ -116,7 +117,7 @@ class _ChoicePageState extends State<ChoicePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) {
-                          return Container();
+                          return LoginEntreprisePage();
                         }),
                       );
                     },

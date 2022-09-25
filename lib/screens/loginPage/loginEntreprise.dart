@@ -4,19 +4,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/screens/homePage/homeClientPage.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:provider/provider.dart';
-
 import '../../animations/buttonAnimation1.dart';
 import '../../providers/providerUser.dart';
 import '../../widgets/bas.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LoginEntreprisePage extends StatefulWidget {
+  const LoginEntreprisePage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LoginEntreprisePage> createState() => _LoginEntreprisePageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginEntreprisePageState extends State<LoginEntreprisePage> {
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
   var _obscureText = true;
@@ -38,8 +37,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    idenfifiant.text = "202120TTAD092067";
-    motdepasse.text = "Admin1234";
   }
 
   @override
@@ -194,32 +191,13 @@ class _LoginPageState extends State<LoginPage> {
                                   setState(() {
                                     isLoading = true;
                                   });
-                                  final Future<Map<String, dynamic>?> response =
-                                      auth.loginUser(
-                                          idenfifiant.text, motdepasse.text);
-                                  response.then(
-                                    (value) {
-                                      if (value!['statut']) {
-                                        Fluttertoast.showToast(
-                                          msg: "message ${value['message']}",
-                                        );
-                                        setState(() {
-                                          isLoading = false;
-                                        });
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) {
-                                              return HomeClientPage();
-                                            },
-                                          ),
-                                        );
-                                      } else {
-                                        Fluttertoast.showToast(
-                                          msg: "Error ${value['message']}",
-                                        );
-                                      }
-                                    },
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return HomeClientPage();
+                                      },
+                                    ),
                                   );
                                 }
                               },
