@@ -17,7 +17,6 @@ class _ListPagesState extends State<ListPages> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: scaffoldbackground,
         body: Column(
           children: [
             TabBar(
@@ -26,8 +25,8 @@ class _ListPagesState extends State<ListPages> {
                 Tab(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      const Icon(Icons.timer_off, color: Colors.black),
+                    children: const [
+                      Icon(Icons.list_sharp, color: Colors.black),
                       Text(
                         'Clients',
                         style: TextStyle(
@@ -40,9 +39,9 @@ class _ListPagesState extends State<ListPages> {
                 Tab(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      const Icon(
-                        Icons.time_to_leave,
+                    children: const [
+                      Icon(
+                        Icons.list_rounded,
                         color: Colors.black,
                       ),
                       Text(
