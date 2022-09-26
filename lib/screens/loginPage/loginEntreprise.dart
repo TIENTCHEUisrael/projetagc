@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/screens/homePage/homeClientPage.dart';
+import 'package:projectagc/screens/homePage/homeEntreprisePage.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:provider/provider.dart';
 import '../../animations/buttonAnimation1.dart';
@@ -195,7 +196,7 @@ class _LoginEntreprisePageState extends State<LoginEntreprisePage> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) {
-                                        return HomeClientPage();
+                                        return HomeEntreprisePage();
                                       },
                                     ),
                                   );

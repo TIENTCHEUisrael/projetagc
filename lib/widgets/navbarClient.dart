@@ -3,10 +3,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectagc/screens/homePage/pagesClient/faq.dart';
 import 'package:projectagc/screens/homePage/pagesClient/historique.dart';
 import 'package:projectagc/screens/homePage/pagesClient/servicereclamation.dart';
+import 'package:projectagc/screens/loginPage/choicePage.dart';
 import 'package:provider/provider.dart';
 import '../providers/providerUser.dart';
 import '../screens/homePage/pagesClient/profilePage.dart';
-import '../screens/loginPage/loginPage.dart';
 import '../themes/constants.dart';
 
 class NavBarClient extends StatelessWidget {
@@ -20,10 +20,10 @@ class NavBarClient extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: blue_color),
+              decoration: const BoxDecoration(color: blue_color),
               accountName: Row(
                 children: [
-                  Text("Identifiant :"),
+                  const Text("Identifiant :"),
                   Text(
                     'IU839UD',
                     style: TextStyle(
@@ -98,7 +98,7 @@ class NavBarClient extends StatelessWidget {
                   color: blue_color,
                 ),
                 title: const Text(
-                  'Historique des prises en charge',
+                  'Historique des bons de prises en charge',
                 ),
                 onLongPress: () {
                   return;
@@ -200,7 +200,7 @@ class NavBarClient extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return LoginPage();
+                              return ChoicePage();
                             },
                           ),
                         );

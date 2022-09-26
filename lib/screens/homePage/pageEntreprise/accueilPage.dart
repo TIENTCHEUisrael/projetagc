@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../../../themes/constants.dart';
 
-class ProfilePageE extends StatefulWidget {
-  const ProfilePageE({super.key});
+class AccueilPage extends StatefulWidget {
+  const AccueilPage({super.key});
 
   @override
-  State<ProfilePageE> createState() => _ProfilePageEState();
+  State<AccueilPage> createState() => _AccueilPageState();
 }
 
-class _ProfilePageEState extends State<ProfilePageE> {
+class _AccueilPageState extends State<AccueilPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

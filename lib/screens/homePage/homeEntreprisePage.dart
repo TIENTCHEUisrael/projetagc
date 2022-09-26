@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/themes/constants.dart';
-import 'package:projectagc/widgets/navbarClient.dart';
 import 'package:projectagc/widgets/navbarEntreprise.dart';
 
 import '../../widgets/bas.dart';
-import 'pagesClient/BonDePriseEnCharge.dart';
+import 'pageEntreprise/accueilPage.dart';
+import 'pageEntreprise/listPages.dart';
+import 'pageEntreprise/profilePageE.dart';
 
 class HomeEntreprisePage extends StatefulWidget {
   const HomeEntreprisePage({super.key});
@@ -20,6 +21,16 @@ class _HomeEntreprisePageState extends State<HomeEntreprisePage> {
   var color2 = blue_color;
   var height1 = 15;
   var height2 = 20;
+  String _texte = 'Accueil';
+  int currentTab = 0;
+
+  final List<Widget> screens = [
+    AccueilPage(),
+    ListPages(),
+    ProfilePageE(),
+  ];
+  final PageStorageBucket bucket = PageStorageBucket();
+  Widget currentPage = AccueilPage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,116 +73,107 @@ class _HomeEntreprisePageState extends State<HomeEntreprisePage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 30,
-            ),
-            Center(
-              child: Lottie.asset("assets/images/lottie/e.json",
-                  height: 300, width: 300),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Colors.grey[200],
-              ),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Center(
-                    child: const Text(
-                      'Requerir un bon de prise en charge',
-                      style: TextStyle(
-                        color: blue_color,
-                        fontSize: 18,
+      body: PageStorage(
+        bucket: bucket,
+        child: currentPage,
+      ),
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 10,
+        child: SizedBox(
+          height: 82,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    MaterialButton(
+                      onPressed: () {
+                        setState(() {
+                          currentPage = AccueilPage();
+                          currentTab = 0;
+                          _texte = 'Accueil';
+                        });
+                      },
+                      minWidth: 40,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.home,
+                            color: currentTab == 0 ? blue_color : Colors.grey,
+                            size: currentTab == 0 ? 38 : 29,
+                          ),
+                          Text(
+                            'Accueil',
+                            style: GoogleFonts.poppins(
+                                color:
+                                    currentTab == 0 ? blue_color : Colors.grey),
+                          ),
+                        ],
                       ),
-                      textAlign: TextAlign.center,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return BonPriseCharge();
+                    MaterialButton(
+                      onPressed: () {
+                        setState(() {
+                          currentPage = ListPages();
+                          currentTab = 1;
+                          _texte = 'Listes';
+                        });
+                      },
+                      minWidth: 40,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.list_alt,
+                            color: currentTab == 1 ? blue_color : Colors.grey,
+                            size: currentTab == 1 ? 38 : 29,
+                          ),
+                          Text(
+                            'Listes',
+                            style: GoogleFonts.poppins(
+                                color:
+                                    currentTab == 1 ? blue_color : Colors.grey),
+                          ),
+                        ],
+                      ),
+                    ),
+                    MaterialButton(
+                      onPressed: () {
+                        setState(
+                          () {
+                            currentPage = ProfilePageE();
+                            currentTab = 2;
+                            _texte = 'Profile';
                           },
-                        ),
-                      );
-                    },
-                    child: Card(
-                      elevation: 3.2,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(60),
-                        ),
-                      ),
-                      child: Container(
-                        height: 90,
-                        width: 90,
-                        alignment: Alignment.center,
-                        child: Icon(
-                          Icons.cases_sharp,
-                          color: blue_color,
-                        ),
+                        );
+                      },
+                      minWidth: 40,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.person,
+                            color: currentTab == 2 ? blue_color : Colors.grey,
+                            size: currentTab == 2 ? 38 : 28,
+                          ),
+                          Text(
+                            'Profile',
+                            style: GoogleFonts.poppins(
+                                color:
+                                    currentTab == 2 ? blue_color : Colors.grey),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 40),
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: blue_color),
-              ),
-              child: Center(
-                child: Text(
-                  'Parler a un conseiller',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16, color: blue_color),
+                  ],
                 ),
-              ),
+                bas()
+              ],
             ),
-            const SizedBox(
-              height: 15,
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 40),
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: blue_color),
-              ),
-              child: Center(
-                child: Text(
-                  "Besoin d'aide",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16, color: blue_color),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 35,
-            ),
-            bas(),
-          ],
+          ),
         ),
       ),
     );
