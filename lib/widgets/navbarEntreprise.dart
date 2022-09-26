@@ -63,7 +63,7 @@ class NavBarEntreprise extends StatelessWidget {
               ),
               child: ListTile(
                 leading: const Icon(
-                  Icons.person,
+                  Icons.add_comment,
                   color: blue_color,
                 ),
                 title: const Text('Test'),

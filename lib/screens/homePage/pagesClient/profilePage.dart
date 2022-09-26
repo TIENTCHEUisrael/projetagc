@@ -1,12 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:projectagc/screens/splashPages/splashPage.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-
-import '../../../animations/buttonAnimation1.dart';
 import '../../loginPage/loginPage.dart';
 
 class ProfilePage extends StatefulWidget {

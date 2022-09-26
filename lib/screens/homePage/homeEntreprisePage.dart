@@ -67,8 +67,8 @@ class _HomeEntreprisePageState extends State<HomeEntreprisePage> {
           IconButton(
             onPressed: () {},
             icon: const Icon(
-              CupertinoIcons.moon_stars,
-              color: Colors.white,
+              Icons.notifications,
+              color: Colors.black,
             ),
           ),
         ],
