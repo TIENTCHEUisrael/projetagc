@@ -68,7 +68,7 @@ class _HomeEntreprisePageState extends State<HomeEntreprisePage> {
             onPressed: () {},
             icon: const Icon(
               Icons.notifications,
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
         ],

@@ -16,13 +16,10 @@ class _AddCompteState extends State<AddCompte> {
       appBar: AppBar(
         backgroundColor: blue_color,
         title: const Center(
-          child: Hero(
-            tag: 'herotag',
-            child: Text(
-              'Ajouter Compte',
-              style: TextStyle(color: scaffoldbackground),
-              textAlign: TextAlign.center,
-            ),
+          child: Text(
+            'Ajouter Compte',
+            style: TextStyle(color: scaffoldbackground),
+            textAlign: TextAlign.center,
           ),
         ),
         actions: [
@@ -44,8 +41,12 @@ class _AddCompteState extends State<AddCompte> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Container(
-          child: Text('dssdf'),
+        child: Column(
+          children: [
+            Center(
+              child: Text('Add'),
+            )
+          ],
         ),
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:projectagc/screens/homePage/pageEntreprise/test.dart';
 import 'package:projectagc/screens/loginPage/choicePage.dart';
-import 'package:projectagc/screens/loginPage/loginEntreprise.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/providerUser.dart';
@@ -74,7 +74,7 @@ class NavBarEntreprise extends StatelessWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
-                        return Container();
+                        return TestBonPriseCharge();
                       },
                     ),
                   );
