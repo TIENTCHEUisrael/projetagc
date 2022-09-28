@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:projectagc/widgets/navbarClient.dart';
 
@@ -63,8 +62,135 @@ class _HomeClientPageState extends State<HomeClientPage> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Center(
+              child: Stack(
+                children: [
+                  Center(
+                    child: Image.asset(
+                      "assets/images/png/doc.png",
+                      height: 450,
+                      width: 450,
+                    ),
+                  ),
+                  Stack(
+                    children: [
+                      Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 200.0),
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.only(top: 15, bottom: 10),
+                                margin:
+                                    const EdgeInsets.only(left: 80, right: 10),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Colors.blue[100],
+                                ),
+                                child: Column(
+                                  children: [
+                                    const Center(
+                                      child: Text(
+                                        'Requerir un bon de prise en charge',
+                                        style: TextStyle(
+                                          color: blue_color,
+                                          fontSize: 20,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) {
+                                              return BonPriseCharge();
+                                            },
+                                          ),
+                                        );
+                                      },
+                                      child: Card(
+                                        elevation: 3.2,
+                                        shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(60),
+                                          ),
+                                        ),
+                                        child: Container(
+                                          height: 90,
+                                          width: 90,
+                                          alignment: Alignment.center,
+                                          child: const Icon(
+                                            Icons.list_alt,
+                                            color: blue_color,
+                                            size: 50,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 40),
+              padding: const EdgeInsets.all(18),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: blue_color),
+              ),
+              child: Center(
+                child: Text(
+                  'Parler a un conseiller',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20, color: blue_color),
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+              padding: const EdgeInsets.all(18),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: blue_color),
+              ),
+              child: Center(
+                child: Text(
+                  "Besoin d'aide",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20, color: blue_color),
+                ),
+              ),
+            ),
             const SizedBox(
+              height: 30,
+            ),
+            bas(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+/**const SizedBox(
               height: 30,
             ),
             Center(
@@ -132,47 +258,4 @@ class _HomeClientPageState extends State<HomeClientPage> {
             ),
             const SizedBox(
               height: 15,
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 40),
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: blue_color),
-              ),
-              child: Center(
-                child: Text(
-                  'Parler a un conseiller',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16, color: blue_color),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 40),
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: blue_color),
-              ),
-              child: Center(
-                child: Text(
-                  "Besoin d'aide",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16, color: blue_color),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 35,
-            ),
-            bas(),
-          ],
-        ),
-      ),
-    );
-  }
-}
+            ), */

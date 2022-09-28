@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 
 import '../../animations/buttonAnimation1.dart';
 import '../../providers/providerUser.dart';
-import '../../widgets/bas.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -25,12 +24,12 @@ class _LoginPageState extends State<LoginPage> {
     color: Colors.black,
   );
 
-  final idenfifiant = TextEditingController();
+  final identifiant = TextEditingController();
   final motdepasse = TextEditingController();
 
   void zero() {
     setState(() {
-      idenfifiant.clear();
+      identifiant.clear();
       motdepasse.clear();
     });
   }
@@ -38,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    idenfifiant.text = "202120TTAD092067";
+    identifiant.text = "202120TTAD092067";
     motdepasse.text = "Admin1234";
   }
 
@@ -92,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 20.0),
                                 child: TextFormField(
-                                  controller: idenfifiant,
+                                  controller: identifiant,
                                   decoration: const InputDecoration(
                                     border: InputBorder.none,
                                     hintText: 'Identifiant',
@@ -137,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                                         if (_obscureText == true) {
                                           setState(() {
                                             _obscureText = !_obscureText;
-                                            _iconchange = Icon(
+                                            _iconchange = const Icon(
                                               Icons.visibility_off,
                                               color: Colors.black,
                                             );
@@ -145,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                                         } else {
                                           setState(() {
                                             _obscureText = !_obscureText;
-                                            _iconchange = Icon(
+                                            _iconchange = const Icon(
                                               Icons.visibility,
                                               color: Colors.black,
                                             );
@@ -196,7 +195,7 @@ class _LoginPageState extends State<LoginPage> {
                                   });
                                   final Future<Map<String, dynamic>?> response =
                                       auth.loginUser(
-                                          idenfifiant.text, motdepasse.text);
+                                          identifiant.text, motdepasse.text);
                                   response.then(
                                     (value) {
                                       if (value!['statut']) {
@@ -206,7 +205,7 @@ class _LoginPageState extends State<LoginPage> {
                                         setState(() {
                                           isLoading = false;
                                         });
-                                        Navigator.push(
+                                        Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) {
@@ -215,6 +214,9 @@ class _LoginPageState extends State<LoginPage> {
                                           ),
                                         );
                                       } else {
+                                        setState(() {
+                                          isLoading = false;
+                                        });
                                         Fluttertoast.showToast(
                                           msg: "Error ${value['message']}",
                                         );
@@ -253,10 +255,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 50,
-            ),
-            bas(),
           ],
         ),
       ),

@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectagc/screens/homePage/pagesClient/faq.dart';
 import 'package:projectagc/screens/homePage/pagesClient/historique.dart';
 import 'package:projectagc/screens/homePage/pagesClient/servicereclamation.dart';
-import 'package:projectagc/screens/loginPage/choicePage.dart';
+import 'package:projectagc/screens/loginPage/loginPage.dart';
 import 'package:provider/provider.dart';
 import '../providers/providerUser.dart';
 import '../screens/homePage/pagesClient/profilePage.dart';
@@ -25,7 +25,7 @@ class NavBarClient extends StatelessWidget {
                 children: [
                   const Text("Identifiant :"),
                   Text(
-                    'IU839UD',
+                    auth.user.identifiant,
                     style: TextStyle(
                         fontWeight: FontWeight.normal, color: Colors.white70),
                   ),
@@ -38,7 +38,7 @@ class NavBarClient extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.normal),
                   ),
                   Text(
-                    'tientcheuisrael@gmail.com',
+                    auth.user.email,
                     style: TextStyle(color: Colors.white70),
                   ),
                 ],
@@ -200,7 +200,7 @@ class NavBarClient extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return ChoicePage();
+                              return LoginPage();
                             },
                           ),
                         );

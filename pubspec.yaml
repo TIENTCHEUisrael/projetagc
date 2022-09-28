@@ -40,6 +40,7 @@ dependencies:
   flutter_svg: ^1.1.1+1
   google_fonts: ^3.0.1
   smooth_page_indicator: ^1.0.0+2
+  image_picker: ^0.8.5+3
   fluttertoast: ^8.0.9
   toggle_switch: ^2.0.1
   url_launcher: ^6.1.5
@@ -86,6 +87,9 @@ flutter:
     - assets/images/jpeg/agc4.jpg
     - assets/images/png/prof.png
     - assets/images/lottie/e.json
+    - assets/images/png/LOGO.png
+    - assets/images/png/LOGO1.png
+    - assets/images/png/doc.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

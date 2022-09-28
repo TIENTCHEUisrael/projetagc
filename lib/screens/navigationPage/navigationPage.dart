@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:projectagc/screens/loginPage/choicePage.dart';
+import 'package:projectagc/screens/loginPage/loginPage.dart';
 import 'package:projectagc/screens/navigationPage/Page2.dart';
 import 'package:projectagc/screens/navigationPage/Page1.dart';
 import 'package:projectagc/themes/constants.dart';
@@ -55,7 +55,7 @@ class _NavigationPageState extends State<NavigationPage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return ChoicePage();
+                                return LoginPage();
                               },
                             ),
                           );

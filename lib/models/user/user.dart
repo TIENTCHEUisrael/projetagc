@@ -1,5 +1,5 @@
 class User {
-  //final int? idUser;
+  final String? idUser;
   final String identifiant;
   final String prenom;
   final String nom;
@@ -10,11 +10,14 @@ class User {
   final String photo;
   final String telephone;
   final String ville;
+  final String remise;
+  final String rang;
+  final String beneficiaires;
   final String? createdAt;
   final String? updatedAt;
 
   User({
-    //this.idUser,
+    this.idUser,
     required this.identifiant,
     required this.prenom,
     required this.nom,
@@ -25,13 +28,16 @@ class User {
     required this.photo,
     required this.telephone,
     required this.ville,
+    required this.remise,
+    required this.rang,
+    required this.beneficiaires,
     this.createdAt,
     this.updatedAt,
   });
 
   factory User.fromJson(dynamic json) {
     return User(
-      //idUser: json['Id'] as int,
+      idUser: json['Id'] as String,
       identifiant: json['Identifiant'] as String,
       prenom: json['Prenom'] as String,
       nom: json['Nom'] as String,
@@ -42,12 +48,15 @@ class User {
       photo: json['Photo'] as String,
       telephone: json['Telephone'] as String,
       ville: json['Ville'] as String,
+      remise: json['Remise'] as String,
+      rang: json['Rang'] as String,
+      beneficiaires: json['Beneficial'] as String,
       createdAt: json['CreatedAt'] as String,
     );
   }
 
   Map<String, dynamic> toJson() => {
-        //"Id": idUser,
+        "Id": idUser,
         "Identifiant": identifiant,
         "Prenom": prenom,
         "Nom": nom,
@@ -57,6 +66,9 @@ class User {
         "Photo": photo,
         "Telephone": telephone,
         "Ville": ville,
+        "Remise": remise,
+        "Rang": rang,
+        "Beneficial": beneficiaires,
         "CreatedAt": createdAt,
       };
 
@@ -68,9 +80,8 @@ class User {
     return snapshot;
   }
 
-//Id: $idUser,
   @override
   String toString() {
-    return 'User {Identifiant: $identifiant,Prenom: $prenom,Nom: $nom,Sexe: $sexe,Nom_Societe: $societe,Email: $email,Photo: $photo,Telephone: $telephone,Ville: $ville,CreatedAt: $createdAt}';
+    return 'User {Id:$idUser,Identifiant: $identifiant,Prenom: $prenom,Nom: $nom,Sexe: $sexe,Nom_Societe: $societe,Email: $email,Photo: $photo,Telephone: $telephone,Ville: $ville,Remise:$remise,Rang:$rang,Beneficial:$beneficiaires,CreatedAt: $createdAt}';
   }
 }

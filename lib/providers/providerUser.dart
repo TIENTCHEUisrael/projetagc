@@ -74,7 +74,7 @@ class AuthProvider extends ChangeNotifier {
       String identifiant, String pass) async {
     var result;
     var urlLogin = Uri.parse(
-        '${Services.url_essai}/userauthenticate.php?Identifiant=$identifiant&Password=$pass');
+        '${Services.urlclient}/userAuthenticate.php?Identifiant=$identifiant&Password=$pass');
 
     try {
       print('...........................BEGIN......................;');
@@ -82,15 +82,10 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       final response = await http.post(urlLogin);
       if (response.statusCode == 200) {
-        print('............................................');
         _logStatus = Statut.authenticated;
-        /*print(response.body);
-        var responseb = response.body
-            .substring(response.body.indexOf('document.cookie') + 17);
-        print(responseb);*/
         var data = jsonDecode(response.body);
-        UserPreferences.saveUserToSharePreference(data);
         _user = User.fromJson(data);
+        UserPreferences.saveUserToSharePreference(data);
         print(_user);
         notifyListeners();
         result = {

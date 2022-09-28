@@ -69,7 +69,6 @@ class _SplashPageState extends State<SplashPage> {
             const SizedBox(
               height: 100,
             ),
-            bas(),
           ],
         ),
       ),

@@ -19,6 +19,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
+  void initState() {
+    //AuthProvider().logOutUser();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
@@ -47,15 +53,16 @@ class _MyAppState extends State<MyApp> {
                   builder: (context, snapshot) {
                     switch (snapshot.connectionState) {
                       case ConnectionState.waiting:
-                        return Scaffold(
+                        return const Scaffold(
                           backgroundColor: Colors.white,
-                          body: Container(
-                            child: const Center(
-                              child: CircularProgressIndicator(),
+                          body: Center(
+                            child: CircularProgressIndicator(
+                              color: blue_color,
                             ),
                           ),
                         );
-
+                      case ConnectionState.none:
+                        return SplashPage();
                       default:
                         if (snapshot.hasError) {
                           return Text('Error: ${snapshot.error}');
