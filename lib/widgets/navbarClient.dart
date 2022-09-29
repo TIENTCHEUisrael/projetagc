@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectagc/screens/homePage/pagesClient/faq.dart';
 import 'package:projectagc/screens/homePage/pagesClient/historique.dart';
+import 'package:projectagc/screens/homePage/pagesClient/profile.dart';
 import 'package:projectagc/screens/homePage/pagesClient/servicereclamation.dart';
 import 'package:projectagc/screens/loginPage/loginPage.dart';
 import 'package:provider/provider.dart';
@@ -76,7 +77,7 @@ class NavBarClient extends StatelessWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
-                        return ProfilePage();
+                        return Profile();
                       },
                     ),
                   );

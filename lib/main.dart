@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/providers/providerUser.dart';
 import 'package:projectagc/screens/homePage/homeClientPage.dart';
+import 'package:projectagc/screens/navigationPage/navigationPage.dart';
 import 'package:projectagc/screens/splashPages/splashPage.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:provider/provider.dart';
@@ -62,12 +63,12 @@ class _MyAppState extends State<MyApp> {
                           ),
                         );
                       case ConnectionState.none:
-                        return SplashPage();
+                        return NavigationPage();
                       default:
                         if (snapshot.hasError) {
                           return Text('Error: ${snapshot.error}');
                         } else {
-                          return SplashPage();
+                          return NavigationPage();
                         }
                     }
                   },

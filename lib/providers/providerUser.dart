@@ -25,7 +25,6 @@ enum Statut {
 
 class AuthProvider extends ChangeNotifier {
   String? _token;
-  int? _id;
   User? _user;
   String? _name;
   Statut _logStatus = Statut.notauthenticate;
@@ -33,16 +32,16 @@ class AuthProvider extends ChangeNotifier {
   Statut _registerStatus = Statut.notregisted;
   Statut _deleteStatus = Statut.notdeleted;
 
+  String get token {
+    return _token!;
+  }
+
   bool? get isAuth {
     return _token != null;
   }
 
   User get user {
     return _user!;
-  }
-
-  int get id {
-    return _id!;
   }
 
   void setUSer(User us) {
@@ -84,14 +83,17 @@ class AuthProvider extends ChangeNotifier {
       if (response.statusCode == 200) {
         _logStatus = Statut.authenticated;
         var data = jsonDecode(response.body);
+        _token = data['Id'];
         _user = User.fromJson(data);
         UserPreferences.saveUserToSharePreference(data);
+        UserPreferences().saveToken(_token!);
         print(_user);
         notifyListeners();
         result = {
           "statut": true,
           "message": "User authenticated",
-          "user": _user!
+          "user": _user!,
+          "token": _token!
         };
       } else {
         _logStatus = Statut.notauthenticate;
@@ -111,13 +113,19 @@ class AuthProvider extends ChangeNotifier {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final bool result;
 
-    if (prefs.getString('currentUser') == null) {
+    if (prefs.getString('token') == null ||
+        prefs.getString('currentUser') == null) {
       print('...........NOT LOGGING..............');
       result = false;
     } else {
       var extractUser = jsonDecode(prefs.getString('currentUser')!);
       print(prefs.getString('currentUser')!);
+      print(prefs.getString('token')!);
       _user = User.fromJson(extractUser);
+
+      var extractToken = prefs.getString('token')!;
+      _token = extractToken;
+      notifyListeners();
       result = true;
       print('............ LOGGED..............');
     }
