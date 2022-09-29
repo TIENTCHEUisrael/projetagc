@@ -209,8 +209,8 @@ class _ServicePageState extends State<ServicePage> {
                         text: "Pour toutes vos reclamations, ecrivez au "),
                     TextSpan(
                       style: linkText,
-                      text: "click there",
-                      recognizer: TapGestureRecognizer()
+                      text: "reclamationsclients@agc-assurances.com",
+                      /*recognizer: TapGestureRecognizer()
                         ..onTap = () async {
                           var urll = "reclamationsclients@agc-assurances.com";
                           if (await canLaunch(urll)) {
@@ -220,7 +220,7 @@ class _ServicePageState extends State<ServicePage> {
                               msg: "Error: Cannot load Url",
                             );
                           }
-                        },
+                        },*/
                     ),
                     TextSpan(
                         style: defaultText,

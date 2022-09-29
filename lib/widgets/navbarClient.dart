@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:projectagc/screens/homePage/pagesClient/faq.dart';
 import 'package:projectagc/screens/homePage/pagesClient/historique.dart';
 import 'package:projectagc/screens/homePage/pagesClient/profile.dart';
 import 'package:projectagc/screens/homePage/pagesClient/servicereclamation.dart';
 import 'package:projectagc/screens/loginPage/loginPage.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../providers/providerUser.dart';
-import '../screens/homePage/pagesClient/profilePage.dart';
 import '../themes/constants.dart';
 
 class NavBarClient extends StatelessWidget {
@@ -149,32 +148,23 @@ class NavBarClient extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: blue_color),
-              ),
               child: ListTile(
                 leading: const Icon(
                   Icons.design_services,
                   color: blue_color,
                 ),
-                title: const Text('FAQ'),
-                onLongPress: () {
-                  return;
-                },
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return FAQPage();
-                      },
-                    ),
-                  );
+                title: const Text('Foire aux questions'),
+                onTap: () async {
+                  var urll = "https://agc-assurances.com/reclamations/";
+                  if (await canLaunch(urll)) {
+                    await launch(urll);
+                  } else {
+                    Fluttertoast.showToast(
+                      msg: "Error: Cannot load Url",
+                    );
+                  }
                 },
               ),
-            ),
-            const SizedBox(
-              height: 8,
             ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),

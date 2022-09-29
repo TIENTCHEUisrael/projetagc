@@ -63,7 +63,7 @@ class _PopupMotdepasseState extends State<PopupMotdepasse> {
                         obscureText: _obscureText,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Mot de passe',
+                          hintText: 'Entrer un nouveau mot de passe',
                           icon: const Icon(Icons.key),
                           suffixIcon: IconButton(
                             icon: _iconchange,
@@ -96,6 +96,10 @@ class _PopupMotdepasseState extends State<PopupMotdepasse> {
                           return null;
                         },
                       ),
+                    ),
+                    Text(
+                      'Votre mot de passe:${auth.user.motdepasse}',
+                      style: TextStyle(color: Colors.grey, fontSize: 15),
                     ),
                     const Divider(
                       color: Colors.white,

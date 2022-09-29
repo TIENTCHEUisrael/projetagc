@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/providers/providerUser.dart';
 import 'package:projectagc/screens/homePage/homeClientPage.dart';
 import 'package:projectagc/screens/navigationPage/navigationPage.dart';
-import 'package:projectagc/screens/splashPages/splashPage.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:provider/provider.dart';
 
@@ -16,14 +15,23 @@ class MyApp extends StatefulWidget {
 
   @override
   State<MyApp> createState() => _MyAppState();
+  static _MyAppState? of(BuildContext context) =>
+      context.findAncestorStateOfType<_MyAppState>();
 }
 
 class _MyAppState extends State<MyApp> {
+  //Locale? _locale;
   @override
   void initState() {
     //AuthProvider().logOutUser();
     super.initState();
   }
+
+  /*void setlocale(Locale value) {
+    setState(() {
+      _locale = value;
+    });
+  }*/
 
   @override
   Widget build(BuildContext context) {

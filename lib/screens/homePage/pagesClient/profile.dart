@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 import '../../../animations/custum.dart';
+import '../../../main.dart';
 import '../../../providers/providerUser.dart';
 import '../../../themes/constants.dart';
 import '../../../widgets/bas.dart';
