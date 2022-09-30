@@ -73,7 +73,7 @@ class AuthProvider extends ChangeNotifier {
       String identifiant, String pass) async {
     var result;
     var urlLogin = Uri.parse(
-        '${Services.urlclient}/userAuthenticate.php?Identifiant=$identifiant&Password=$pass');
+        '${Services.urlclient}/auth.php?Identifiant=$identifiant&Password=$pass');
 
     try {
       print('...........................BEGIN......................;');

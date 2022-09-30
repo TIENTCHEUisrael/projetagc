@@ -39,8 +39,6 @@ class _ProfileState extends State<Profile> {
         actions: [
           Image.asset(
             "assets/images/png/agc1.png",
-            height: 40,
-            width: 40,
           ),
           const SizedBox(
             width: 5,
@@ -63,8 +61,8 @@ class _ProfileState extends State<Profile> {
                       Center(
                         child: Container(
                           child: ClipOval(
-                            child: Image.asset(
-                              'assets/images/png/prof.png',
+                            child: Image.network(
+                              auth.user.photo,
                               width: 150,
                               height: 100,
                             ),
