@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:projectagc/models/BonDePriseEnCharge/coupon.dart';
 import 'package:projectagc/models/BonDePriseEnCharge/locale.dart';
 import 'package:projectagc/providers/providerBpc.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +20,8 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
   bool value = false;
   List<Locales>? _locales;
   bool _isloading = true;
-  String? hostoChoose;
+  bool _isgetted = false;
+  String? locale;
   String? ville;
   List villes = ["ville1", "ville2", "ville3", "ville4", "ville5"];
   String? beneficiaire;
@@ -38,8 +41,10 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
     });
   }
 
+  void getvalueVille() {}
   @override
   Widget build(BuildContext context) {
+    BPCProvider bpcProvider = Provider.of<BPCProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: blue_color,
@@ -90,7 +95,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                             child: DropdownButton(
                               hint: const Text(
                                   'Hopital, Laboratoire,Autre Prestataire'),
-                              value: hostoChoose,
+                              value: locale,
                               dropdownColor: Colors.white,
                               icon: Icon(
                                 Icons.arrow_drop_down,
@@ -102,7 +107,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                               style: TextStyle(color: blue_color),
                               onChanged: (newvalue) {
                                 setState(() {
-                                  hostoChoose = newvalue.toString();
+                                  locale = newvalue.toString();
                                 });
                               },
                               items: _locales!.map(
@@ -140,17 +145,27 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    "Villes",
-                                    style: TextStyle(
-                                        fontSize: 15, color: Colors.grey),
-                                  ),
+                                  Mysearch().query.isEmpty
+                                      ? Text(
+                                          "Ville",
+                                          style: TextStyle(
+                                              fontSize: 15, color: Colors.grey),
+                                        )
+                                      : Text(
+                                          Mysearch().query,
+                                          style: TextStyle(
+                                              fontSize: 15, color: Colors.grey),
+                                        ),
                                   IconButton(
                                     onPressed: () {
-                                      showSearch(
-                                        context: context,
-                                        delegate: Mysearch(),
-                                      );
+                                      final result = showSearch(
+                                          context: context,
+                                          delegate: Mysearch());
+
+                                      setState(() {
+                                        ville = result.toString();
+                                        print(ville);
+                                      });
                                     },
                                     icon: Icon(
                                       Icons.search,
@@ -313,7 +328,36 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        print('demande');
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Center(child: CircularProgressIndicator());
+                            });
+                        var coupon = Coupon(
+                            ville: ville!,
+                            partenaire: 1,
+                            identifiantclient: auth.user.identifiant);
+                        final Future<Map<String, dynamic>?> response =
+                            bpcProvider.generateCoupon(coupon);
+                        response.then((value) {
+                          if (value!['statut']) {
+                            setState(() {
+                              _isgetted = true;
+                            });
+                            Fluttertoast.showToast(
+                              msg: "message ${value['message']}",
+                            );
+                            Navigator.of(context).pop();
+                          } else {
+                            setState(() {
+                              _isgetted = false;
+                            });
+                            Fluttertoast.showToast(
+                              msg: "message ${value['message']}",
+                            );
+                            Navigator.of(context).pop();
+                          }
+                        });
                       },
                       child: Card(
                         elevation: 3.2,
@@ -344,10 +388,15 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                       ),
                     ),
                     Center(
-                      child: Text(
-                        '3ED4F4ZD',
-                        style: TextStyle(color: Colors.grey),
-                      ),
+                      child: _isgetted
+                          ? Text(
+                              bpcProvider.getCoupon,
+                              style: TextStyle(color: Colors.grey),
+                            )
+                          : Text(
+                              '-  -  -',
+                              style: TextStyle(color: Colors.grey),
+                            ),
                     ),
                     bas()
                   ],
@@ -512,7 +561,7 @@ class Mysearch extends SearchDelegate {
       IconButton(
         onPressed: () {
           if (query.isEmpty) {
-            close(context, null);
+            close(context, query);
           } else {
             query = "";
           }
@@ -533,14 +582,13 @@ class Mysearch extends SearchDelegate {
         color: Colors.black,
       ),
       onPressed: () {
-        close(context, null);
+        close(context, query);
       },
     );
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    value = query;
     return Center(
       child: Text(
         query,

@@ -6,6 +6,8 @@ import 'package:projectagc/screens/navigationPage/navigationPage.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:provider/provider.dart';
 
+import 'providers/providerBpc.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -42,6 +44,9 @@ class _MyAppState extends State<MyApp> {
             return AuthProvider();
           },
         ),
+        ChangeNotifierProvider(create: (_) {
+          return BPCProvider();
+        }),
       ],
       child: Consumer<AuthProvider>(builder: (context, auth, _) {
         return MaterialApp(
