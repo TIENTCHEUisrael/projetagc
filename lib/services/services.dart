@@ -5,4 +5,5 @@ class Services {
   static String urllist =
       "http://agcassurance.42web.io/api/institution/read.php?";
   static String urlcoupon = "http://agcassurance.42web.io/api/coupon";
+  static String urlsendEmail = "https://api.emailjs.com/api/v1.0/email/send";
 }

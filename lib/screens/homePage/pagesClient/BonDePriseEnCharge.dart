@@ -3,11 +3,14 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectagc/models/BonDePriseEnCharge/coupon.dart';
 import 'package:projectagc/models/BonDePriseEnCharge/locale.dart';
 import 'package:projectagc/providers/providerBpc.dart';
+import 'package:projectagc/widgets/popup.dart';
 import 'package:provider/provider.dart';
 
+import '../../../animations/custum.dart';
 import '../../../providers/providerUser.dart';
 import '../../../themes/constants.dart';
 import '../../../widgets/bas.dart';
+import '../../../widgets/pageRoute.dart';
 
 class BonPriseCharge extends StatefulWidget {
   const BonPriseCharge({super.key});
@@ -273,8 +276,14 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: blue_color),
                       ),
-                      child: const Center(
-                        child: Text('Information sur le partenaire'),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            const Center(
+                              child: Text('Information sur le partenaire'),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -334,10 +343,10 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                 );
                               });
 
-                          final Future<Map<String, dynamic>?> response =
+                          final Future<Map<String, dynamic>?> response1 =
                               bpcProvider.generateCoupon(coupon);
 
-                          response.then((value) {
+                          response1.then((value) {
                             if (value!['statut']) {
                               Fluttertoast.showToast(
                                 msg: "message ${value['message']}",
@@ -345,7 +354,107 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                               setState(() {
                                 _isgetting = true;
                               });
+                              /*final Future<
+                                  Map<String,
+                                      dynamic>?> response2 = bpcProvider.sendEmail(
+                                  "AGC assurance",
+                                  "Coupon",
+                                  auth.user.nom,
+                                  "Ton coupon pour le bon de prise en charge est : ${bpcProvider.getCoupon}",
+                                  auth.user.email);
+
+                              response2.then((value1) {
+                                if (value1!['statut']) {
+                                  Fluttertoast.showToast(
+                                    msg:
+                                        "message ${value['message']} and ${value1['message']}",
+                                  );
+                                  setState(() {
+                                    _isgetting = true;
+                                  });
+                                  Navigator.of(context).pop();
+                                  Navigator.push(
+                                    context,
+                                    HeroDialogRoute(
+                                      builder: (context) {
+                                        return CouponPopup(
+                                          contain: Column(
+                                            children: [
+                                              Container(
+                                                child: Center(
+                                                  child: Text(
+                                                      'Votre coupon est : ${bpcProvider.getCoupon}'),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  Navigator.of(context).pop();
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Card(
+                                                  elevation: 5,
+                                                  child: Text(
+                                                    'OK',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: blue_color),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  );
+                                } else {
+                                  Fluttertoast.showToast(
+                                    msg:
+                                        "Error ${value['message']} and ${value1['message']}",
+                                  );
+                                }
+                              });*/
                               Navigator.of(context).pop();
+                              Navigator.push(
+                                context,
+                                HeroDialogRoute(
+                                  builder: (context) {
+                                    return CouponPopup(
+                                      contain: Column(
+                                        children: [
+                                          Container(
+                                            child: Center(
+                                              child: Text(
+                                                  'Votre coupon est : ${bpcProvider.getCoupon}'),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.of(context).pop();
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Card(
+                                              elevation: 5,
+                                              child: Text(
+                                                'OK',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: blue_color),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              );
                             } else {
                               Fluttertoast.showToast(
                                 msg: "message ${value['message']}",
@@ -359,21 +468,27 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                           );
                         }
                       },
-                      child: Card(
-                        elevation: 3.2,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(60),
+                      child: Hero(
+                        tag: herosystem,
+                        createRectTween: (begin, end) {
+                          return CustomRectTween(begin: begin!, end: end!);
+                        },
+                        child: Card(
+                          elevation: 3.2,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(60),
+                            ),
                           ),
-                        ),
-                        child: Container(
-                          height: 85,
-                          width: 85,
-                          alignment: Alignment.center,
-                          child: Icon(
-                            Icons.share,
-                            color: blue_color,
-                            size: 60,
+                          child: Container(
+                            height: 85,
+                            width: 85,
+                            alignment: Alignment.center,
+                            child: Icon(
+                              Icons.share,
+                              color: blue_color,
+                              size: 60,
+                            ),
                           ),
                         ),
                       ),

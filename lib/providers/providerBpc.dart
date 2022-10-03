@@ -10,9 +10,9 @@ enum Statut {
   registing,
   registed,
   notregisted,
-  updating,
-  updated,
-  notupdated,
+  sending,
+  sended,
+  notsended,
   deleting,
   deleted,
   notdeleted,
@@ -21,6 +21,7 @@ enum Statut {
 class BPCProvider extends ChangeNotifier {
   String? _coupon;
   Statut _registerStatus = Statut.notregisted;
+  Statut _sendedStatus = Statut.notsended;
 
   String get getCoupon {
     return _coupon!;
@@ -29,6 +30,11 @@ class BPCProvider extends ChangeNotifier {
   Statut get registerStatus => _registerStatus;
   set registerStatus(Statut value) {
     _registerStatus = value;
+  }
+
+  Statut get sendedStatus => _sendedStatus;
+  set sendedStatus(Statut value) {
+    _sendedStatus = value;
   }
 
   Future<Map<String, dynamic>?> generateCoupon(Coupon cpn) async {
@@ -62,6 +68,48 @@ class BPCProvider extends ChangeNotifier {
       print(e);
     }
     return result;
+  }
+
+  Future<Map<String, dynamic>?> sendEmail(String emetteur, String sujet,
+      String recepteur, String message, String userEmail) async {
+    var result;
+    final url = Uri.parse('${Services.urlsendEmail}');
+    const serviceId = "service_luqr6sg";
+    const templateId = "template_5vvx4q3";
+    const userId = "";
+    _sendedStatus = Statut.sending;
+    notifyListeners();
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({
+        "service_id": serviceId,
+        "template_id": templateId,
+        "user_id": userId,
+        "template_params": {
+          "name": emetteur,
+          "subject": sujet,
+          "your_name": recepteur,
+          "message": message,
+          "user_email": userEmail
+        }
+      }),
+    );
+    if (response.statusCode == 200) {
+      _sendedStatus = Statut.sended;
+      notifyListeners();
+      result = {
+        "statut": true,
+        "message": "Email sended",
+      };
+    } else {
+      _sendedStatus = Statut.notsended;
+      notifyListeners();
+      result = {
+        "statut": false,
+        "message": "Email not sended",
+      };
+    }
   }
 
   static Future<List<Locales>> getlocales() async {

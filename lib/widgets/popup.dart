@@ -137,14 +137,15 @@ class _PopupMotdepasseState extends State<PopupMotdepasse> {
 
 const String herosystem = 'system';
 
-class SystemePopup extends StatefulWidget {
-  SystemePopup();
+class CouponPopup extends StatefulWidget {
+  final Widget contain;
+  CouponPopup({required this.contain});
 
   @override
-  State<PopupMotdepasse> createState() => _PopupMotdepasseState();
+  State<CouponPopup> createState() => _CouponPopupState();
 }
 
-class _SystemePopupState extends State<SystemePopup> {
+class _CouponPopupState extends State<CouponPopup> {
   @override
   Widget build(BuildContext context) {
     AuthProvider auth = Provider.of<AuthProvider>(context);
@@ -152,7 +153,7 @@ class _SystemePopupState extends State<SystemePopup> {
       child: Padding(
         padding: const EdgeInsets.all(32.0),
         child: Hero(
-          tag: heroAddTodo,
+          tag: herosystem,
           createRectTween: (begin, end) {
             return CustomRectTween(begin: begin!, end: end!);
           },
@@ -164,21 +165,33 @@ class _SystemePopupState extends State<SystemePopup> {
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Column(mainAxisSize: MainAxisSize.min, children: [
-                  Container(
-                    padding: const EdgeInsets.only(top: 5),
-                    height: 70,
-                    width: 70,
-                    child: Image.asset(
-                      'assets/images/png/LOGO.png',
-                      fit: BoxFit.cover,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
+                        ),
+                        color: blue_color,
+                      ),
+                      height: 30,
+                      width: 300,
+                      child: Center(
+                        child: Text(
+                          'Systeme',
+                          style: TextStyle(color: scaffoldbackground),
+                        ),
+                      ),
                     ),
-                  ),
-                  const Divider(
-                    color: Colors.white,
-                    thickness: 0.2,
-                  ),
-                ]),
+                    const Divider(
+                      color: Colors.white,
+                      thickness: 0.2,
+                    ),
+                    widget.contain
+                  ],
+                ),
               ),
             ),
           ),
