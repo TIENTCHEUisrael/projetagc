@@ -94,6 +94,31 @@ class NavBarClient extends StatelessWidget {
               ),
               child: ListTile(
                 leading: const Icon(
+                  Icons.list,
+                  color: blue_color,
+                ),
+                title: const Text(
+                  'Status BPC',
+                ),
+                onLongPress: () {
+                  return;
+                },
+                onTap: () {
+                  print('cliquer');
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: blue_color),
+              ),
+              child: ListTile(
+                leading: const Icon(
                   Icons.search_sharp,
                   color: blue_color,
                 ),

@@ -17,7 +17,8 @@ class PopupMotdepasse extends StatefulWidget {
 class _PopupMotdepasseState extends State<PopupMotdepasse> {
   @override
   Widget build(BuildContext context) {
-    TextEditingController motdepasse = TextEditingController();
+    final _formKey = GlobalKey<FormState>();
+    final motdepasse = TextEditingController();
     bool _isloading = false;
     var _obscureText = true;
     var _iconchange = Icon(
@@ -58,6 +59,7 @@ class _PopupMotdepasseState extends State<PopupMotdepasse> {
                       thickness: 0.2,
                     ),
                     Form(
+                      key: _formKey,
                       child: TextFormField(
                         controller: motdepasse,
                         obscureText: _obscureText,
@@ -124,6 +126,59 @@ class _PopupMotdepasseState extends State<PopupMotdepasse> {
                     )
                   ],
                 ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+const String herosystem = 'system';
+
+class SystemePopup extends StatefulWidget {
+  SystemePopup();
+
+  @override
+  State<PopupMotdepasse> createState() => _PopupMotdepasseState();
+}
+
+class _SystemePopupState extends State<SystemePopup> {
+  @override
+  Widget build(BuildContext context) {
+    AuthProvider auth = Provider.of<AuthProvider>(context);
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: Hero(
+          tag: heroAddTodo,
+          createRectTween: (begin, end) {
+            return CustomRectTween(begin: begin!, end: end!);
+          },
+          child: Material(
+            color: Colors.white,
+            elevation: 2,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(mainAxisSize: MainAxisSize.min, children: [
+                  Container(
+                    padding: const EdgeInsets.only(top: 5),
+                    height: 70,
+                    width: 70,
+                    child: Image.asset(
+                      'assets/images/png/LOGO.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const Divider(
+                    color: Colors.white,
+                    thickness: 0.2,
+                  ),
+                ]),
               ),
             ),
           ),

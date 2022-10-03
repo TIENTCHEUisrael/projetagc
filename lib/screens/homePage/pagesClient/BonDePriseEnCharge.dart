@@ -20,10 +20,9 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
   bool value = false;
   List<Locales>? _locales;
   bool _isloading = true;
-  bool _isgetted = false;
-  String? locale;
+  bool _isgetting = false;
+  Locales? locale;
   String? ville;
-  List villes = ["ville1", "ville2", "ville3", "ville4", "ville5"];
   String? beneficiaire;
   List beneficiaires = ["bene1", "bene2"];
   String? partenaire;
@@ -41,7 +40,6 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
     });
   }
 
-  void getvalueVille() {}
   @override
   Widget build(BuildContext context) {
     BPCProvider bpcProvider = Provider.of<BPCProvider>(context);
@@ -94,7 +92,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                             ignoring: false,
                             child: DropdownButton(
                               hint: const Text(
-                                  'Hopital, Laboratoire,Autre Prestataire'),
+                                  'Hopitals, Laboratoires,Autre Prestataire'),
                               value: locale,
                               dropdownColor: Colors.white,
                               icon: Icon(
@@ -107,7 +105,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                               style: TextStyle(color: blue_color),
                               onChanged: (newvalue) {
                                 setState(() {
-                                  locale = newvalue.toString();
+                                  locale = newvalue;
                                 });
                               },
                               items: _locales!.map(
@@ -133,54 +131,49 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                     Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Container(
-                            padding: const EdgeInsets.only(left: 16, right: 16),
-                            margin: const EdgeInsets.only(left: 18),
+                            padding: const EdgeInsets.only(left: 8),
+                            margin: const EdgeInsets.only(left: 15),
                             decoration: BoxDecoration(
                                 border:
                                     Border.all(color: Colors.grey, width: 1),
                                 borderRadius: BorderRadius.circular(15)),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Mysearch().query.isEmpty
-                                      ? Text(
-                                          "Ville",
-                                          style: TextStyle(
-                                              fontSize: 15, color: Colors.grey),
-                                        )
-                                      : Text(
-                                          Mysearch().query,
-                                          style: TextStyle(
-                                              fontSize: 15, color: Colors.grey),
-                                        ),
-                                  IconButton(
-                                    onPressed: () {
-                                      final result = showSearch(
-                                          context: context,
-                                          delegate: Mysearch());
-
-                                      setState(() {
-                                        ville = result.toString();
-                                        print(ville);
-                                      });
-                                    },
-                                    icon: Icon(
-                                      Icons.search,
-                                      size: 15,
-                                      color: Colors.black,
-                                    ),
-                                  )
-                                ]),
+                            child: IgnorePointer(
+                              ignoring: false,
+                              child: DropdownButton(
+                                hint: const Text('Ville'),
+                                value: ville,
+                                dropdownColor: Colors.white,
+                                icon: const Icon(
+                                  Icons.arrow_drop_down,
+                                  color: Colors.black,
+                                ),
+                                iconSize: 30,
+                                underline: SizedBox(),
+                                //isExpanded: true,
+                                style: TextStyle(color: blue_color),
+                                onChanged: (newvalue) {
+                                  setState(() {
+                                    ville = newvalue.toString();
+                                  });
+                                },
+                                items: villes.map(
+                                  (valueItem) {
+                                    return DropdownMenuItem(
+                                        value: valueItem,
+                                        child: Text(valueItem));
+                                  },
+                                ).toList(),
+                              ),
+                            ),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Container(
-                            padding: const EdgeInsets.only(left: 16, right: 16),
-                            margin: const EdgeInsets.only(left: 5),
+                            padding: const EdgeInsets.only(left: 10),
+                            margin: const EdgeInsets.only(left: 8),
                             decoration: BoxDecoration(
                                 border:
                                     Border.all(color: Colors.grey, width: 1),
@@ -328,36 +321,43 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Center(child: CircularProgressIndicator());
-                            });
-                        var coupon = Coupon(
-                            ville: ville!,
-                            partenaire: 1,
-                            identifiantclient: auth.user.identifiant);
-                        final Future<Map<String, dynamic>?> response =
-                            bpcProvider.generateCoupon(coupon);
-                        response.then((value) {
-                          if (value!['statut']) {
-                            setState(() {
-                              _isgetted = true;
-                            });
-                            Fluttertoast.showToast(
-                              msg: "message ${value['message']}",
-                            );
-                            Navigator.of(context).pop();
-                          } else {
-                            setState(() {
-                              _isgetted = false;
-                            });
-                            Fluttertoast.showToast(
-                              msg: "message ${value['message']}",
-                            );
-                            Navigator.of(context).pop();
-                          }
-                        });
+                        if (ville!.isNotEmpty || partenaire!.isNotEmpty) {
+                          var coupon = Coupon(
+                              ville: ville!,
+                              partenaire: 1,
+                              identifiantclient: auth.user.identifiant);
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              });
+
+                          final Future<Map<String, dynamic>?> response =
+                              bpcProvider.generateCoupon(coupon);
+
+                          response.then((value) {
+                            if (value!['statut']) {
+                              Fluttertoast.showToast(
+                                msg: "message ${value['message']}",
+                              );
+                              setState(() {
+                                _isgetting = true;
+                              });
+                              Navigator.of(context).pop();
+                            } else {
+                              Fluttertoast.showToast(
+                                msg: "message ${value['message']}",
+                              );
+                              Navigator.of(context).pop();
+                            }
+                          });
+                        } else {
+                          Fluttertoast.showToast(
+                            msg: "error: Enter the information",
+                          );
+                        }
                       },
                       child: Card(
                         elevation: 3.2,
@@ -388,7 +388,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                       ),
                     ),
                     Center(
-                      child: _isgetted
+                      child: _isgetting
                           ? Text(
                               bpcProvider.getCoupon,
                               style: TextStyle(color: Colors.grey),
@@ -403,219 +403,6 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                 );
               }),
             ),
-    );
-  }
-}
-
-class Mysearch extends SearchDelegate {
-  String? value;
-  String get values {
-    return value!;
-  }
-
-  List<String> searchresults = [
-    "Bafia",
-    "Bafoussam",
-    "Bamenda",
-    "Buea",
-    "Douala",
-    "Kribi",
-    "Kumba",
-    "Ringo",
-    "Tibati",
-    "Bankim",
-    "Banyo",
-    "Bélel",
-    "Djohong",
-    "Kontcha",
-    "Mayo-Banyo",
-    "Meïganga",
-    "Ngaoundéré",
-    "Somié",
-    "Tignère",
-    "Vina",
-    "Akono",
-    "Akonolinga",
-    "Eséka",
-    "Essé",
-    "Évodoula",
-    "Mbalmayo",
-    "Mbam-Et-Inoubou",
-    "Mbandjok",
-    "Mbankomo",
-    "Mefou-et-Akono",
-    "Mfoundi",
-    "Minta",
-    "Nanga Eboko",
-    "Ndikiniméki",
-    "Ngomedzap",
-    "Ngoro",
-    "Nkoteng",
-    "Ntui",
-    "Obala",
-    "Okoa",
-    "Okola",
-    "Ombésa",
-    "Saa",
-    "Yaoundé",
-    "Yoko",
-    "Abong Mbang",
-    "Batouri",
-    "Bélabo",
-    "Bertoua",
-    "Bétaré Oya",
-    "Dimako",
-    "Doumé",
-    "Garoua Boulaï",
-    "Mbang",
-    "Ndelele",
-    "Yokadouma",
-    "Bogo",
-    "Kaélé",
-    "Kousséri",
-    "Koza",
-    "Makary",
-    "Maroua",
-    "Mayo-Sava",
-    "Mayo-Tsanaga",
-    "Mindif",
-    "Mokolo",
-    "Mora",
-    "Yagoua",
-    "Bonabéri",
-    "Diang",
-    "Dibombari",
-    "Dizangué",
-    "Edéa",
-    "Loum",
-    "Manjo",
-    "Mbanga",
-    "Melong",
-    "Mouanko",
-    "Ndom",
-    "Ngambé",
-    "Nkongsamba",
-    "Penja",
-    "Yabassi",
-    "Faro Department",
-    "Garoua",
-    "Guider",
-    "Lagdo",
-    "Mayo-Louti",
-    "Mayo-Rey",
-    "Pitoa",
-    "Poli",
-    "Rey Bouba",
-    "Tcholliré",
-    "Babanki",
-    "Bali",
-    "Batibo",
-    "Belo",
-    "Boyo",
-    "Fundong",
-    "Jakiri",
-    "Kumbo",
-    "Mbengwi",
-    "Mme-Bafumen",
-    "Njinikom",
-    "Wum",
-    "Akom II",
-    "Ambam",
-    "Ébolowa",
-    "Lolodorf",
-    "Mvangué",
-    "Mvila",
-    "Sangmélima",
-    "Bamusso",
-    "Bekondo",
-    "Fako Division",
-    "Fontem",
-    "Lebialem",
-    "Limbe",
-    "Mamfe",
-    "Mundemba",
-    "Mutengene",
-    "Muyuka",
-    "Nguti",
-    "Tiko",
-    "Bafang",
-    "Bamendjou",
-    "Bana",
-    "Bandjoun",
-    "Bangangté",
-    "Bansoa",
-    "Bazou",
-    "Dschang",
-    "Foumban",
-    "Foumbot",
-    "Hauts-Plateaux",
-    "Koung-Khi",
-    "Mbouda",
-    "Ngou",
-    "Noun",
-    "Tonga"
-  ];
-  @override
-  List<Widget>? buildActions(BuildContext context) {
-    return [
-      IconButton(
-        onPressed: () {
-          if (query.isEmpty) {
-            close(context, query);
-          } else {
-            query = "";
-          }
-        },
-        icon: Icon(
-          Icons.clear,
-          color: Colors.black,
-        ),
-      ),
-    ];
-  }
-
-  @override
-  Widget? buildLeading(BuildContext context) {
-    return IconButton(
-      icon: const Icon(
-        Icons.arrow_back,
-        color: Colors.black,
-      ),
-      onPressed: () {
-        close(context, query);
-      },
-    );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    return Center(
-      child: Text(
-        query,
-        style: const TextStyle(fontSize: 64, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    List<String> suggestions = searchresults.where((search) {
-      final result = search.toLowerCase();
-      final input = query.toLowerCase();
-      return result.contains(input);
-    }).toList();
-    return ListView.builder(
-      itemCount: suggestions.length,
-      itemBuilder: (context, index) {
-        final suggestion = suggestions[index];
-        return ListTile(
-          title: Text(suggestion),
-          onTap: () {
-            query = suggestion;
-            showResults(context);
-          },
-        );
-      },
     );
   }
 }
