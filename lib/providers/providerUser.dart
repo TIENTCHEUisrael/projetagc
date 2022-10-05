@@ -76,7 +76,7 @@ class AuthProvider extends ChangeNotifier {
         '${Services.urlclient}/auth.php?Identifiant=$identifiant&Password=$pass');
 
     try {
-      print('...........................BEGIN......................;');
+      print('...........................BEGIN......................');
       _logStatus = Statut.authenticating;
       notifyListeners();
       final response = await http.post(urlLogin);

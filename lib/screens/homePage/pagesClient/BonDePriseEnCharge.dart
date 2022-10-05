@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectagc/models/BonDePriseEnCharge/coupon.dart';
+import 'package:projectagc/models/BonDePriseEnCharge/institution.dart';
 import 'package:projectagc/models/BonDePriseEnCharge/locale.dart';
 import 'package:projectagc/providers/providerBpc.dart';
 import 'package:projectagc/widgets/popup.dart';
@@ -22,6 +23,7 @@ class BonPriseCharge extends StatefulWidget {
 class _BonPriseChargeState extends State<BonPriseCharge> {
   bool value = false;
   List<Locales>? _locales;
+  List<Institutions>? _intitutions;
   bool _isloading = true;
   bool _isgetting = false;
   Locales? locale;
@@ -41,6 +43,11 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
     setState(() {
       _isloading = false;
     });
+  }
+
+  Future<void> getpartenaires(Locales l, String s) async {
+    _intitutions = await BPCProvider.getPartenaireByVilleLocale(l, s);
+    setState(() {});
   }
 
   @override
@@ -68,8 +75,18 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
         ],
       ),
       body: _isloading
-          ? const Center(
-              child: CircularProgressIndicator(),
+          ? Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text('Attendre la stabilité de la connexion"')
+                ],
+              ),
             )
           : SingleChildScrollView(
               child: Consumer<AuthProvider>(builder: (context, auth, _) {

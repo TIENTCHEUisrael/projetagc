@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 import 'package:flutter/widgets.dart';
+import 'package:projectagc/models/BonDePriseEnCharge/institution.dart';
 import '../models/BonDePriseEnCharge/coupon.dart';
 import '../models/BonDePriseEnCharge/locale.dart';
 import '../services/services.dart';
@@ -128,6 +129,28 @@ class BPCProvider extends ChangeNotifier {
       _var = Locales.recipesFromSnapshot(_temp);
     } else {
       print('False');
+    }
+
+    return _var;
+  }
+
+  static Future<List<Institutions>> getPartenaireByVilleLocale(
+      Locales loc, String ville) async {
+    var _var;
+    var url = Uri.parse(
+        '${Services.urlinstitut}/get.php?Institution=${loc.id}&Town=$ville');
+    final response = await http.post(url);
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      List _temp = [];
+
+      for (var i in data) {
+        _temp.add(i);
+      }
+      _var = Institutions.recipesFromSnapshot(_temp);
+    } else {
+      print(
+          '.......................................False............................');
     }
 
     return _var;
