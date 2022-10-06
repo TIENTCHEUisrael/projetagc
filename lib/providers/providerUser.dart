@@ -109,6 +109,43 @@ class AuthProvider extends ChangeNotifier {
     return result;
   }
 
+  Future<Map<String, dynamic>?> updateUser(User us) async {
+    var result;
+    var urlLogin = Uri.parse(
+        '${Services.urlupdate}Prenom=${us.prenom}&Nom=${us.nom}&Sexe=${us.sexe}&Nom_Societe=${us.societe}&Password=${us.motdepasse}&Email=${us.email}&Photo=${us.photo}&Telephone=${us.telephone}&Ville=${us.ville}&Identifiant=${us.identifiant}');
+
+    try {
+      print('...........................BEGIN......................');
+      _logStatus = Statut.updating;
+      notifyListeners();
+      final response = await http.post(urlLogin);
+      if (response.statusCode == 200) {
+        _logStatus = Statut.updated;
+        var data = jsonDecode(response.body);
+        _user = User.fromJson(data);
+        await UserPreferences.removeUserToSharePreference();
+        UserPreferences.saveUserToSharePreference(data);
+        print(_user);
+        notifyListeners();
+        result = {
+          "statut": true,
+          "message": "User updated",
+          "user": _user!,
+        };
+      } else {
+        _logStatus = Statut.notupdated;
+        notifyListeners();
+        result = {
+          "statut": false,
+          "message": "User not updated",
+        };
+      }
+    } catch (e) {
+      print(e);
+    }
+    return result;
+  }
+
   Future<bool> tryAutoLogin() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final bool result;

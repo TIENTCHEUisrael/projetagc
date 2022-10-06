@@ -107,21 +107,24 @@ class _PopupMotdepasseState extends State<PopupMotdepasse> {
                       color: Colors.white,
                       thickness: 0.2,
                     ),
-                    Center(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 25, vertical: 10),
-                        margin: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: blue_color),
-                        child: _isloading
-                            ? const CircularProgressIndicator()
-                            : Text(
-                                ' Changer ',
-                                style: TextStyle(
-                                    color: scaffoldbackground, fontSize: 18),
-                              ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Center(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 25, vertical: 10),
+                          margin: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: blue_color),
+                          child: _isloading
+                              ? Center(child: const CircularProgressIndicator())
+                              : Text(
+                                  ' Changer ',
+                                  style: TextStyle(
+                                      color: scaffoldbackground, fontSize: 18),
+                                ),
+                        ),
                       ),
                     )
                   ],

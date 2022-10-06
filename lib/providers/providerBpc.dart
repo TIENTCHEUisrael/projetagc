@@ -97,6 +97,7 @@ class BPCProvider extends ChangeNotifier {
       }),
     );
     if (response.statusCode == 200) {
+      print('............BEGIN...............');
       _sendedStatus = Statut.sended;
       notifyListeners();
       result = {
@@ -111,6 +112,7 @@ class BPCProvider extends ChangeNotifier {
         "message": "Email not sended",
       };
     }
+    return result;
   }
 
   static Future<List<Locales>> getlocales() async {

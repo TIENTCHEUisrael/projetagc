@@ -556,6 +556,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                       msg:
                                           "Error ${value['message']} and ${value1['message']}",
                                     );
+                                    Navigator.of(context).pop();
                                   }
                                 });*/
                                     Navigator.of(context).pop();
