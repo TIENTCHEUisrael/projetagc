@@ -24,13 +24,14 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
   List<Locales>? _locales;
   Locales? locale;
   List<Institutions>? _intitutions;
+  List<Institutions>? _intitutionss;
+  Institutions? partenaire;
   bool _isloading = true;
   bool _isgetting = false;
   String? ville;
   String? beneficiaire;
   List beneficiaires = ["bene1", "bene2"];
-  String? partenaire;
-  List partenaires = ["...", "..."];
+
   bool t1 = true;
   bool t2 = true;
   bool t3 = true;
@@ -40,6 +41,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
   void initState() {
     super.initState();
     getLocales();
+    getall();
   }
 
   Future<void> getLocales() async {
@@ -54,6 +56,10 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
     setState(() {
       getPartenaire = true;
     });
+  }
+
+  Future<void> getall() async {
+    _intitutionss = await BPCProvider.getAllPartenaires();
   }
 
   @override
@@ -198,7 +204,6 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                     t2 = false;
                                     t3 = false;
                                   });
-                                  getpartenaires(locale!, ville!);
                                 },
                                 items: villes.map(
                                   (valueItem) {
@@ -279,46 +284,39 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                           child: IgnorePointer(
                             ignoring: t3,
                             child: DropdownButton(
-                              hint: t3
-                                  ? const Text(
-                                      "Choix de l'hopital partenaire",
-                                      style: TextStyle(color: Colors.grey),
-                                    )
-                                  : Text(
-                                      "Choix de l'hopital partenaire",
-                                      style: TextStyle(color: Colors.black),
-                                    ),
-                              value: partenaire,
-                              dropdownColor: Colors.white,
-                              icon: const Icon(
-                                Icons.arrow_drop_down,
-                                color: Colors.black,
-                              ),
-                              iconSize: 36,
-                              underline: SizedBox(),
-                              //isExpanded: true,
-                              style: TextStyle(color: blue_color),
-                              onChanged: (newvalue) {
-                                setState(() {
-                                  partenaire = newvalue.toString();
-                                });
-                              },
-                              items: getPartenaire
-                                  ? _intitutions!.map(
-                                      (valueItem) {
-                                        return DropdownMenuItem(
-                                            value: valueItem,
-                                            child: Text(valueItem.name));
-                                      },
-                                    ).toList()
-                                  : partenaires.map(
-                                      (valueItem) {
-                                        return DropdownMenuItem(
-                                            value: valueItem,
-                                            child: Text(valueItem));
-                                      },
-                                    ).toList(),
-                            ),
+                                hint: t3
+                                    ? const Text(
+                                        "Choix de l'hopital partenaire",
+                                        style: TextStyle(color: Colors.grey),
+                                      )
+                                    : Text(
+                                        "Choix de l'hopital partenaire",
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                value: partenaire,
+                                dropdownColor: Colors.white,
+                                icon: const Icon(
+                                  Icons.arrow_drop_down,
+                                  color: Colors.black,
+                                ),
+                                iconSize: 36,
+                                underline: SizedBox(),
+                                //isExpanded: true,
+                                style: TextStyle(color: blue_color),
+                                onChanged: (newvalue) {
+                                  setState(() {
+                                    partenaire = newvalue;
+                                    button = false;
+                                    getPartenaire = true;
+                                  });
+                                },
+                                items: _intitutionss!.map(
+                                  (val) {
+                                    print(getPartenaire);
+                                    return DropdownMenuItem(
+                                        value: val, child: Text(val.name));
+                                  },
+                                ).toList()),
                           ),
                         ),
                       ),
@@ -341,34 +339,110 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: blue_color),
                       ),
-                      child: SingleChildScrollView(
-                        child: t3
-                            ? Column(
-                                children: [
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Information sur le partenaire',
-                                      style: TextStyle(color: Colors.grey),
+                      child: getPartenaire
+                          ? SingleChildScrollView(
+                              child: t3
+                                  ? Center(
+                                      child: Column(
+                                        children: [
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          const Center(
+                                            child: Text('Information'),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : Column(
+                                      children: [
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        const Text(
+                                          'Informations Partenaire',
+                                          style: TextStyle(
+                                              color: blue_color, fontSize: 15),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Text('Nom du Locale partenaire : '),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              partenaire!.name,
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Text('Description : '),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              partenaire!.description,
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Text('Ville : '),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              partenaire!.ville,
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Text('Numero a contacter : '),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              '. . .',
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                ],
-                              )
-                            : Center(
-                                child: Column(
-                                  children: [
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    const Center(
-                                      child: Text('Information'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                      ),
+                            )
+                          : Center(
+                              child: CircularProgressIndicator(),
+                            ),
                     ),
                     const SizedBox(
                       height: 10,
@@ -393,26 +467,6 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                     const SizedBox(
                       height: 15,
                     ),
-                    /*Row(
-                      children: [
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Checkbox(
-                          value: this.value,
-                          onChanged: (values) {
-                            setState(() {
-                              this.value = values!;
-                              button = false;
-                            });
-                          },
-                        ),
-                        Text(
-                          'Formulaire a verifier',
-                          style: TextStyle(color: blue_color),
-                        ),
-                      ],
-                    ),*/
                     IgnorePointer(
                       ignoring: button,
                       child: GestureDetector(
@@ -551,9 +605,10 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                 });
                               }
                             : () {
+                                print("object");
                                 Fluttertoast.showToast(
                                   msg:
-                                      "Error: Des valeurs sont non selectionné}",
+                                      "Error: Certainés valeurs sont mal indexé}",
                                 );
                               },
                         child: Hero(

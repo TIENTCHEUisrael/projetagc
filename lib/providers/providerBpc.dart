@@ -137,8 +137,29 @@ class BPCProvider extends ChangeNotifier {
   static Future<List<Institutions>> getPartenaireByVilleLocale(
       Locales loc, String ville) async {
     var _var;
+    print('object');
     var url = Uri.parse(
         '${Services.urlinstitut}/get.php?Institution=${loc.id}&Town=$ville');
+    final response = await http.post(url);
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      List _temp = [];
+
+      for (var i in data) {
+        _temp.add(i);
+      }
+      _var = Institutions.recipesFromSnapshot(_temp);
+    } else {
+      print(
+          '.......................................False............................');
+    }
+
+    return _var;
+  }
+
+  static Future<List<Institutions>> getAllPartenaires() async {
+    var _var;
+    var url = Uri.parse('${Services.urlgetallinstitut}');
     final response = await http.post(url);
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
