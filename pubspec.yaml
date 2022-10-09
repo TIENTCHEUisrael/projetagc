@@ -51,6 +51,8 @@ dependencies:
 
 dev_dependencies:
   flutter_launcher_icons: ^0.10.0
+  flutter_localizations: # Add this line
+    sdk: flutter   
   flutter_test:
     sdk: flutter
   flutter_native_splash: ^2.2.10+1
@@ -95,6 +97,8 @@ flutter:
     - assets/images/png/LOGO.png
     - assets/images/png/LOGO1.png
     - assets/images/png/doc.png
+    - lib/themes/lang/ang.json
+    - lib/themes/lang/fr.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

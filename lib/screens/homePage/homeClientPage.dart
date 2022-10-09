@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:projectagc/localisation/localisation.dart';
+import 'package:projectagc/main.dart';
+import 'package:projectagc/models/classes/langages.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:projectagc/widgets/navbarClient.dart';
 
@@ -18,6 +21,22 @@ class _HomeClientPageState extends State<HomeClientPage> {
   var color2 = blue_color;
   var height1 = 15;
   var height2 = 20;
+
+  void _changeLanguage(language langage) {
+    Locale? _temp;
+    switch (langage.languagecode) {
+      case 'en':
+        _temp = Locale(langage.languagecode, 'US');
+        break;
+      case 'fr':
+        _temp = Locale(langage.languagecode, 'FR');
+        break;
+      default:
+        _temp = Locale(langage.languagecode, 'FR');
+    }
+    MyApp.setLocale(context, _temp);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,9 +112,11 @@ class _HomeClientPageState extends State<HomeClientPage> {
                                 ),
                                 child: Column(
                                   children: [
-                                    const Center(
+                                    Center(
                                       child: Text(
-                                        'Requerir un bon de prise en charge',
+                                        //'Requerir un bon de prise en charge',
+                                        DemoLocalizations.of(context)
+                                            .getTranslationValue('home_info')!,
                                         style: TextStyle(
                                           color: blue_color,
                                           fontSize: 20,

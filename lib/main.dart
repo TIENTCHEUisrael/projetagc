@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projectagc/localisation/localisation.dart';
 import 'package:projectagc/providers/providerUser.dart';
 import 'package:projectagc/screens/homePage/homeClientPage.dart';
 import 'package:projectagc/screens/navigationPage/navigationPage.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'providers/providerBpc.dart';
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
   MyApp({super.key});
+
+  static void setLocale(BuildContext context, Locale locale) {
+    _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
+    state!.setlocale(locale);
+  }
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -22,18 +31,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  //Locale? _locale;
+  Locale? _locale;
   @override
   void initState() {
     //AuthProvider().logOutUser();
     super.initState();
+    Future.delayed(Duration(seconds: 5))
+        .then((value) => {FlutterNativeSplash.remove()});
   }
 
-  /*void setlocale(Locale value) {
+  void setlocale(Locale value) {
     setState(() {
       _locale = value;
     });
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +70,7 @@ class _MyAppState extends State<MyApp> {
               button: GoogleFonts.poppins(),
             ),
           ),
+          locale: _locale,
           title: 'Project Agc',
           home: auth.isAuth == true
               ? HomeClientPage()
@@ -86,6 +98,26 @@ class _MyAppState extends State<MyApp> {
                     }
                   },
                 ),
+          supportedLocales: [
+            Locale('en', 'US'),
+            Locale('fr', 'FR'),
+          ],
+          localizationsDelegates: [
+            DemoLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          localeResolutionCallback: (deviceLocale, supportedLocales) {
+            for (var locale in supportedLocales) {
+              if (locale.languageCode == deviceLocale!.languageCode &&
+                  locale.countryCode == deviceLocale.countryCode) {
+                return deviceLocale;
+              }
+
+              return supportedLocales.first;
+            }
+          },
         );
       }),
     );
