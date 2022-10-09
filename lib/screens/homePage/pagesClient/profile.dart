@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
+import 'package:projectagc/routes/route_names.dart';
 import 'package:provider/provider.dart';
 
 import '../../../animations/custum.dart';
@@ -35,9 +36,9 @@ class _ProfileState extends State<Profile> {
         leading: const BackButton(
           color: scaffoldbackground,
         ),
-        title: const Center(
+        title: Center(
           child: Text(
-            'Mon Compte',
+            getTranslated(context, 'nav_compte'),
             style: TextStyle(color: scaffoldbackground),
             textAlign: TextAlign.center,
           ),
@@ -122,7 +123,7 @@ class _ProfileState extends State<Profile> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Societe :',
+                                getTranslated(context, 'compte_societe'),
                                 style:
                                     TextStyle(color: blue_color, fontSize: 15),
                               ),
@@ -146,7 +147,7 @@ class _ProfileState extends State<Profile> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Identifiant :',
+                                getTranslated(context, 'compte_identifiant'),
                                 style:
                                     TextStyle(color: blue_color, fontSize: 15),
                               ),
@@ -190,8 +191,8 @@ class _ProfileState extends State<Profile> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            const Text(
-                              'Langue',
+                            Text(
+                              getTranslated(context, 'compte_langue'),
                               style: TextStyle(color: blue_color, fontSize: 18),
                             ),
                             /*ToggleSwitch(
@@ -294,7 +295,7 @@ class _ProfileState extends State<Profile> {
                               color: blue_color,
                             ),
                             child: Text(
-                              'Modifier son mot de passe',
+                              getTranslated(context, 'compte_modifier'),
                               style: TextStyle(
                                   color: scaffoldbackground, fontSize: 18),
                             ),
@@ -315,7 +316,7 @@ class _ProfileState extends State<Profile> {
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Text(
-                                  'Aide',
+                                  getTranslated(context, 'compte_aide'),
                                   style: TextStyle(
                                       color: scaffoldbackground, fontSize: 18),
                                   textAlign: TextAlign.center,
@@ -331,7 +332,7 @@ class _ProfileState extends State<Profile> {
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Text(
-                                  'A propos',
+                                  getTranslated(context, 'compte_propos'),
                                   style: TextStyle(
                                       color: scaffoldbackground, fontSize: 18),
                                   textAlign: TextAlign.center,
@@ -356,14 +357,7 @@ class _ProfileState extends State<Profile> {
                           Fluttertoast.showToast(
                             msg: "Message: Deconnexion",
                           );
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return LoginPage();
-                              },
-                            ),
-                          );
+                          Navigator.pushReplacementNamed(context, loginRoute);
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(
@@ -374,7 +368,7 @@ class _ProfileState extends State<Profile> {
                               color: scaffoldbackground,
                               border: Border.all(color: blue_color)),
                           child: Text(
-                            'Déconnexion',
+                            getTranslated(context, 'compte_deconnexion'),
                             style: TextStyle(color: red_color, fontSize: 18),
                           ),
                         ),
