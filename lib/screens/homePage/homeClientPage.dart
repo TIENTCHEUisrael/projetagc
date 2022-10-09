@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
 import 'package:projectagc/main.dart';
 import 'package:projectagc/models/classes/langages.dart';
+import 'package:projectagc/routes/route_names.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:projectagc/widgets/navbarClient.dart';
 
 import '../../widgets/bas.dart';
-import 'pagesClient/BonDePriseEnCharge.dart';
 
 class HomeClientPage extends StatefulWidget {
   const HomeClientPage({super.key});
@@ -23,6 +23,7 @@ class _HomeClientPageState extends State<HomeClientPage> {
   var height2 = 20;
 
   void _changeLanguage(language langage) async {
+    print(langage.languagecode);
     Locale? _temp = await setLocale(langage.languagecode);
     MyApp.setLocale(context, _temp);
   }
@@ -60,11 +61,30 @@ class _HomeClientPageState extends State<HomeClientPage> {
           },
         ),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              CupertinoIcons.moon_stars,
-              color: Colors.white,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DropdownButton(
+              onChanged: (language? langage) {
+                _changeLanguage(langage!);
+              },
+              underline: SizedBox(),
+              icon: Icon(
+                Icons.language,
+                color: Colors.black,
+              ),
+              items: language
+                  .languageList()
+                  .map<DropdownMenuItem<language>>((lang) => DropdownMenuItem(
+                        value: lang,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(lang.flag),
+                            Text(lang.name),
+                          ],
+                        ),
+                      ))
+                  .toList(),
             ),
           ),
         ],
@@ -118,14 +138,7 @@ class _HomeClientPageState extends State<HomeClientPage> {
                                     ),
                                     GestureDetector(
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) {
-                                              return BonPriseCharge();
-                                            },
-                                          ),
-                                        );
+                                        Navigator.pushNamed(context, bpcRoute);
                                       },
                                       child: Card(
                                         elevation: 3.2,

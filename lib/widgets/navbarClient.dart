@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
-import 'package:projectagc/screens/homePage/pagesClient/historique.dart';
-import 'package:projectagc/screens/homePage/pagesClient/profile.dart';
-import 'package:projectagc/screens/homePage/pagesClient/servicereclamation.dart';
-import 'package:projectagc/screens/homePage/pagesClient/statutB.dart';
+import 'package:projectagc/routes/route_names.dart';
 import 'package:projectagc/screens/loginPage/loginPage.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -75,13 +72,8 @@ class NavBarClient extends StatelessWidget {
                   return;
                 },
                 onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return Profile();
-                      },
-                    ),
-                  );
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, compteRoute);
                 },
               ),
             ),
@@ -106,11 +98,8 @@ class NavBarClient extends StatelessWidget {
                   return;
                 },
                 onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) {
-                      return StatutBpc();
-                    }),
-                  );
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, statutRoute);
                 },
               ),
             ),
@@ -135,13 +124,8 @@ class NavBarClient extends StatelessWidget {
                   return;
                 },
                 onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return HistoriquePage();
-                      },
-                    ),
-                  );
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, historiqueROute);
                 },
               ),
             ),
@@ -164,13 +148,8 @@ class NavBarClient extends StatelessWidget {
                   return;
                 },
                 onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return ServicePage();
-                      },
-                    ),
-                  );
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, serviceRoute);
                 },
               ),
             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/localisation/localisation.dart';
 import 'package:projectagc/providers/providerUser.dart';
+import 'package:projectagc/routes/custum_route.dart';
 import 'package:projectagc/screens/homePage/homeClientPage.dart';
 import 'package:projectagc/screens/navigationPage/navigationPage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -132,10 +133,10 @@ class _MyAppState extends State<MyApp> {
                     locale.countryCode == deviceLocale.countryCode) {
                   return deviceLocale;
                 }
-
-                return supportedLocales.first;
               }
+              return supportedLocales.first;
             },
+            onGenerateRoute: CustomRoute.allRoutes,
           );
         }),
       );

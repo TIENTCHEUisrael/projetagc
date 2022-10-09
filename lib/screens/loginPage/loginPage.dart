@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
+import 'package:projectagc/routes/route_names.dart';
 import 'package:projectagc/screens/homePage/homeClientPage.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:provider/provider.dart';
@@ -208,14 +209,8 @@ class _LoginPageState extends State<LoginPage> {
                                         setState(() {
                                           isLoading = false;
                                         });
-                                        Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) {
-                                              return HomeClientPage();
-                                            },
-                                          ),
-                                        );
+                                        Navigator.pushReplacementNamed(
+                                            context, homeRoute);
                                       } else {
                                         setState(() {
                                           isLoading = false;
