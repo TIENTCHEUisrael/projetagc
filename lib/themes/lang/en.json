@@ -14,7 +14,7 @@
     "bpc_pourcentage":"The reimbursement percentage is :",
     "bpc_code":"Unique Voucher Code",
     "nav_identifiant":"Id :",
-    "nav_email":"Email",
+    "nav_email":"Email :",
     "nav_compte":"My account",
     "nav_statut":"Status BPC",
     "nav_historique":"History of receipts",
@@ -38,8 +38,15 @@
     "service_message":"Would you like to send a message to the complaints department?",
     "service_text":"Message",
     "service_button1":"Send",
-    "service_ou":"Or call it?",
+    "service_ou":"Or",
+    "service_ou2":"Call it",
     "service_button2":"Call",
     "service_message_end":"For all your complaints, write to",
-    "service_message_end2":"Or Call at"
+    "service_message_end2":"Or Call at",
+    "change_language":"Change",
+    "login_title":"Salut et bon retour a vous!",
+   "login_identifiant":"Identifiant",
+   "login_passe":"Mot de passe",
+   "login_passeoublier":"Mot de passe oublié? ",
+   "login_connexion":"Connexion"
  }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:projectagc/localisation/localization_constant.dart';
 
 import '../../../themes/constants.dart';
 
@@ -17,9 +18,9 @@ class _StatutBpcState extends State<StatutBpc> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: blue_color,
-        title: const Center(
+        title: Center(
           child: Text(
-            'Statut Bon de prix en charge',
+            getTranslated(context, 'statut_title'),
             style: TextStyle(color: scaffoldbackground),
             textAlign: TextAlign.center,
           ),

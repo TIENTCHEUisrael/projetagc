@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectagc/localisation/localization_constant.dart';
 import 'package:projectagc/themes/constants.dart';
 
 class HistoriquePage extends StatefulWidget {
@@ -15,9 +16,9 @@ class _HistoriquePageState extends State<HistoriquePage> {
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         backgroundColor: blue_color,
-        title: const Center(
+        title: Center(
           child: Text(
-            'Historique de bon de prise en charge',
+            getTranslated(context, 'historique_title'),
             style: TextStyle(color: scaffoldbackground),
             textAlign: TextAlign.center,
           ),

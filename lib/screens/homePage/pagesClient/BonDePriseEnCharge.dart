@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:projectagc/localisation/localization_constant.dart';
 import 'package:projectagc/models/BonDePriseEnCharge/coupon.dart';
 import 'package:projectagc/models/BonDePriseEnCharge/institution.dart';
 import 'package:projectagc/models/BonDePriseEnCharge/locale.dart';
@@ -68,9 +69,9 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: blue_color,
-        title: const Center(
+        title: Center(
           child: Text(
-            'Bon de prise en charge',
+            getTranslated(context, 'bpc_title'),
             style: TextStyle(color: scaffoldbackground),
             textAlign: TextAlign.center,
           ),
@@ -96,7 +97,9 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                   const SizedBox(
                     width: 10,
                   ),
-                  Text('Attendre la stabilité de la connexion"')
+                  Text(
+                    getTranslated(context, "bpc_chargement"),
+                  )
                 ],
               ),
             )
@@ -107,8 +110,8 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text(
-                      'Type de local:',
+                    Text(
+                      getTranslated(context, 'bpc_type'),
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 18, color: blue_color),
                     ),
@@ -123,8 +126,8 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                           child: IgnorePointer(
                             ignoring: false,
                             child: DropdownButton(
-                              hint: const Text(
-                                'Hopitals, Laboratoires,Autre Prestataire',
+                              hint: Text(
+                                getTranslated(context, 'bpc_type_choice'),
                                 style: TextStyle(color: Colors.black),
                               ),
                               value: locale,
@@ -158,8 +161,8 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                     const SizedBox(
                       height: 6,
                     ),
-                    const Text(
-                      'Ville et bénéficiaire au choix:',
+                    Text(
+                      getTranslated(context, 'bpc_ville'),
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 18, color: blue_color),
                     ),
@@ -178,12 +181,14 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                               ignoring: t1,
                               child: DropdownButton(
                                 hint: t1
-                                    ? const Text(
-                                        'Ville',
+                                    ? Text(
+                                        getTranslated(
+                                            context, 'bpc_ville_choice'),
                                         style: TextStyle(color: Colors.grey),
                                       )
                                     : Text(
-                                        'Ville',
+                                        getTranslated(
+                                            context, 'bpc_ville_choice'),
                                         style: TextStyle(
                                           color: Colors.black,
                                         ),
@@ -229,12 +234,14 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                               ignoring: t2,
                               child: DropdownButton(
                                 hint: t2
-                                    ? const Text(
-                                        'Bénéficiaire',
+                                    ? Text(
+                                        getTranslated(
+                                            context, 'bpc_beneficiaire'),
                                         style: TextStyle(color: Colors.grey),
                                       )
                                     : Text(
-                                        'Bénéficiaire',
+                                        getTranslated(
+                                            context, 'bpc_beneficiaire'),
                                         style: TextStyle(color: Colors.black),
                                       ),
                                 value: beneficiaire,
@@ -268,8 +275,8 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                     const SizedBox(
                       height: 4,
                     ),
-                    const Text(
-                      'Hopital,laboratoire... patenaire aux choix:',
+                    Text(
+                      getTranslated(context, 'bpc_partenaire'),
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 18, color: blue_color),
                     ),
@@ -285,12 +292,14 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                             ignoring: t3,
                             child: DropdownButton(
                                 hint: t3
-                                    ? const Text(
-                                        "Choix de l'hopital partenaire",
+                                    ? Text(
+                                        getTranslated(
+                                            context, 'bpc_partenaire_choice'),
                                         style: TextStyle(color: Colors.grey),
                                       )
                                     : Text(
-                                        "Choix de l'hopital partenaire",
+                                        getTranslated(
+                                            context, 'bpc_partenaire_choice'),
                                         style: TextStyle(color: Colors.black),
                                       ),
                                 value: partenaire,
@@ -454,7 +463,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                             width: 20,
                           ),
                           Text(
-                            'Le pourcentage de remboursement est de :',
+                            getTranslated(context, 'bpc_pourcentage'),
                             style: TextStyle(fontSize: 15, color: blue_color),
                           ),
                           Text(
@@ -641,9 +650,9 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                     const SizedBox(
                       height: 5,
                     ),
-                    const Center(
+                    Center(
                       child: Text(
-                        'Code unique du Bon :',
+                        getTranslated(context, 'bpc_code'),
                         style: TextStyle(color: blue_color),
                       ),
                     ),

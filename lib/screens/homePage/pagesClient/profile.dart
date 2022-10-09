@@ -195,7 +195,7 @@ class _ProfileState extends State<Profile> {
                               'Langue',
                               style: TextStyle(color: blue_color, fontSize: 18),
                             ),
-                            ToggleSwitch(
+                            /*ToggleSwitch(
                               minWidth: 60.0,
                               cornerRadius: 23.0,
                               activeBgColors: [
@@ -227,7 +227,32 @@ class _ProfileState extends State<Profile> {
                                   _changeLanguage(lang2);
                                 }
                               },
-                            ),
+                            ),*/
+                            DropdownButton<language>(
+                              items: language
+                                  .languageList()
+                                  .map(
+                                    (e) => DropdownMenuItem<language>(
+                                      value: e,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            e.flag,
+                                            style: TextStyle(fontSize: 20),
+                                          ),
+                                          Text(e.name)
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                              onChanged: (language? lang) {
+                                _changeLanguage(lang!);
+                              },
+                              hint: Text(
+                                getTranslated(context, 'change_language'),
+                              ),
+                            )
                           ],
                         ),
                       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectagc/localisation/localization_constant.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:provider/provider.dart';
 
@@ -65,7 +66,8 @@ class _PopupMotdepasseState extends State<PopupMotdepasse> {
                         obscureText: _obscureText,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Entrer un nouveau mot de passe',
+                          hintText:
+                              getTranslated(context, 'compte_modifier_hint'),
                           icon: const Icon(Icons.key),
                           suffixIcon: IconButton(
                             icon: _iconchange,
@@ -100,7 +102,8 @@ class _PopupMotdepasseState extends State<PopupMotdepasse> {
                       ),
                     ),
                     Text(
-                      'Votre mot de passe:${auth.user.motdepasse}',
+                      getTranslated(context, 'compte_modifier_soustitre') +
+                          '${auth.user.motdepasse}',
                       style: TextStyle(color: Colors.grey, fontSize: 15),
                     ),
                     const Divider(
@@ -120,7 +123,8 @@ class _PopupMotdepasseState extends State<PopupMotdepasse> {
                           child: _isloading
                               ? Center(child: const CircularProgressIndicator())
                               : Text(
-                                  ' Changer ',
+                                  getTranslated(
+                                      context, 'compte_modifier_button'),
                                   style: TextStyle(
                                       color: scaffoldbackground, fontSize: 18),
                                 ),

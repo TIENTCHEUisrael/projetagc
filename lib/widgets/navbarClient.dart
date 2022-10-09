@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:projectagc/localisation/localization_constant.dart';
 import 'package:projectagc/screens/homePage/pagesClient/historique.dart';
 import 'package:projectagc/screens/homePage/pagesClient/profile.dart';
 import 'package:projectagc/screens/homePage/pagesClient/servicereclamation.dart';
@@ -24,7 +25,7 @@ class NavBarClient extends StatelessWidget {
               decoration: const BoxDecoration(color: blue_color),
               accountName: Row(
                 children: [
-                  const Text("Identifiant :"),
+                  Text(getTranslated(context, 'nav_identifiant')),
                   Text(
                     auth.user.identifiant,
                     style: TextStyle(
@@ -35,7 +36,7 @@ class NavBarClient extends StatelessWidget {
               accountEmail: Row(
                 children: [
                   Text(
-                    "Email :",
+                    getTranslated(context, 'nav_email'),
                     style: TextStyle(fontWeight: FontWeight.normal),
                   ),
                   Text(
@@ -69,7 +70,7 @@ class NavBarClient extends StatelessWidget {
                   Icons.person,
                   color: blue_color,
                 ),
-                title: const Text('Mon Compte'),
+                title: Text(getTranslated(context, 'nav_compte')),
                 onLongPress: () {
                   return;
                 },
@@ -98,8 +99,8 @@ class NavBarClient extends StatelessWidget {
                   Icons.list,
                   color: blue_color,
                 ),
-                title: const Text(
-                  'Status BPC',
+                title: Text(
+                  getTranslated(context, 'nav_statut'),
                 ),
                 onLongPress: () {
                   return;
@@ -127,8 +128,8 @@ class NavBarClient extends StatelessWidget {
                   Icons.search_sharp,
                   color: blue_color,
                 ),
-                title: const Text(
-                  'Historique des bons de prises en charge',
+                title: Text(
+                  getTranslated(context, 'nav_historique'),
                 ),
                 onLongPress: () {
                   return;
@@ -158,7 +159,7 @@ class NavBarClient extends StatelessWidget {
                   Icons.handshake,
                   color: blue_color,
                 ),
-                title: const Text('Service réclamation'),
+                title: Text(getTranslated(context, 'nav_service')),
                 onLongPress: () {
                   return;
                 },
@@ -183,7 +184,7 @@ class NavBarClient extends StatelessWidget {
                   Icons.design_services,
                   color: blue_color,
                 ),
-                title: const Text('Foire aux questions'),
+                title: Text(getTranslated(context, 'nav_question')),
                 onTap: () async {
                   var urll = "https://agc-assurances.com/reclamations/";
                   if (await canLaunch(urll)) {
@@ -203,8 +204,8 @@ class NavBarClient extends StatelessWidget {
                   Icons.exit_to_app,
                   color: blue_color,
                 ),
-                title: const Text(
-                  'Déconnexion',
+                title: Text(
+                  getTranslated(context, 'nav_deconnexion'),
                   style: TextStyle(color: red_color),
                 ),
                 onLongPress: () {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projectagc/localisation/localization_constant.dart';
 import 'package:projectagc/screens/homePage/homeClientPage.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:provider/provider.dart';
-
 import '../../animations/buttonAnimation1.dart';
 import '../../providers/providerUser.dart';
 
@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: [
                     Text(
-                      'Salut et bon retour a vous!',
+                      getTranslated(context, 'login_title'),
                       style: GoogleFonts.poppins(fontSize: 17),
                     ),
                     const SizedBox(
@@ -92,9 +92,10 @@ class _LoginPageState extends State<LoginPage> {
                                 padding: const EdgeInsets.only(left: 20.0),
                                 child: TextFormField(
                                   controller: identifiant,
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'Identifiant',
+                                    hintText: getTranslated(
+                                        context, 'login_identifiant'),
                                     icon: Icon(Icons.person),
                                   ),
                                   keyboardType: TextInputType.name,
@@ -128,7 +129,8 @@ class _LoginPageState extends State<LoginPage> {
                                   obscureText: _obscureText,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'Mot de passe',
+                                    hintText:
+                                        getTranslated(context, 'login_passe'),
                                     icon: const Icon(Icons.key),
                                     suffixIcon: IconButton(
                                       icon: _iconchange,
@@ -170,7 +172,8 @@ class _LoginPageState extends State<LoginPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text('Mot de passe oublié? '),
+                              Text(
+                                  getTranslated(context, 'login_passeoublier')),
                               InkWell(
                                 child: const Text(
                                   'Changer mot de passe',
@@ -238,7 +241,8 @@ class _LoginPageState extends State<LoginPage> {
                                           strokeWidth: 1,
                                         )
                                       : Text(
-                                          'Connexion',
+                                          getTranslated(
+                                              context, 'login_connexion'),
                                           style: GoogleFonts.poppins(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,

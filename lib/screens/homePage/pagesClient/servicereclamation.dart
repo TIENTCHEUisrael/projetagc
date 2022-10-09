@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projectagc/localisation/localization_constant.dart';
 
 import '../../../themes/constants.dart';
 
@@ -27,9 +28,9 @@ class _ServicePageState extends State<ServicePage> {
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: blue_color,
-        title: const Center(
+        title: Center(
           child: Text(
-            'Service reclamation',
+            getTranslated(context, 'service_title'),
             style: TextStyle(color: scaffoldbackground),
             textAlign: TextAlign.center,
           ),
@@ -70,8 +71,8 @@ class _ServicePageState extends State<ServicePage> {
                     const SizedBox(
                       height: 25,
                     ),
-                    const Text(
-                      'Souhaitez vous envoyer un message au service de reclamation?',
+                    Text(
+                      getTranslated(context, 'service_message'),
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 16, color: blue_color),
                     ),
@@ -132,7 +133,7 @@ class _ServicePageState extends State<ServicePage> {
                                 width: 8,
                               ),
                               Text(
-                                'Envoyer',
+                                getTranslated(context, 'service_button1'),
                                 style: GoogleFonts.poppins(
                                     color: Colors.white, fontSize: 16),
                               ),
@@ -144,12 +145,12 @@ class _ServicePageState extends State<ServicePage> {
                     const SizedBox(
                       height: 5,
                     ),
-                    const Text(
-                      'Ou',
+                    Text(
+                      getTranslated(context, 'service_ou'),
                       style: TextStyle(color: blue_color, fontSize: 16),
                     ),
-                    const Text(
-                      "l'appelez?",
+                    Text(
+                      getTranslated(context, 'service_ou2'),
                       style: TextStyle(color: blue_color, fontSize: 16),
                     ),
                     const SizedBox(
@@ -178,7 +179,7 @@ class _ServicePageState extends State<ServicePage> {
                                 width: 8,
                               ),
                               Text(
-                                'Appelez',
+                                getTranslated(context, 'service_button2'),
                                 style: TextStyle(
                                     fontSize: 16, color: Colors.white),
                               ),
@@ -203,7 +204,7 @@ class _ServicePageState extends State<ServicePage> {
                   children: [
                     TextSpan(
                         style: defaultText,
-                        text: "Pour toutes vos reclamations, ecrivez au "),
+                        text: getTranslated(context, 'service_message_end')),
                     TextSpan(
                       style: linkText,
                       text: "reclamationsclients@agc-assurances.com",
@@ -221,7 +222,8 @@ class _ServicePageState extends State<ServicePage> {
                     ),
                     TextSpan(
                         style: defaultText,
-                        text: " Ou appelez au +237 6 92 34 19 34"),
+                        text: getTranslated(context, 'service_message_end2') +
+                            " +237 6 92 34 19 34"),
                   ],
                 ),
               ),
