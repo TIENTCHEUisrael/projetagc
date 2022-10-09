@@ -8,6 +8,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'localisation/localization_constant.dart';
 import 'providers/providerBpc.dart';
 
 void main() {
@@ -47,79 +48,97 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) {
-            return AuthProvider();
-          },
-        ),
-        ChangeNotifierProvider(create: (_) {
-          return BPCProvider();
-        }),
-      ],
-      child: Consumer<AuthProvider>(builder: (context, auth, _) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            //brightness: Brightness.dark,
-            primaryColor: blue_color,
-            scaffoldBackgroundColor: scaffoldbackground,
-            textTheme: TextTheme(
-              button: GoogleFonts.poppins(),
-            ),
-          ),
-          locale: _locale,
-          title: 'Project Agc',
-          home: auth.isAuth == true
-              ? HomeClientPage()
-              : FutureBuilder<bool>(
-                  future: auth.tryAutoLogin(),
-                  builder: (context, snapshot) {
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.waiting:
-                        return const Scaffold(
-                          backgroundColor: Colors.white,
-                          body: Center(
-                            child: CircularProgressIndicator(
-                              color: blue_color,
-                            ),
-                          ),
-                        );
-                      case ConnectionState.none:
-                        return NavigationPage();
-                      default:
-                        if (snapshot.hasError) {
-                          return Text('Error: ${snapshot.error}');
-                        } else {
-                          return NavigationPage();
-                        }
-                    }
-                  },
-                ),
-          supportedLocales: [
-            Locale('en', 'US'),
-            Locale('fr', 'FR'),
-          ],
-          localizationsDelegates: [
-            DemoLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          localeResolutionCallback: (deviceLocale, supportedLocales) {
-            for (var locale in supportedLocales) {
-              if (locale.languageCode == deviceLocale!.languageCode &&
-                  locale.countryCode == deviceLocale.countryCode) {
-                return deviceLocale;
-              }
+  void didChangeDependencies() {
+    getLocale().then((value) {
+      setState(() {
+        this._locale = value;
+      });
+    });
+    super.didChangeDependencies();
+  }
 
-              return supportedLocales.first;
-            }
-          },
-        );
-      }),
-    );
+  @override
+  Widget build(BuildContext context) {
+    if (_locale == null) {
+      return Container(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    } else {
+      return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) {
+              return AuthProvider();
+            },
+          ),
+          ChangeNotifierProvider(create: (_) {
+            return BPCProvider();
+          }),
+        ],
+        child: Consumer<AuthProvider>(builder: (context, auth, _) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              //brightness: Brightness.dark,
+              primaryColor: blue_color,
+              scaffoldBackgroundColor: scaffoldbackground,
+              textTheme: TextTheme(
+                button: GoogleFonts.poppins(),
+              ),
+            ),
+            locale: _locale,
+            title: 'Project Agc',
+            home: auth.isAuth == true
+                ? HomeClientPage()
+                : FutureBuilder<bool>(
+                    future: auth.tryAutoLogin(),
+                    builder: (context, snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.waiting:
+                          return const Scaffold(
+                            backgroundColor: Colors.white,
+                            body: Center(
+                              child: CircularProgressIndicator(
+                                color: blue_color,
+                              ),
+                            ),
+                          );
+                        case ConnectionState.none:
+                          return NavigationPage();
+                        default:
+                          if (snapshot.hasError) {
+                            return Text('Error: ${snapshot.error}');
+                          } else {
+                            return NavigationPage();
+                          }
+                      }
+                    },
+                  ),
+            supportedLocales: [
+              Locale('fr', 'FR'),
+              Locale('en', 'US'),
+            ],
+            localizationsDelegates: [
+              DemoLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            localeResolutionCallback: (deviceLocale, supportedLocales) {
+              for (var locale in supportedLocales) {
+                if (locale.languageCode == deviceLocale!.languageCode &&
+                    locale.countryCode == deviceLocale.countryCode) {
+                  return deviceLocale;
+                }
+
+                return supportedLocales.first;
+              }
+            },
+          );
+        }),
+      );
+    }
   }
 }

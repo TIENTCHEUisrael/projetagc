@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:projectagc/localisation/localization_constant.dart';
 import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 import '../../../animations/custum.dart';
 import '../../../main.dart';
+import '../../../models/classes/langages.dart';
 import '../../../providers/providerUser.dart';
 import '../../../themes/constants.dart';
 import '../../../widgets/bas.dart';
@@ -20,6 +22,11 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  void _changeLanguage(language language) async {
+    Locale _locale = await setLocale(language.languagecode);
+    MyApp.setLocale(context, _locale);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -200,10 +207,25 @@ class _ProfileState extends State<Profile> {
                               inactiveFgColor: Colors.white,
                               initialLabelIndex: 0,
                               totalSwitches: 2,
-                              labels: const ['FR', 'EN'],
+                              labels: const [French, English],
                               radiusStyle: true,
                               onToggle: (index) {
                                 print('switched to: $index');
+                                language lang = language(
+                                    id: 1,
+                                    name: '🇺🇸',
+                                    flag: 'English',
+                                    languagecode: "en");
+                                language lang2 = language(
+                                    id: 2,
+                                    name: '🇫🇷',
+                                    flag: 'French',
+                                    languagecode: "fr");
+                                if (index == 1) {
+                                  _changeLanguage(lang);
+                                } else {
+                                  _changeLanguage(lang2);
+                                }
                               },
                             ),
                           ],

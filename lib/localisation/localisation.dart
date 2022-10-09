@@ -14,9 +14,9 @@ class DemoLocalizations {
   Map<String, String>? _localizedvalues;
 
   Future load() async {
-    String jsonStringvalues =
-        await rootBundle.loadString('lib/lang/${locale.languageCode}.json');
-    Map<String, String> mappedJson = json.decode(jsonStringvalues);
+    String jsonStringvalues = await rootBundle
+        .loadString('lib/themes/lang/${locale.languageCode}.json');
+    Map<String, dynamic> mappedJson = json.decode(jsonStringvalues);
 
     _localizedvalues =
         mappedJson.map((key, value) => MapEntry(key, value.toString()));
@@ -35,7 +35,7 @@ class _DemoLocalizationDelegate
   const _DemoLocalizationDelegate();
   @override
   bool isSupported(Locale locale) {
-    return ['en', 'fr'].contains(locale.languageCode);
+    return ['fr', 'en'].contains(locale.languageCode);
   }
 
   @override
@@ -47,7 +47,6 @@ class _DemoLocalizationDelegate
 
   @override
   bool shouldReload(covariant LocalizationsDelegate<DemoLocalizations> old) {
-    // TODO: implement shouldReload
-    throw UnimplementedError();
+    return false;
   }
 }

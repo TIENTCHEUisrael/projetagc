@@ -97,7 +97,7 @@ flutter:
     - assets/images/png/LOGO.png
     - assets/images/png/LOGO1.png
     - assets/images/png/doc.png
-    - lib/themes/lang/ang.json
+    - lib/themes/lang/en.json
     - lib/themes/lang/fr.json
 
   # An image asset can refer to one or more resolution-specific "variants", see

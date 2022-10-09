@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:projectagc/localisation/localisation.dart';
+import 'package:projectagc/localisation/localization_constant.dart';
 import 'package:projectagc/main.dart';
 import 'package:projectagc/models/classes/langages.dart';
 import 'package:projectagc/themes/constants.dart';
@@ -22,18 +22,8 @@ class _HomeClientPageState extends State<HomeClientPage> {
   var height1 = 15;
   var height2 = 20;
 
-  void _changeLanguage(language langage) {
-    Locale? _temp;
-    switch (langage.languagecode) {
-      case 'en':
-        _temp = Locale(langage.languagecode, 'US');
-        break;
-      case 'fr':
-        _temp = Locale(langage.languagecode, 'FR');
-        break;
-      default:
-        _temp = Locale(langage.languagecode, 'FR');
-    }
+  void _changeLanguage(language langage) async {
+    Locale? _temp = await setLocale(langage.languagecode);
     MyApp.setLocale(context, _temp);
   }
 
@@ -115,8 +105,7 @@ class _HomeClientPageState extends State<HomeClientPage> {
                                     Center(
                                       child: Text(
                                         //'Requerir un bon de prise en charge',
-                                        DemoLocalizations.of(context)
-                                            .getTranslationValue('home_info')!,
+                                        getTranslated(context, 'home_info'),
                                         style: TextStyle(
                                           color: blue_color,
                                           fontSize: 20,
@@ -178,7 +167,7 @@ class _HomeClientPageState extends State<HomeClientPage> {
               ),
               child: Center(
                 child: Text(
-                  'Parler a un conseiller',
+                  getTranslated(context, 'home_button1'),
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20, color: blue_color),
                 ),
@@ -193,7 +182,7 @@ class _HomeClientPageState extends State<HomeClientPage> {
               ),
               child: Center(
                 child: Text(
-                  "Besoin d'aide",
+                  getTranslated(context, 'home_button2'),
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20, color: blue_color),
                 ),
