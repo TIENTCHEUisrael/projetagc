@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
 import 'package:projectagc/main.dart';

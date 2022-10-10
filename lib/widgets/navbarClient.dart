@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
@@ -7,9 +10,38 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../providers/providerUser.dart';
 import '../themes/constants.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
 
-class NavBarClient extends StatelessWidget {
+class NavBarClient extends StatefulWidget {
   const NavBarClient({super.key});
+
+  @override
+  State<NavBarClient> createState() => _NavBarClientState();
+}
+
+class _NavBarClientState extends State<NavBarClient> {
+  bool darkmode = false;
+  dynamic savedThemeMode;
+  @override
+  void initState() {
+    super.initState();
+    getCurrentTheme();
+  }
+
+  Future getCurrentTheme() async {
+    savedThemeMode = await AdaptiveTheme.getThemeMode();
+    if (savedThemeMode.toString() == 'AdaptiveThemeMode.dark') {
+      print('theme sombre');
+      setState(() {
+        darkmode = true;
+      });
+    } else {
+      print('theme clair');
+      setState(() {
+        darkmode = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -150,6 +182,28 @@ class NavBarClient extends StatelessWidget {
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.pushNamed(context, serviceRoute);
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              child: SwitchListTile(
+                title: Text('Mode sombre'),
+                secondary: Icon(Icons.nightlight_round),
+                value: darkmode,
+                onChanged: (value) {
+                  print(value);
+                  if (value == true) {
+                    AdaptiveTheme.of(context).setDark();
+                  } else {
+                    AdaptiveTheme.of(context).setLight();
+                  }
+                  setState(() {
+                    darkmode = value;
+                  });
                 },
               ),
             ),

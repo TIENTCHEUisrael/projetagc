@@ -49,5 +49,7 @@
     "login_passe":"Mot de passe",
     "login_passeoublier":"Mot de passe oublié? ",
     "login_connexion":"Connexion",
-    "commencer":"Start"
+    "commencer":"Start",
+    "temps_j":"Day",
+    "temps_n":"Night"
  }
