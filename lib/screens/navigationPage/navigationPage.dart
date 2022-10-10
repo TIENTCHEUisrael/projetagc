@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projectagc/localisation/localization_constant.dart';
 import 'package:projectagc/screens/loginPage/loginPage.dart';
 import 'package:projectagc/screens/navigationPage/Page2.dart';
 import 'package:projectagc/screens/navigationPage/Page1.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../animations/buttonAnimation1.dart';
 
 class NavigationPage extends StatefulWidget {
@@ -70,7 +70,7 @@ class _NavigationPageState extends State<NavigationPage> {
                           child: Row(
                             children: [
                               Text(
-                                'Commencer',
+                                getTranslated(context, 'commencer'),
                                 style: GoogleFonts.poppins(
                                     fontSize: 20, color: Colors.white),
                               ),

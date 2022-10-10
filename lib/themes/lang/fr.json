@@ -48,5 +48,6 @@
    "login_identifiant":"Identifiant",
    "login_passe":"Mot de passe",
    "login_passeoublier":"Mot de passe oublié? ",
-   "login_connexion":"Connexion"
+   "login_connexion":"Connexion",
+   "commencer":"Commencez"
 }

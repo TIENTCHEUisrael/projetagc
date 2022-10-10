@@ -45,8 +45,9 @@
     "service_message_end2":"Or Call at",
     "change_language":"Change",
     "login_title":"Salut et bon retour a vous!",
-   "login_identifiant":"Identifiant",
-   "login_passe":"Mot de passe",
-   "login_passeoublier":"Mot de passe oublié? ",
-   "login_connexion":"Connexion"
+    "login_identifiant":"Identifiant",
+    "login_passe":"Mot de passe",
+    "login_passeoublier":"Mot de passe oublié? ",
+    "login_connexion":"Connexion",
+    "commencer":"Start"
  }
