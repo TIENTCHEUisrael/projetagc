@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
@@ -51,10 +48,13 @@ class _NavBarClientState extends State<NavBarClient> {
           padding: EdgeInsets.zero,
           children: [
             UserAccountsDrawerHeader(
-              decoration: const BoxDecoration(color: blue_color),
+              decoration: BoxDecoration(color: blue_color),
               accountName: Row(
                 children: [
-                  Text(getTranslated(context, 'nav_identifiant')),
+                  Text(
+                    getTranslated(context, 'nav_identifiant'),
+                    style: TextStyle(color: scaffoldbackground),
+                  ),
                   Text(
                     auth.user.identifiant,
                     style: TextStyle(
@@ -66,7 +66,10 @@ class _NavBarClientState extends State<NavBarClient> {
                 children: [
                   Text(
                     getTranslated(context, 'nav_email'),
-                    style: TextStyle(fontWeight: FontWeight.normal),
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      color: scaffoldbackground,
+                    ),
                   ),
                   Text(
                     auth.user.email,
@@ -92,7 +95,9 @@ class _NavBarClientState extends State<NavBarClient> {
               margin: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: blue_color),
+                border: Border.all(
+                  color: AdaptiveTheme.of(context).theme.primaryColor,
+                ),
               ),
               child: ListTile(
                 leading: const Icon(
@@ -116,7 +121,9 @@ class _NavBarClientState extends State<NavBarClient> {
               margin: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: blue_color),
+                border: Border.all(
+                  color: AdaptiveTheme.of(context).theme.primaryColor,
+                ),
               ),
               child: ListTile(
                 leading: const Icon(
@@ -142,7 +149,9 @@ class _NavBarClientState extends State<NavBarClient> {
               margin: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: blue_color),
+                border: Border.all(
+                  color: AdaptiveTheme.of(context).theme.primaryColor,
+                ),
               ),
               child: ListTile(
                 leading: const Icon(
@@ -168,7 +177,9 @@ class _NavBarClientState extends State<NavBarClient> {
               margin: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: blue_color),
+                border: Border.all(
+                  color: AdaptiveTheme.of(context).theme.primaryColor,
+                ),
               ),
               child: ListTile(
                 leading: const Icon(
@@ -192,7 +203,10 @@ class _NavBarClientState extends State<NavBarClient> {
               margin: const EdgeInsets.symmetric(horizontal: 10),
               child: SwitchListTile(
                 title: Text('Mode sombre'),
-                secondary: Icon(Icons.nightlight_round),
+                secondary: Icon(
+                  Icons.nightlight_round,
+                  color: blue_color,
+                ),
                 value: darkmode,
                 onChanged: (value) {
                   print(value);

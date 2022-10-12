@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
-
 import '../../../themes/constants.dart';
 
 class StatutBpc extends StatefulWidget {
@@ -39,12 +36,33 @@ class _StatutBpcState extends State<StatutBpc> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Center(
-              child: Text('Statut'),
-            ),
+            ListView.separated(
+                itemBuilder: (context, index) {
+                  return CardWidget(
+                      texte: "texte",
+                      info: "info",
+                      color: Colors.black,
+                      image: Image.asset("assets/images/png/agc1.png"));
+                },
+                separatorBuilder: ((context, index) {
+                  return Divider();
+                }),
+                itemCount: 10),
           ],
         ),
       ),
     );
   }
+}
+
+Widget CardWidget(
+    {required String texte,
+    required String info,
+    required Color color,
+    required Image image,
+    Icon? icon}) {
+  return Card(
+    elevation: 10,
+    child: ListTile(),
+  );
 }

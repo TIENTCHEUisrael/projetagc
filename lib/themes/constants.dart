@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 const blue_color = Color(0XFF0D47A1);
+const blue_color2 = Color.fromARGB(255, 4, 33, 77);
 const red_color = Color(0XFFD50000);
 const scaffoldbackground = Color(0XFFFFFFFF);
 const grey_color = Colors.grey;

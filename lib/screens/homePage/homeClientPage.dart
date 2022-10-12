@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
 import 'package:projectagc/main.dart';
@@ -16,11 +17,6 @@ class HomeClientPage extends StatefulWidget {
 }
 
 class _HomeClientPageState extends State<HomeClientPage> {
-  var color1 = blue_color;
-  var color2 = blue_color;
-  var height1 = 15;
-  var height2 = 20;
-
   void _changeLanguage(language langage) async {
     print(langage.languagecode);
     Locale? _temp = await setLocale(langage.languagecode);
@@ -126,7 +122,9 @@ class _HomeClientPageState extends State<HomeClientPage> {
                                         //'Requerir un bon de prise en charge',
                                         getTranslated(context, 'home_info'),
                                         style: TextStyle(
-                                          color: blue_color,
+                                          color: AdaptiveTheme.of(context)
+                                              .theme
+                                              .primaryColor,
                                           fontSize: 20,
                                         ),
                                         textAlign: TextAlign.center,
@@ -175,13 +173,18 @@ class _HomeClientPageState extends State<HomeClientPage> {
               padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: blue_color),
+                border: Border.all(
+                  color: AdaptiveTheme.of(context).theme.primaryColor,
+                ),
               ),
               child: Center(
                 child: Text(
                   getTranslated(context, 'home_button1'),
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20, color: blue_color),
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: AdaptiveTheme.of(context).theme.primaryColor,
+                  ),
                 ),
               ),
             ),
@@ -190,13 +193,18 @@ class _HomeClientPageState extends State<HomeClientPage> {
               padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: blue_color),
+                border: Border.all(
+                  color: AdaptiveTheme.of(context).theme.primaryColor,
+                ),
               ),
               child: Center(
                 child: Text(
                   getTranslated(context, 'home_button2'),
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20, color: blue_color),
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: AdaptiveTheme.of(context).theme.primaryColor,
+                  ),
                 ),
               ),
             ),

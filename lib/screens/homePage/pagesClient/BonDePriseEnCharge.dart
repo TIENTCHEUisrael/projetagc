@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
@@ -113,7 +114,10 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                     Text(
                       getTranslated(context, 'bpc_type'),
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 18, color: blue_color),
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: AdaptiveTheme.of(context).theme.primaryColor,
+                      ),
                     ),
                     Center(
                       child: Padding(
@@ -164,7 +168,10 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                     Text(
                       getTranslated(context, 'bpc_ville'),
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 18, color: blue_color),
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: AdaptiveTheme.of(context).theme.primaryColor,
+                      ),
                     ),
                     Row(
                       children: [
@@ -202,7 +209,11 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                 iconSize: 30,
                                 underline: SizedBox(),
                                 //isExpanded: true,
-                                style: TextStyle(color: blue_color),
+                                style: TextStyle(
+                                  color: AdaptiveTheme.of(context)
+                                      .theme
+                                      .primaryColor,
+                                ),
                                 onChanged: (newvalue) {
                                   setState(() {
                                     ville = newvalue.toString();
@@ -278,7 +289,10 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                     Text(
                       getTranslated(context, 'bpc_partenaire'),
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 18, color: blue_color),
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: AdaptiveTheme.of(context).theme.primaryColor,
+                      ),
                     ),
                     Center(
                       child: Padding(
@@ -464,7 +478,11 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                           ),
                           Text(
                             getTranslated(context, 'bpc_pourcentage'),
-                            style: TextStyle(fontSize: 15, color: blue_color),
+                            style: TextStyle(
+                              fontSize: 15,
+                              color:
+                                  AdaptiveTheme.of(context).theme.primaryColor,
+                            ),
                           ),
                           Text(
                             '${auth.user.remise}%',
@@ -504,70 +522,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                     setState(() {
                                       _isgetting = true;
                                     });
-                                    /*final Future<
-                                    Map<String,
-                                        dynamic>?> response2 = bpcProvider.sendEmail(
-                                    "AGC assurance",
-                                    "Coupon",
-                                    auth.user.nom,
-                                    "Ton coupon pour le bon de prise en charge est : ${bpcProvider.getCoupon}",
-                                    auth.user.email);
-                    
-                                response2.then((value1) {
-                                  if (value1!['statut']) {
-                                    Fluttertoast.showToast(
-                                      msg:
-                                          "message ${value['message']} and ${value1['message']}",
-                                    );
-                                    setState(() {
-                                      _isgetting = true;
-                                    });
-                                    Navigator.of(context).pop();
-                                    Navigator.push(
-                                      context,
-                                      HeroDialogRoute(
-                                        builder: (context) {
-                                          return CouponPopup(
-                                            contain: Column(
-                                              children: [
-                                                Container(
-                                                  child: Center(
-                                                    child: Text(
-                                                        'Votre coupon est : ${bpcProvider.getCoupon}'),
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  height: 10,
-                                                ),
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    Navigator.of(context).pop();
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: Card(
-                                                    elevation: 5,
-                                                    child: Text(
-                                                      'OK',
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          color: blue_color),
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  } else {
-                                    Fluttertoast.showToast(
-                                      msg:
-                                          "Error ${value['message']} and ${value1['message']}",
-                                    );
-                                    Navigator.of(context).pop();
-                                  }
-                                });*/
+
                                     Navigator.of(context).pop();
                                     Navigator.push(
                                       context,
@@ -653,7 +608,9 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                     Center(
                       child: Text(
                         getTranslated(context, 'bpc_code'),
-                        style: TextStyle(color: blue_color),
+                        style: TextStyle(
+                          color: AdaptiveTheme.of(context).theme.primaryColor,
+                        ),
                       ),
                     ),
                     Center(

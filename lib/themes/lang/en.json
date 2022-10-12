@@ -5,7 +5,7 @@
     "bpc_chargement":"Wait for connection stability",
     "bpc_title":"Support voucher",
     "bpc_type":"Type of room",
-    "bpc_type_choice":"Hospitals, Laboratories, Other Service Provider",
+    "bpc_type_choice":"Hospitals, Laboratories,...",
     "bpc_ville":"City and beneficiary of your choice",
     "bpc_ville_choice":"City",
     "bpc_beneficiaire":"Beneficiary",
