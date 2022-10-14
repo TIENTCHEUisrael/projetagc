@@ -90,6 +90,7 @@ class _MyAppState extends State<MyApp> {
               dark: ThemeData(
                 brightness: Brightness.dark,
                 primaryColor: scaffoldbackground,
+
               ),
               initial: AdaptiveThemeMode.light,
               builder: (theme, darktheme) {

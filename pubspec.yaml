@@ -97,10 +97,9 @@ flutter:
     - assets/images/lottie/e.json
     - assets/images/png/LOGO.png
     - assets/images/png/LOGO1.png
-    - assets/images/png/doc.png
     - lib/themes/lang/en.json
     - lib/themes/lang/fr.json
-
+    - assets/images/png/docvv.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

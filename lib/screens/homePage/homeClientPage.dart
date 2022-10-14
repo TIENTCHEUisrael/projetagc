@@ -88,16 +88,22 @@ class _HomeClientPageState extends State<HomeClientPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Center(
+            Container(
+              height: 450,
               child: Stack(
+                alignment: Alignment.center,
                 children: [
-                  Center(
+                  Positioned(
+                  left: 0,
+                  top: 50,
+                  child:Center(
                     child: Image.asset(
-                      "assets/images/png/doc.png",
-                      height: 450,
-                      width: 450,
+                      "assets/images/png/docvv.png",
+                      height: 400,
+                      width: 270,
+                      fit: BoxFit.cover,
                     ),
-                  ),
+                  ),),
                   Stack(
                     children: [
                       Center(
@@ -105,7 +111,7 @@ class _HomeClientPageState extends State<HomeClientPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top: 200.0),
+                              padding: const EdgeInsets.only(top: 150.0),
                               child: Container(
                                 padding:
                                     const EdgeInsets.only(top: 15, bottom: 10),
@@ -113,7 +119,7 @@ class _HomeClientPageState extends State<HomeClientPage> {
                                     const EdgeInsets.only(left: 80, right: 10),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  color: Colors.blue[100],
+                                  color: Color(0XF4682B4).withOpacity(0.6),
                                 ),
                                 child: Column(
                                   children: [
@@ -207,9 +213,6 @@ class _HomeClientPageState extends State<HomeClientPage> {
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 30,
             ),
             bas(),
           ],
