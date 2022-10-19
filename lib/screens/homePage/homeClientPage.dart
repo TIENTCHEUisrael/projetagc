@@ -111,14 +111,14 @@ class _HomeClientPageState extends State<HomeClientPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top: 150.0),
+                              padding: const EdgeInsets.only(top: 140.0,left: 50),
                               child: Container(
                                 padding:
-                                    const EdgeInsets.only(top: 15, bottom: 10),
+                                    const EdgeInsets.all(40),
                                 margin:
                                     const EdgeInsets.only(left: 80, right: 10),
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
+                                  shape:BoxShape.circle,
                                   color: Color(0XF4682B4).withOpacity(0.6),
                                 ),
                                 child: Column(
