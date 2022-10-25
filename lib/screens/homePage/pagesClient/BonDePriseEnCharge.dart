@@ -592,11 +592,8 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                               height: 85,
                               width: 85,
                               alignment: Alignment.center,
-                              child: Icon(
-                                Icons.share,
-                                color: blue_color,
-                                size: 60,
-                              ),
+                              child:
+                                  Image.asset("assets/images/png/partage.png"),
                             ),
                           ),
                         ),

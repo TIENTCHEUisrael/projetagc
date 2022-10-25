@@ -99,6 +99,7 @@ flutter:
     - assets/images/png/LOGO1.png
     - lib/themes/lang/en.json
     - lib/themes/lang/fr.json
+    - assets/images/png/partage.png
     - assets/images/png/docvv.png
     - assets/images/svg/button.svg
     - assets/images/svg/button2.svg

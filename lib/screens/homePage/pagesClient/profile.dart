@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
@@ -12,7 +13,6 @@ import '../../../themes/constants.dart';
 import '../../../widgets/bas.dart';
 import '../../../widgets/pageRoute.dart';
 import '../../../widgets/popup.dart';
-import '../../loginPage/loginPage.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -30,7 +30,6 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         backgroundColor: blue_color,
         leading: const BackButton(
@@ -195,39 +194,6 @@ class _ProfileState extends State<Profile> {
                               getTranslated(context, 'compte_langue'),
                               style: TextStyle(color: blue_color, fontSize: 18),
                             ),
-                            /*ToggleSwitch(
-                              minWidth: 60.0,
-                              cornerRadius: 23.0,
-                              activeBgColors: [
-                                [blue_color],
-                                [red_color]
-                              ],
-                              activeFgColor: Colors.white,
-                              inactiveBgColor: Colors.grey,
-                              inactiveFgColor: Colors.white,
-                              initialLabelIndex: 0,
-                              totalSwitches: 2,
-                              labels: const [French, English],
-                              radiusStyle: true,
-                              onToggle: (index) {
-                                print('switched to: $index');
-                                language lang = language(
-                                    id: 1,
-                                    name: '🇺🇸',
-                                    flag: 'English',
-                                    languagecode: "en");
-                                language lang2 = language(
-                                    id: 2,
-                                    name: '🇫🇷',
-                                    flag: 'French',
-                                    languagecode: "fr");
-                                if (index == 1) {
-                                  _changeLanguage(lang);
-                                } else {
-                                  _changeLanguage(lang2);
-                                }
-                              },
-                            ),*/
                             DropdownButton<language>(
                               items: language
                                   .languageList()
@@ -251,6 +217,9 @@ class _ProfileState extends State<Profile> {
                               },
                               hint: Text(
                                 getTranslated(context, 'change_language'),
+                                style: TextStyle(
+                                  color: blue_color,
+                                ),
                               ),
                             )
                           ],

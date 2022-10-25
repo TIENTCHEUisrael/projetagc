@@ -84,13 +84,13 @@ class _MyAppState extends State<MyApp> {
           builder: (context, auth, _) {
             return AdaptiveTheme(
               light: ThemeData(
-                brightness: Brightness.light,
-                primaryColor: blue_color,
-              ),
+                  brightness: Brightness.light,
+                  primaryColor: blue_color,
+                  hintColor: scaffoldbackground),
               dark: ThemeData(
-                brightness: Brightness.dark,
-                primaryColor: scaffoldbackground,
-              ),
+                  brightness: Brightness.dark,
+                  primaryColor: scaffoldbackground,
+                  hintColor: blue_color),
               initial: AdaptiveThemeMode.light,
               builder: (theme, darktheme) {
                 return MaterialApp(
