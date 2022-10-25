@@ -12,6 +12,7 @@ class User {
   final String ville;
   final String remise;
   final String rang;
+  final String maximum;
   final String beneficiaires;
   final String? createdAt;
   final String? updatedAt;
@@ -30,6 +31,7 @@ class User {
     required this.ville,
     required this.remise,
     required this.rang,
+    required this.maximum,
     required this.beneficiaires,
     this.createdAt,
     this.updatedAt,
@@ -50,6 +52,7 @@ class User {
       ville: json['town'] as String,
       remise: json['discount'] as String,
       rang: json['rank'] as String,
+      maximum: json['maximum'] as String,
       beneficiaires: json['beneficial'] as String,
       createdAt: json['CreatedAt'] as String,
     );
@@ -68,6 +71,7 @@ class User {
         "town": ville,
         "discount": remise,
         "rank": rang,
+        "maximum": maximum,
         "beneficial": beneficiaires,
         "CreatedAt": createdAt,
       };
@@ -82,6 +86,6 @@ class User {
 
   @override
   String toString() {
-    return 'User {Id:$idUser,Identifiant: $identifiant,Prenom: $prenom,Nom: $nom,Sexe: $sexe,Nom_Societe: $societe,mot_de_passe:$motdepasse,Email: $email,Photo: $photo,Telephone: $telephone,Ville: $ville,Remise:$remise,Rang:$rang,Beneficial:$beneficiaires,CreatedAt: $createdAt}';
+    return 'User {Id:$idUser,Identifiant: $identifiant,Prenom: $prenom,Nom: $nom,Sexe: $sexe,Nom_Societe: $societe,mot_de_passe:$motdepasse,Email: $email,Photo: $photo,Telephone: $telephone,Ville: $ville,Remise:$remise,Rang:$rang,maximum:$maximum,Beneficial:$beneficiaires,CreatedAt: $createdAt}';
   }
 }

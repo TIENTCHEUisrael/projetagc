@@ -100,6 +100,9 @@ flutter:
     - lib/themes/lang/en.json
     - lib/themes/lang/fr.json
     - assets/images/png/docvv.png
+    - assets/images/svg/button.svg
+    - assets/images/svg/button2.svg
+    - assets/images/svg/arrierePlan.svg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

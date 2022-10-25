@@ -83,18 +83,25 @@ class AuthProvider extends ChangeNotifier {
       if (response.statusCode == 200) {
         _logStatus = Statut.authenticated;
         var data = jsonDecode(response.body);
-        _token = data['Id'];
-        _user = User.fromJson(data);
-        UserPreferences.saveUserToSharePreference(data);
-        UserPreferences().saveToken(_token!);
-        print(_user);
-        notifyListeners();
-        result = {
-          "statut": true,
-          "message": "User authenticated",
-          "user": _user!,
-          "token": _token!
-        };
+        if (data['Id'] == null) {
+          result = {
+            "statut": false,
+            "message": "Password or email incorrect",
+          };
+        } else {
+          _token = data['Id'];
+          _user = User.fromJson(data);
+          UserPreferences.saveUserToSharePreference(data);
+          UserPreferences().saveToken(_token!);
+          print(_user);
+          notifyListeners();
+          result = {
+            "statut": true,
+            "message": "User authenticated",
+            "user": _user!,
+            "token": _token!
+          };
+        }
       } else {
         _logStatus = Statut.notauthenticate;
         notifyListeners();

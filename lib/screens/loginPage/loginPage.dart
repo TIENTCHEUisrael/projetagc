@@ -3,7 +3,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
 import 'package:projectagc/routes/route_names.dart';
-import 'package:projectagc/screens/homePage/homeClientPage.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:provider/provider.dart';
 import '../../animations/buttonAnimation1.dart';
@@ -204,7 +203,7 @@ class _LoginPageState extends State<LoginPage> {
                                     (value) {
                                       if (value!['statut']) {
                                         Fluttertoast.showToast(
-                                          msg: "message ${value['message']}",
+                                          msg: "${value['message']}",
                                         );
                                         setState(() {
                                           isLoading = false;
@@ -216,7 +215,7 @@ class _LoginPageState extends State<LoginPage> {
                                           isLoading = false;
                                         });
                                         Fluttertoast.showToast(
-                                          msg: "Error ${value['message']}",
+                                          msg: "Error: ${value['message']}",
                                         );
                                       }
                                     },

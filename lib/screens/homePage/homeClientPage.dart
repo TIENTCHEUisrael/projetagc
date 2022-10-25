@@ -94,16 +94,17 @@ class _HomeClientPageState extends State<HomeClientPage> {
                 alignment: Alignment.center,
                 children: [
                   Positioned(
-                  left: 0,
-                  top: 50,
-                  child:Center(
-                    child: Image.asset(
-                      "assets/images/png/docvv.png",
-                      height: 400,
-                      width: 270,
-                      fit: BoxFit.cover,
+                    left: 0,
+                    top: 50,
+                    child: Center(
+                      child: Image.asset(
+                        "assets/images/png/docvv.png",
+                        height: 400,
+                        width: 270,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),),
+                  ),
                   Stack(
                     children: [
                       Center(
@@ -111,14 +112,14 @@ class _HomeClientPageState extends State<HomeClientPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top: 140.0,left: 50),
+                              padding:
+                                  const EdgeInsets.only(top: 140.0, left: 50),
                               child: Container(
-                                padding:
-                                    const EdgeInsets.all(40),
+                                padding: const EdgeInsets.all(40),
                                 margin:
                                     const EdgeInsets.only(left: 80, right: 10),
                                 decoration: BoxDecoration(
-                                  shape:BoxShape.circle,
+                                  shape: BoxShape.circle,
                                   color: Color(0XF4682B4).withOpacity(0.6),
                                 ),
                                 child: Column(
