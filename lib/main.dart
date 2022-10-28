@@ -98,7 +98,7 @@ class _MyAppState extends State<MyApp> {
                   theme: theme,
                   darkTheme: darktheme,
                   locale: _locale,
-                  title: 'Project Agc',
+                  title: 'Agc santé',
                   home: auth.isAuth == true
                       ? HomeClientPage()
                       : FutureBuilder<bool>(

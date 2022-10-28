@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:ui';
 
 class HeroDialogRoute<T> extends PageRoute<T> {
   /// {@macro hero_dialog_route}

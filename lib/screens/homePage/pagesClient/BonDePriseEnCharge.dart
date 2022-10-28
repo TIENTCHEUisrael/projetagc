@@ -25,7 +25,6 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
   bool value = false;
   List<Locales>? _locales;
   Locales? locale;
-  List<Institutions>? _intitutions;
   List<Institutions>? _intitutionss;
   Institutions? partenaire;
   bool _isloading = true;
@@ -53,15 +52,9 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
     });
   }
 
-  Future<void> getpartenaires(Locales l, String s) async {
-    _intitutions = await BPCProvider.getPartenaireByVilleLocale(l, s);
-    setState(() {
-      getPartenaire = true;
-    });
-  }
-
   Future<void> getall() async {
     _intitutionss = await BPCProvider.getAllPartenaires();
+    print(_intitutionss);
   }
 
   @override

@@ -71,50 +71,6 @@ class BPCProvider extends ChangeNotifier {
     return result;
   }
 
-  Future<Map<String, dynamic>?> sendEmail(String emetteur, String sujet,
-      String recepteur, String message, String userEmail) async {
-    var result;
-    final url = Uri.parse('${Services.urlsendEmail}');
-    const serviceId = "service_luqr6sg";
-    const templateId = "template_5vvx4q3";
-    const userId = "";
-    _sendedStatus = Statut.sending;
-    notifyListeners();
-    final response = await http.post(
-      url,
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode({
-        "service_id": serviceId,
-        "template_id": templateId,
-        "user_id": userId,
-        "template_params": {
-          "name": emetteur,
-          "subject": sujet,
-          "your_name": recepteur,
-          "message": message,
-          "user_email": userEmail
-        }
-      }),
-    );
-    if (response.statusCode == 200) {
-      print('............BEGIN...............');
-      _sendedStatus = Statut.sended;
-      notifyListeners();
-      result = {
-        "statut": true,
-        "message": "Email sended",
-      };
-    } else {
-      _sendedStatus = Statut.notsended;
-      notifyListeners();
-      result = {
-        "statut": false,
-        "message": "Email not sended",
-      };
-    }
-    return result;
-  }
-
   static Future<List<Locales>> getlocales() async {
     var _var;
     var url = Uri.parse('${Services.urllist}?id=1');
@@ -136,12 +92,9 @@ class BPCProvider extends ChangeNotifier {
     return _var;
   }
 
-  static Future<List<Institutions>> getPartenaireByVilleLocale(
-      Locales loc, String ville) async {
+  static Future<dynamic> getAllPartenaires() async {
     var _var;
-    print('object');
-    var url = Uri.parse(
-        '${Services.urlinstitut}/get.php?Institution=${loc.id}&Town=$ville');
+    var url = Uri.parse('${Services.urlvillepartenaire}/readall.php');
     final response = await http.post(url);
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
@@ -150,27 +103,7 @@ class BPCProvider extends ChangeNotifier {
       for (var i in data) {
         _temp.add(i);
       }
-      _var = Institutions.recipesFromSnapshot(_temp);
-    } else {
-      print(
-          '.......................................False............................');
-    }
-
-    return _var;
-  }
-
-  static Future<List<Institutions>> getAllPartenaires() async {
-    var _var;
-    var url = Uri.parse('${Services.urlgetallinstitut}');
-    final response = await http.post(url);
-    if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-      List _temp = [];
-
-      for (var i in data) {
-        _temp.add(i);
-      }
-      _var = Institutions.recipesFromSnapshot(_temp);
+      print(_temp);
     } else {
       print(
           '.......................................False............................');

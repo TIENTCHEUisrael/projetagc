@@ -51,5 +51,7 @@
     "login_connexion":"Connexion",
     "commencer":"Start",
     "temps_j":"Day",
-    "temps_n":"Night"
+    "temps_n":"Night",
+    "plafond":"annual limit",
+    "plafond1":"Your limit is :"
  }

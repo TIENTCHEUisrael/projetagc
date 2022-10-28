@@ -72,10 +72,10 @@ flutter_native_splash:
 flutter_icons:
   android: true
   ios: true
-  image_path_ios: "assets/images/png/agc2.png"
-  image_path_android: "assets/images/png/agc2.png"
-  adaptive_icon_background: "assets/images/png/agc2.png"
-  adaptive_icon_foreground: "assets/images/png/agc2.png"
+  image_path_ios: "assets/images/png/agc1.png"
+  image_path_android: "assets/images/png/agc1.png"
+  adaptive_icon_background: "assets/images/png/agc1.png"
+  adaptive_icon_foreground: "assets/images/png/agc1.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -104,6 +104,7 @@ flutter:
     - assets/images/svg/button.svg
     - assets/images/svg/button2.svg
     - assets/images/svg/arrierePlan.svg
+    - assets/images/png/profile.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

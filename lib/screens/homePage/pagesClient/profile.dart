@@ -1,10 +1,8 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
 import 'package:projectagc/routes/route_names.dart';
 import 'package:provider/provider.dart';
-
 import '../../../animations/custum.dart';
 import '../../../main.dart';
 import '../../../models/classes/langages.dart';
@@ -22,11 +20,36 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  double t2 = 0.5;
   void _changeLanguage(language language) async {
     Locale _locale = await setLocale(language.languagecode);
     MyApp.setLocale(context, _locale);
   }
 
+  void calcul() async {
+    AuthProvider pro = Provider.of<AuthProvider>(context);
+    if (pro.user.maximum as double >= 100000) {
+      setState(() {
+        t2 = 0.6;
+      });
+    } else if (pro.user.maximum as double == 100000) {
+      setState(() {
+        t2 = 0.5;
+      });
+    } else {
+      setState(() {
+        t2 = 0.4;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    calcul();
+  }
+
+  bool generate = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,11 +90,17 @@ class _ProfileState extends State<Profile> {
                       Center(
                         child: Container(
                           child: ClipOval(
-                            child: Image.network(
-                              auth.user.photo,
-                              width: 150,
-                              height: 100,
-                            ),
+                            child: auth.user.photo == null
+                                ? Image.asset(
+                                    "assets/images/png/profile.png",
+                                    width: 150,
+                                    height: 100,
+                                  )
+                                : Image.network(
+                                    auth.user.photo,
+                                    width: 150,
+                                    height: 100,
+                                  ),
                           ),
                         ),
                       ),
@@ -221,6 +250,56 @@ class _ProfileState extends State<Profile> {
                                   color: blue_color,
                                 ),
                               ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding:
+                            const EdgeInsets.only(top: 4, left: 4, right: 4),
+                        child: Column(
+                          children: [
+                            Center(
+                              child: Text(
+                                getTranslated(context, "plafond"),
+                                style: TextStyle(
+                                  color: blue_color,
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            LinearProgressIndicator(
+                              minHeight: 18,
+                              backgroundColor: Colors.grey,
+                              value: t2,
+                            ),
+                            const SizedBox(
+                              height: 2,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  getTranslated(context, 'plafond1'),
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  auth.user.maximum,
+                                  style: TextStyle(
+                                    color: blue_color,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                              ],
                             )
                           ],
                         ),

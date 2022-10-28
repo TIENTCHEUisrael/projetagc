@@ -51,5 +51,7 @@
    "login_connexion":"Connexion",
    "commencer":"Commencez",
    "temps_j":"Jour",
-   "temps_n":"Nuit"
+   "temps_n":"Nuit",
+   "plafond":"Plafond Annuelle",
+   "plafond1":"Votre plafond est de:"
 }

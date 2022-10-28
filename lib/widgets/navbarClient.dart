@@ -79,12 +79,19 @@ class _NavBarClientState extends State<NavBarClient> {
               ),
               currentAccountPicture: CircleAvatar(
                 child: ClipOval(
-                  child: Image.network(
-                    auth.user.photo,
-                    height: 100,
-                    width: 100,
-                    fit: BoxFit.cover,
-                  ),
+                  child: auth.user.photo == null
+                      ? Image.asset(
+                          "assets/images/png/profile.png",
+                          height: 100,
+                          width: 100,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.network(
+                          auth.user.photo,
+                          height: 100,
+                          width: 100,
+                          fit: BoxFit.cover,
+                        ),
                 ),
               ),
             ),

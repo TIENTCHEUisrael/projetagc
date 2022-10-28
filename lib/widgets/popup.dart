@@ -72,7 +72,7 @@ class _PopupMotdepasseState extends State<PopupMotdepasse> {
                           suffixIcon: IconButton(
                             icon: _iconchange,
                             onPressed: () {
-                              if (_obscureText == true) {
+                              if (_obscureText) {
                                 setState(() {
                                   _obscureText = !_obscureText;
                                   _iconchange = const Icon(
@@ -110,8 +110,12 @@ class _PopupMotdepasseState extends State<PopupMotdepasse> {
                       color: Colors.white,
                       thickness: 0.2,
                     ),
-                    GestureDetector(
-                      onTap: () {},
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          _isloading = true;
+                        });
+                      },
                       child: Center(
                         child: Container(
                           padding: const EdgeInsets.symmetric(
