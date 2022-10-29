@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
@@ -69,49 +71,78 @@ class AuthProvider extends ChangeNotifier {
     _deleteStatus = value;
   }
 
+  /**
+   *  bool ActiveConnection = false;
+    String T = "";
+
+    Future checkUserConnection() async {
+      try {
+        final result = await InternetAddress.lookup('google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          setState(() {
+            ActiveConnection = true;
+            isLoading = false;
+            T = "Turn off the data and repress again";
+          });
+        }
+      } on SocketException catch (_) {
+        setState(() {
+          ActiveConnection = false;
+          isLoading = true;
+          T = "Turn On the data and repress again";
+        });
+      }
+    }
+  */
   Future<Map<String, dynamic>?> loginUser(
       String identifiant, String pass) async {
     var result;
-    var urlLogin = Uri.parse(
-        '${Services.urlclient}/auth.php?Identifiant=$identifiant&Password=$pass');
-
     try {
-      print('...........................BEGIN......................');
-      _logStatus = Statut.authenticating;
-      notifyListeners();
-      final response = await http.post(urlLogin);
-      if (response.statusCode == 200) {
-        _logStatus = Statut.authenticated;
-        var data = jsonDecode(response.body);
-        if (data['Id'] == null) {
-          result = {
-            "statut": false,
-            "message": "Password or email incorrect",
-          };
+      final res = await InternetAddress.lookup('google.com');
+      if (res.isNotEmpty && res[0].rawAddress.isNotEmpty) {
+        var urlLogin = Uri.parse(
+            '${Services.urlclient}/auth.php?Identifiant=$identifiant&Password=$pass');
+
+        print('...........................BEGIN......................');
+        _logStatus = Statut.authenticating;
+        notifyListeners();
+        final response = await http.post(urlLogin);
+        if (response.statusCode == 200) {
+          _logStatus = Statut.authenticated;
+          var data = jsonDecode(response.body);
+          if (data['Id'] == null) {
+            result = {
+              "statut": false,
+              "message": "Password or Identifiant incorrect",
+            };
+          } else {
+            _token = data['Id'];
+            _user = User.fromJson(data);
+            UserPreferences.saveUserToSharePreference(data);
+            UserPreferences().saveToken(_token!);
+            print(_user);
+            notifyListeners();
+            result = {
+              "statut": true,
+              "message": "User authenticated",
+              "user": _user!,
+              "token": _token!
+            };
+          }
         } else {
-          _token = data['Id'];
-          _user = User.fromJson(data);
-          UserPreferences.saveUserToSharePreference(data);
-          UserPreferences().saveToken(_token!);
-          print(_user);
+          _logStatus = Statut.notauthenticate;
           notifyListeners();
           result = {
-            "statut": true,
-            "message": "User authenticated",
-            "user": _user!,
-            "token": _token!
+            "statut": false,
+            "message": "User not authenticated",
           };
         }
-      } else {
-        _logStatus = Statut.notauthenticate;
-        notifyListeners();
-        result = {
-          "statut": false,
-          "message": "User not authenticated",
-        };
       }
-    } catch (e) {
-      print(e);
+    } on SocketException catch (_) {
+      result = {
+        "statut": false,
+        "message": "Connexion failed",
+      };
     }
     return result;
   }
