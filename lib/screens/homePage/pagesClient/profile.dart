@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
+import 'package:projectagc/models/user/user.dart';
 import 'package:projectagc/routes/route_names.dart';
 import 'package:provider/provider.dart';
-import '../../../animations/custum.dart';
 import '../../../main.dart';
 import '../../../models/classes/langages.dart';
 import '../../../providers/providerUser.dart';
 import '../../../themes/constants.dart';
 import '../../../widgets/bas.dart';
-import '../../../widgets/pageRoute.dart';
-import '../../../widgets/popup.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -22,6 +20,14 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   double t2 = 0.5;
   bool _isloading = true;
+  final motdepasse = TextEditingController();
+  bool _isloading2 = false;
+  bool _obscureText = true;
+  Icon _iconchange = Icon(
+    Icons.visibility,
+    color: Colors.black,
+  );
+  final _formKey = GlobalKey<FormState>();
   void _changeLanguage(language language) async {
     Locale _locale = await setLocale(language.languagecode);
     MyApp.setLocale(context, _locale);
@@ -330,33 +336,205 @@ class _ProfileState extends State<Profile> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            HeroDialogRoute(
-                              builder: (context) {
-                                return PopupMotdepasse();
-                              },
-                            ),
-                          );
+                          showDialog(
+                              context: context,
+                              builder: ((context) {
+                                return AlertDialog(
+                                  content: Stack(
+                                    children: [
+                                      Positioned(
+                                        right: -40.0,
+                                        top: -40.0,
+                                        child: InkResponse(
+                                          onTap: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: CircleAvatar(
+                                            child: Icon(Icons.close),
+                                            backgroundColor: Colors.red,
+                                          ),
+                                        ),
+                                      ),
+                                      Form(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: <Widget>[
+                                            Container(
+                                              padding:
+                                                  const EdgeInsets.only(top: 5),
+                                              height: 70,
+                                              width: 70,
+                                              child: Image.asset(
+                                                'assets/images/png/LOGO.png',
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: 8.0, left: 8, right: 8),
+                                              child: TextFormField(
+                                                controller: motdepasse,
+                                                obscureText: _obscureText,
+                                                decoration: InputDecoration(
+                                                  border: InputBorder.none,
+                                                  hintText: "Mot de passe",
+                                                  icon: const Icon(Icons.key),
+                                                  suffixIcon: IconButton(
+                                                    icon: _iconchange,
+                                                    onPressed: () {
+                                                      if (_obscureText) {
+                                                        setState(() {
+                                                          _obscureText =
+                                                              !_obscureText;
+                                                          _iconchange =
+                                                              const Icon(
+                                                            Icons
+                                                                .visibility_off,
+                                                            color: Colors.black,
+                                                          );
+                                                        });
+                                                      } else {
+                                                        setState(() {
+                                                          _obscureText =
+                                                              !_obscureText;
+                                                          _iconchange =
+                                                              const Icon(
+                                                            Icons.visibility,
+                                                            color: Colors.black,
+                                                          );
+                                                        });
+                                                      }
+                                                    },
+                                                  ),
+                                                ),
+                                                keyboardType:
+                                                    TextInputType.name,
+                                                validator: (value) {
+                                                  if (value == null ||
+                                                      value.isEmpty) {
+                                                    return "S'il vous plait entrer votre mot de passe";
+                                                  }
+                                                  return null;
+                                                },
+                                              ),
+                                            ),
+                                            Text(
+                                              getTranslated(context,
+                                                      'compte_modifier_soustitre') +
+                                                  '${auth.user.motdepasse}',
+                                              style: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 15),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(top: 2.0),
+                                              child: InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    _isloading2 = true;
+                                                  });
+                                                  var us = User(
+                                                      identifiant:
+                                                          auth.user.identifiant,
+                                                      prenom: auth.user.prenom,
+                                                      nom: auth.user.nom,
+                                                      sexe: auth.user.sexe,
+                                                      societe:
+                                                          auth.user.societe,
+                                                      motdepasse:
+                                                          motdepasse.text,
+                                                      email: auth.user.email,
+                                                      photo: auth.user.photo,
+                                                      telephone:
+                                                          auth.user.telephone,
+                                                      ville: auth.user.ville,
+                                                      remise: auth.user.remise,
+                                                      rang: auth.user.rang,
+                                                      maximum:
+                                                          auth.user.maximum,
+                                                      beneficiaires: auth
+                                                          .user.beneficiaires);
+
+                                                  auth
+                                                      .updateUser(us)
+                                                      .then((value) {
+                                                    if (value!['statut'] ==
+                                                        true) {
+                                                      Fluttertoast.showToast(
+                                                        msg:
+                                                            "${value['message']}",
+                                                      );
+                                                      setState(() {
+                                                        _isloading2 = false;
+                                                      });
+                                                      Navigator.pop(context);
+                                                    } else {
+                                                      Fluttertoast.showToast(
+                                                        msg:
+                                                            "${value['message']}",
+                                                      );
+                                                      setState(() {
+                                                        _isloading2 = false;
+                                                      });
+                                                    }
+                                                  });
+                                                },
+                                                child: Center(
+                                                  child: Container(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 25,
+                                                        vertical: 10),
+                                                    margin:
+                                                        const EdgeInsets.all(
+                                                            10),
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20),
+                                                        color: blue_color),
+                                                    child: _isloading2
+                                                        ? Center(
+                                                            child:
+                                                                const CircularProgressIndicator(
+                                                              color:
+                                                                  scaffoldbackground,
+                                                            ),
+                                                          )
+                                                        : Text(
+                                                            getTranslated(
+                                                                context,
+                                                                'compte_modifier_button'),
+                                                            style: TextStyle(
+                                                                color:
+                                                                    scaffoldbackground,
+                                                                fontSize: 18),
+                                                          ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              }));
                         },
-                        child: Hero(
-                          tag: heroAddTodo,
-                          createRectTween: (begin, end) {
-                            return CustomRectTween(begin: begin!, end: end!);
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 25, vertical: 12),
-                            margin: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: blue_color,
-                            ),
-                            child: Text(
-                              getTranslated(context, 'compte_modifier'),
-                              style: TextStyle(
-                                  color: scaffoldbackground, fontSize: 18),
-                            ),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 25, vertical: 12),
+                          margin: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: blue_color,
+                          ),
+                          child: Text(
+                            getTranslated(context, 'compte_modifier'),
+                            style: TextStyle(
+                                color: scaffoldbackground, fontSize: 18),
                           ),
                         ),
                       ),
