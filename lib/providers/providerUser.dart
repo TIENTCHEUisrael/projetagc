@@ -71,29 +71,6 @@ class AuthProvider extends ChangeNotifier {
     _deleteStatus = value;
   }
 
-  /**
-   *  bool ActiveConnection = false;
-    String T = "";
-
-    Future checkUserConnection() async {
-      try {
-        final result = await InternetAddress.lookup('google.com');
-        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-          setState(() {
-            ActiveConnection = true;
-            isLoading = false;
-            T = "Turn off the data and repress again";
-          });
-        }
-      } on SocketException catch (_) {
-        setState(() {
-          ActiveConnection = false;
-          isLoading = true;
-          T = "Turn On the data and repress again";
-        });
-      }
-    }
-  */
   Future<Map<String, dynamic>?> loginUser(
       String identifiant, String pass) async {
     var result;
@@ -178,8 +155,11 @@ class AuthProvider extends ChangeNotifier {
           "message": "User not updated",
         };
       }
-    } catch (e) {
-      print(e);
+    } on SocketException catch (_) {
+      result = {
+        "statut": false,
+        "message": "Connexion failed",
+      };
     }
     return result;
   }

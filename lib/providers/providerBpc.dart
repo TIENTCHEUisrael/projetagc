@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
@@ -65,50 +67,77 @@ class BPCProvider extends ChangeNotifier {
         notifyListeners();
         result = {"statut": false, "message": "coupon not generated"};
       }
-    } catch (e) {
-      print(e);
+    } on SocketException catch (_) {
+      result = {
+        "statut": false,
+        "message": "Connexion failed",
+      };
     }
     return result;
   }
 
   static Future<List<Locales>> getlocales() async {
     var _var;
-    var url = Uri.parse('${Services.urllist}?id=1');
-    final response = await http.post(url);
-    if (response.statusCode == 200) {
-      print('GOOD');
-      var data = jsonDecode(response.body);
-      List _temp = [];
+    try {
+      var url = Uri.parse('${Services.urllist}?id=1');
+      final response = await http.post(url);
+      if (response.statusCode == 200) {
+        print('GOOD');
+        var data = jsonDecode(response.body);
+        List _temp = [];
 
-      for (var i in data['body']) {
-        _temp.add(i);
+        for (var i in data['body']) {
+          _temp.add(i);
+        }
+
+        _var = Locales.recipesFromSnapshot(_temp);
+      } else {
+        print('False');
       }
-
-      _var = Locales.recipesFromSnapshot(_temp);
-    } else {
-      print('False');
+    } on SocketException catch (_) {
+      print('Connexion failed');
     }
 
     return _var;
   }
 
-  static Future<dynamic> getAllPartenaires() async {
-    var _var;
-    var url = Uri.parse('${Services.urlvillepartenaire}/readall.php');
-    final response = await http.post(url);
-    if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-      List _temp = [];
+  static Future<List<dynamic>> getTowns() async {
+    var result;
+    var url = Uri.parse("${Services.urlvillepartenaire}");
+    try {
+      final response = await http.post(url);
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+        List _temp = [];
+        for (var i in data) {
+          _temp.add(i['town']);
+        }
 
-      for (var i in data) {
-        _temp.add(i);
+        return _temp;
       }
-      print(_temp);
-    } else {
-      print(
-          '.......................................False............................');
+    } on SocketException catch (_) {
+      print("connexion failed");
     }
+    return result;
+  }
 
-    return _var;
+  static Future<List<Institutions>> getPatnersByTown(String town) async {
+    var listpartner;
+    try {
+      var urlall = Uri.parse('${Services.urlpartners}Town=$town');
+      final response = await http.post(urlall);
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+        List _temp = [];
+        for (var i in data) {
+          _temp.add(i);
+        }
+        print(_temp);
+        listpartner = Institutions.recipesFromSnapshot(_temp);
+      }
+    } on SocketException catch (_) {
+      print("not connexion");
+    }
+    return listpartner;
   }
 }

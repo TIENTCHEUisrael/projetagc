@@ -1,5 +1,3 @@
-import '../user/user.dart';
-
 class Coupon {
   final int? id;
   final String ville;

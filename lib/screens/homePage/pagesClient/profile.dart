@@ -21,24 +21,28 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   double t2 = 0.5;
+  bool _isloading = true;
   void _changeLanguage(language language) async {
     Locale _locale = await setLocale(language.languagecode);
     MyApp.setLocale(context, _locale);
   }
 
-  void calcul() async {
+  Future<void> calcul() async {
     AuthProvider pro = Provider.of<AuthProvider>(context);
-    if (pro.user.maximum as double >= 100000) {
+    if (pro.user.maximum as double > 100000) {
       setState(() {
-        t2 = 0.6;
+        t2 = 0.8;
+        _isloading = false;
       });
     } else if (pro.user.maximum as double == 100000) {
       setState(() {
         t2 = 0.5;
+        _isloading = false;
       });
     } else {
       setState(() {
         t2 = 0.4;
+        _isloading = false;
       });
     }
   }
@@ -271,11 +275,17 @@ class _ProfileState extends State<Profile> {
                             const SizedBox(
                               height: 4,
                             ),
-                            LinearProgressIndicator(
-                              minHeight: 18,
-                              backgroundColor: Colors.grey,
-                              value: t2,
-                            ),
+                            _isloading
+                                ? LinearProgressIndicator(
+                                    minHeight: 18,
+                                    backgroundColor: Colors.grey,
+                                    value: 0.6,
+                                  )
+                                : LinearProgressIndicator(
+                                    minHeight: 18,
+                                    backgroundColor: Colors.grey,
+                                    value: t2,
+                                  ),
                             const SizedBox(
                               height: 2,
                             ),

@@ -23,13 +23,15 @@ class BonPriseCharge extends StatefulWidget {
 
 class _BonPriseChargeState extends State<BonPriseCharge> {
   bool value = false;
+  List<dynamic>? town;
+  String? ville;
   List<Locales>? _locales;
   Locales? locale;
   List<Institutions>? _intitutionss;
   Institutions? partenaire;
   bool _isloading = true;
+  bool _isloading2 = true;
   bool _isgetting = false;
-  String? ville;
   String? beneficiaire;
   List beneficiaires = ["bene1", "bene2"];
 
@@ -42,19 +44,25 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
   void initState() {
     super.initState();
     getLocales();
-    getall();
+    gettown();
   }
 
   Future<void> getLocales() async {
     _locales = await BPCProvider.getlocales();
+  }
+
+  Future<void> gettown() async {
+    town = await BPCProvider.getTowns();
     setState(() {
       _isloading = false;
     });
   }
 
-  Future<void> getall() async {
-    _intitutionss = await BPCProvider.getAllPartenaires();
-    print(_intitutionss);
+  Future<void> getpartner(String t) async {
+    _intitutionss = await BPCProvider.getPatnersByTown(t);
+    setState(() {
+      _isloading2 = false;
+    });
   }
 
   @override
@@ -167,6 +175,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                       ),
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(5.0),
@@ -213,8 +222,9 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                     t2 = false;
                                     t3 = false;
                                   });
+                                  getpartner(ville!);
                                 },
-                                items: villes.map(
+                                items: town!.map(
                                   (valueItem) {
                                     return DropdownMenuItem(
                                         value: valueItem,
@@ -287,63 +297,86 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                         color: AdaptiveTheme.of(context).theme.primaryColor,
                       ),
                     ),
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          padding: const EdgeInsets.only(left: 16, right: 16),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey, width: 1),
-                              borderRadius: BorderRadius.circular(15)),
-                          child: IgnorePointer(
-                            ignoring: t3,
-                            child: DropdownButton(
-                                hint: t3
-                                    ? Text(
-                                        getTranslated(
-                                            context, 'bpc_partenaire_choice'),
-                                        style: TextStyle(color: Colors.grey),
-                                      )
-                                    : Text(
-                                        getTranslated(
-                                            context, 'bpc_partenaire_choice'),
-                                        style: TextStyle(color: Colors.black),
-                                      ),
-                                value: partenaire,
-                                dropdownColor: Colors.white,
-                                icon: const Icon(
-                                  Icons.arrow_drop_down,
-                                  color: Colors.black,
+                    _isloading2
+                        ? Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.only(left: 16, right: 16),
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.grey, width: 1),
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
-                                iconSize: 36,
-                                underline: SizedBox(),
-                                //isExpanded: true,
-                                style: TextStyle(color: blue_color),
-                                onChanged: (newvalue) {
-                                  setState(() {
-                                    partenaire = newvalue;
-                                    button = false;
-                                    getPartenaire = true;
-                                  });
-                                },
-                                items: _intitutionss!.map(
-                                  (val) {
-                                    print(getPartenaire);
-                                    return DropdownMenuItem(
-                                        value: val, child: Text(val.name));
-                                  },
-                                ).toList()),
+                                child: IgnorePointer(
+                                  ignoring: t3,
+                                  child: Icon(Icons.arrow_right),
+                                ),
+                              ),
+                            ),
+                          )
+                        : Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.only(left: 16, right: 16),
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.grey, width: 1),
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: IgnorePointer(
+                                  ignoring: t3,
+                                  child: DropdownButton(
+                                      hint: t3
+                                          ? Text(
+                                              getTranslated(context,
+                                                  'bpc_partenaire_choice'),
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            )
+                                          : Text(
+                                              getTranslated(context,
+                                                  'bpc_partenaire_choice'),
+                                              style: TextStyle(
+                                                  color: Colors.black),
+                                            ),
+                                      value: partenaire,
+                                      dropdownColor: Colors.white,
+                                      icon: const Icon(
+                                        Icons.arrow_drop_down,
+                                        color: Colors.black,
+                                      ),
+                                      iconSize: 36,
+                                      underline: SizedBox(),
+                                      //isExpanded: true,
+                                      style: TextStyle(color: blue_color),
+                                      onChanged: (newvalue) {
+                                        setState(() {
+                                          partenaire = newvalue;
+                                          button = false;
+                                          getPartenaire = true;
+                                        });
+                                      },
+                                      items: _intitutionss!.map(
+                                        (val) {
+                                          print(getPartenaire);
+                                          return DropdownMenuItem(
+                                              value: val,
+                                              child: Text(val.name));
+                                        },
+                                      ).toList()),
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
                     const SizedBox(
                       height: 10,
                     ),
                     Container(
                       height: 250,
                       margin: const EdgeInsets.symmetric(horizontal: 10),
-                      /*padding: const EdgeInsets.only(top: 70, bottom: 70),*/
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: const AssetImage("assets/images/png/agc2.png"),
@@ -370,94 +403,77 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                         ],
                                       ),
                                     )
-                                  : Column(
-                                      children: [
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        const Text(
-                                          'Informations Partenaire',
-                                          style: TextStyle(
-                                              color: blue_color, fontSize: 15),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Text('Nom du Locale partenaire : '),
-                                            const SizedBox(
-                                              width: 10,
+                                  : SingleChildScrollView(
+                                      child: Column(
+                                        children: [
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Text(
+                                            getTranslated(context, 'partner'),
+                                            style: TextStyle(
+                                                color: blue_color,
+                                                fontSize: 15),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          ListTile(
+                                            title: Text(
+                                              getTranslated(
+                                                  context, 'partner_name'),
                                             ),
-                                            Text(
-                                              partenaire!.name,
-                                              style:
-                                                  TextStyle(color: Colors.grey),
+                                            subtitle: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 2, left: 35),
+                                              child: Text(partenaire!.name),
                                             ),
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Text('Description : '),
-                                            const SizedBox(
-                                              width: 10,
+                                          ),
+                                          ListTile(
+                                            title: Text(
+                                              getTranslated(
+                                                  context, 'partner_desc'),
                                             ),
-                                            Text(
-                                              partenaire!.description,
-                                              style:
-                                                  TextStyle(color: Colors.grey),
+                                            subtitle: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 2, left: 40),
+                                              child:
+                                                  Text(partenaire!.description),
                                             ),
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Text('Ville : '),
-                                            const SizedBox(
-                                              width: 10,
+                                          ),
+                                          ListTile(
+                                            title: Text(
+                                              getTranslated(
+                                                  context, 'partner_town'),
                                             ),
-                                            Text(
-                                              partenaire!.ville,
-                                              style:
-                                                  TextStyle(color: Colors.grey),
+                                            subtitle: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 2, left: 50),
+                                              child: Text(partenaire!.ville),
                                             ),
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Text('Numero a contacter : '),
-                                            const SizedBox(
-                                              width: 10,
+                                          ),
+                                          ListTile(
+                                            title: Text(
+                                              getTranslated(
+                                                  context, 'partner_number'),
                                             ),
-                                            Text(
-                                              '. . .',
-                                              style:
-                                                  TextStyle(color: Colors.grey),
+                                            subtitle: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 2, left: 45),
+                                              child: Text(
+                                                  partenaire!.institutionId),
                                             ),
-                                          ],
-                                        ),
-                                      ],
+                                          )
+                                        ],
+                                      ),
                                     ),
                             )
                           : Center(
-                              child: CircularProgressIndicator(),
+                              child: Text(
+                                getTranslated(context, 'partner'),
+                                style: TextStyle(fontSize: 15),
+                              ),
                             ),
                     ),
                     const SizedBox(

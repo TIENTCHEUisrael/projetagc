@@ -53,5 +53,10 @@
     "temps_j":"Day",
     "temps_n":"Night",
     "plafond":"annual limit",
-    "plafond1":"Your limit is :"
+    "plafond1":"Your limit is :",
+    "partner":"Information of partners",
+    "partner_name":"Name of partner :",
+    "partner_desc":"Description :",
+    "partner_town":"Town :",
+    "partner_number":"Number to contact :"
  }

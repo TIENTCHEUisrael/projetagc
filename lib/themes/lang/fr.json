@@ -53,5 +53,10 @@
    "temps_j":"Jour",
    "temps_n":"Nuit",
    "plafond":"Plafond Annuelle",
-   "plafond1":"Votre plafond est de:"
+   "plafond1":"Votre plafond est de:",
+   "partner":"Information sur le partenaire",
+   "partner_name":"Nom du partenaire :",
+   "partner_desc":"Description :",
+   "partner_town":"Ville :",
+   "partner_number":"Numéro a contacter :"
 }
