@@ -6,7 +6,6 @@ import 'package:projectagc/models/classes/langages.dart';
 import 'package:projectagc/routes/route_names.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:projectagc/widgets/navbarClient.dart';
-
 import '../../widgets/bas.dart';
 
 class HomeClientPage extends StatefulWidget {

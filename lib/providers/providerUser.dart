@@ -124,16 +124,16 @@ class AuthProvider extends ChangeNotifier {
     return result;
   }
 
-  Future<Map<String, dynamic>?> updateUser(User us) async {
+  Future<Map<String, dynamic>?> updateUser(String id, String newPass) async {
     var result;
-    var urlLogin = Uri.parse(
-        '${Services.urlupdate}Prenom=${us.prenom}&Nom=${us.nom}&Sexe=${us.sexe}&Nom_Societe=${us.societe}&Password=${us.motdepasse}&Email=${us.email}&Photo=${us.photo}&Telephone=${us.telephone}&Ville=${us.ville}&Identifiant=${us.identifiant}');
-
     try {
+      var urlPass =
+          Uri.parse('${Services.urlupdate}Identifiant=$id&Password=$newPass');
+
       print('...........................BEGIN......................');
       _logStatus = Statut.updating;
       notifyListeners();
-      final response = await http.post(urlLogin);
+      final response = await http.post(urlPass);
       if (response.statusCode == 200) {
         _logStatus = Statut.updated;
         var data = jsonDecode(response.body);

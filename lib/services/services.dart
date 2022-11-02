@@ -5,6 +5,7 @@ class Services {
   //http://agcassurance.42web.io/api/cities/readall.php
   //http://agcassurance.42web.io/api/cities/readall.php?i=4
   //http://agcassurance.42web.io/api/partners/get.php?Institution=1&Town=Douala
+  //http://agcassurance.42web.io/api/customers/setPassword.php?Identifiant=test&Password=test34
   static String urlclient = "http://agcassurance.42web.io/api/customers";
   static String urllist =
       "http://agcassurance.42web.io/api/institution/read.php?";
@@ -13,7 +14,7 @@ class Services {
   static String urlgetallinstitut =
       "http://agcassurance.42web.io/api/partners/read.php";
   static String urlupdate =
-      "http://agcassurance.42web.io/api/client/update.php?";
+      "http://agcassurance.42web.io/api/customers/setPassword.php?";
   static String urlvillepartenaire =
       "http://agcassurance.42web.io/api/cities/readall.php?i=1";
   static String urlpartners =

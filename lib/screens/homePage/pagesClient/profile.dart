@@ -434,30 +434,12 @@ class _ProfileState extends State<Profile> {
                                                   setState(() {
                                                     _isloading2 = true;
                                                   });
-                                                  var us = User(
-                                                      identifiant:
-                                                          auth.user.identifiant,
-                                                      prenom: auth.user.prenom,
-                                                      nom: auth.user.nom,
-                                                      sexe: auth.user.sexe,
-                                                      societe:
-                                                          auth.user.societe,
-                                                      motdepasse:
-                                                          motdepasse.text,
-                                                      email: auth.user.email,
-                                                      photo: auth.user.photo,
-                                                      telephone:
-                                                          auth.user.telephone,
-                                                      ville: auth.user.ville,
-                                                      remise: auth.user.remise,
-                                                      rang: auth.user.rang,
-                                                      maximum:
-                                                          auth.user.maximum,
-                                                      beneficiaires: auth
-                                                          .user.beneficiaires);
+                                                  String identifiant =
+                                                      auth.user.identifiant;
 
                                                   auth
-                                                      .updateUser(us)
+                                                      .updateUser(identifiant,
+                                                          motdepasse.text)
                                                       .then((value) {
                                                     if (value!['statut'] ==
                                                         true) {
