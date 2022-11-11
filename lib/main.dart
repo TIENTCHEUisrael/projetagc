@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projectagc/localisation/localisation.dart';
+import 'package:projectagc/providers/providerCustumer.dart';
 import 'package:projectagc/providers/providerUser.dart';
 import 'package:projectagc/routes/custum_route.dart';
 import 'package:projectagc/screens/homePage/homeClientPage.dart';
@@ -79,8 +80,13 @@ class _MyAppState extends State<MyApp> {
               return BPCProvider();
             },
           ),
+          ChangeNotifierProvider(
+            create: (_) {
+              return ProviderCustumer();
+            },
+          ),
         ],
-        child: Consumer<AuthProvider>(
+        child: Consumer<ProviderCustumer>(
           builder: (context, auth, _) {
             return AdaptiveTheme(
               light: ThemeData(

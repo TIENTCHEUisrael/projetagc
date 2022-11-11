@@ -1,14 +1,16 @@
 import 'dart:io';
-
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 import 'package:flutter/widgets.dart';
+import 'package:projectagc/models/beneficiaire/beneficiaire.dart';
+import 'package:projectagc/models/custumer/custumer.dart';
+import 'package:projectagc/models/custumer/sharedCustumer.dart';
+import 'package:projectagc/services/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/user/shareduser.dart';
 import '../models/user/user.dart';
-import '../services/services.dart';
 
 enum Statut {
   registing,
@@ -25,10 +27,12 @@ enum Statut {
   notdeleted,
 }
 
-class AuthProvider extends ChangeNotifier {
+class ProviderCustumer extends ChangeNotifier {
   String? _token;
+  int? _count;
+  Custumer? _custumer;
   User? _user;
-  String? _name;
+  List<Beneficiaire>? _beneficiaires;
   Statut _logStatus = Statut.notauthenticate;
   Statut _updateStatus = Statut.notupdated;
   Statut _registerStatus = Statut.notregisted;
@@ -42,12 +46,20 @@ class AuthProvider extends ChangeNotifier {
     return _token != null;
   }
 
+  Custumer get custumer {
+    return _custumer!;
+  }
+
   User get user {
     return _user!;
   }
 
-  void setUSer(User us) {
-    us = _user!;
+  List<Beneficiaire> get beneficiaires {
+    return _beneficiaires!;
+  }
+
+  void setCustumer(Custumer us) {
+    us = _custumer!;
     notifyListeners();
   }
 
@@ -71,60 +83,73 @@ class AuthProvider extends ChangeNotifier {
     _deleteStatus = value;
   }
 
-  Future<Map<String, dynamic>?> loginUser(
+  Future<Map<String, dynamic>?> loginCustumer(
       String identifiant, String pass) async {
+    var _affiliaires;
     var result;
     try {
       final res = await InternetAddress.lookup('google.com');
       if (res.isNotEmpty && res[0].rawAddress.isNotEmpty) {
         var urlLogin = Uri.parse(
-            '${Services.urlclient}Identifiant=$identifiant&Password=$pass&i=1');
-
-        print('...........................BEGIN......................');
-        _logStatus = Statut.authenticating;
-        notifyListeners();
-        final response = await http.post(urlLogin);
+            '${Services.urlclient}Identifiant=$identifiant&Password=$pass&i=2');
+        var response = await http.post(urlLogin);
         if (response.statusCode == 200) {
-          _logStatus = Statut.authenticated;
+          print(
+              "////////////////////////////////////START////////////////////");
           var data = jsonDecode(response.body);
-          if (data['Id'] == null) {
+          print(data);
+          if (data['customer'][0]['Id'] == null) {
             result = {
               "statut": false,
-              "message": "Password or Identifiant incorrect",
+              "message": "Password ou Identifiant incorrect"
             };
           } else {
-            _token = data['Id'];
-            _user = User.fromJson(data);
-            UserPreferences.saveUserToSharePreference(data);
-            UserPreferences().saveToken(_token!);
-            print(_user);
+            _token = data['customer'][0]['Id'];
+            _count = data['affiliateCount'];
+
+            notifyListeners();
+            print('token :' + _token!);
+
+            _custumer = Custumer.fromJson(data);
+            notifyListeners();
+            print('custumer :' + _custumer!.toString());
+            CustumerPreferences().saveToken(_token!);
+            CustumerPreferences.saveCustumerToSharePreference(data);
+            notifyListeners();
+
+            List temp = [];
+            for (var i in data['affiliates']) {
+              temp.add(i);
+            }
+
+            _beneficiaires = Beneficiaire.beneficiairesFromSnapshots(temp);
+            notifyListeners();
+
+            _user = User.fromJson(data['customer'][0]);
+            UserPreferences.saveUserToSharePreference(data['customer'][0]);
             notifyListeners();
             result = {
               "statut": true,
               "message": "User authenticated",
-              "user": _user!,
-              "token": _token!
+              "custumer": _custumer!,
+              "token": _token!,
+              "beneficiaires": _beneficiaires!,
+              "user": _user
+              /*"beneficiare": _beneficiaires!,
+              "count": _count!*/
             };
           }
         } else {
-          _logStatus = Statut.notauthenticate;
-          notifyListeners();
-          result = {
-            "statut": false,
-            "message": "User not authenticated",
-          };
+          result = {"statut": false, "message": "Statut code !=200"};
         }
       }
     } on SocketException catch (_) {
-      result = {
-        "statut": false,
-        "message": "Connexion failed",
-      };
+      result = {"statut": false, "message": "Connexion failed"};
     }
     return result;
   }
 
-  Future<Map<String, dynamic>?> updateUser(String id, String newPass) async {
+  /*Future<Map<String, dynamic>?> updateUser(String id, String newPass) async {
     var result;
     try {
       var urlPass =
@@ -162,19 +187,23 @@ class AuthProvider extends ChangeNotifier {
       };
     }
     return result;
-  }
+  }*/
 
   Future<bool> tryAutoLogin() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final bool result;
 
-    if (prefs.getString('currentUser') == null) {
+    if (prefs.getString('customertoken') == null ||
+        prefs.getString('currentCustumer') == null) {
       print('...........NOT LOGGING..............');
       result = false;
     } else {
-      var extractUser = jsonDecode(prefs.getString('currentUser')!);
-      print(prefs.getString('currentUser')!);
-      _user = User.fromJson(extractUser);
+      var extractCustomer = jsonDecode(prefs.getString('currentCustumer')!);
+      print(prefs.getString('customertoken')!);
+      _custumer = Custumer.fromJson(extractCustomer);
+
+      var extractToken = prefs.getString('customertoken')!;
+      _token = extractToken;
       notifyListeners();
       result = true;
       print('............ LOGGED..............');
@@ -188,13 +217,13 @@ class AuthProvider extends ChangeNotifier {
     try {
       await UserPreferences.removeUserToSharePreference();
       notifyListeners();
-      if (prefs.getString('currentUser') == null) {
-        result = {"status": true, "message": "User removed", "user": _user};
+      if (prefs.getString('currentCustumer') == null) {
+        result = {"status": true, "message": "User removed"};
       } else {
         result = {
           "status": false,
           "message": "User not removed",
-          "user": _user
+          "user": _custumer
         };
       }
     } catch (e) {
@@ -203,3 +232,28 @@ class AuthProvider extends ChangeNotifier {
     return result;
   }
 }
+
+
+/**List _temp = [];
+            List _temps = [];
+            for (var i in data['customer']) {
+              _user = User.fromJson(i);
+              UserPreferences.saveUserToSharePreference(i);
+              notifyListeners();
+              _temp.add(i);
+            }
+            print('user :' + _user!.toString());
+            _users = User.usersFromSnapshots(_temp);
+            print('users :' + _users!.toString());
+            print('.....................................................');
+            notifyListeners();
+
+            for (var i in data['affiliates']) {
+              _temps.add(i);
+            }
+            _beneficiaires = Beneficiaire.beneficiairesFromSnapshots(_temps);
+            notifyListeners();
+
+            print('affiliaires :' + _beneficiaires!.toString());
+            print('......................................................');
+            CustumerPreferences.saveCustumerToSharePreference(data); */

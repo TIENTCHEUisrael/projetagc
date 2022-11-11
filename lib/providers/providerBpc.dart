@@ -42,11 +42,12 @@ class BPCProvider extends ChangeNotifier {
 
   Future<Map<String, dynamic>?> generateCoupon(Coupon cpn) async {
     var result;
-    notifyListeners();
-    var url = Uri.parse(
-        '${Services.urlcoupon}/newcoupon.php?ville=${cpn.ville}&partenaire=${cpn.partenaire}&client=${cpn.identifiantclient}');
 
     try {
+      notifyListeners();
+      var url = Uri.parse(
+          '${Services.urlcoupon}/newcoupon.php?ville=${cpn.ville}&partenaire=${cpn.partenaire}&client=${cpn.identifiantclient}&beneficial=${cpn.beneficial}');
+
       print('............................BEGIN.........................');
       registerStatus = Statut.registing;
       notifyListeners();

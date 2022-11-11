@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
+import 'package:projectagc/providers/providerCustumer.dart';
 import 'package:projectagc/routes/route_names.dart';
 import 'package:projectagc/screens/loginPage/loginPage.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +18,7 @@ class NavBarClient extends StatefulWidget {
 }
 
 class _NavBarClientState extends State<NavBarClient> {
+  var placeholder = "assets/images/png/profile.png";
   bool darkmode = false;
   dynamic savedThemeMode;
   @override
@@ -43,7 +45,7 @@ class _NavBarClientState extends State<NavBarClient> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Consumer<AuthProvider>(builder: (context, auth, _) {
+      child: Consumer<ProviderCustumer>(builder: (context, auth, _) {
         return ListView(
           padding: EdgeInsets.zero,
           children: [
@@ -79,19 +81,13 @@ class _NavBarClientState extends State<NavBarClient> {
               ),
               currentAccountPicture: CircleAvatar(
                 child: ClipOval(
-                  child: auth.user.photo == null
-                      ? Image.asset(
-                          "assets/images/png/profile.png",
-                          height: 100,
-                          width: 100,
-                          fit: BoxFit.cover,
-                        )
-                      : Image.network(
-                          auth.user.photo,
-                          height: 100,
-                          width: 100,
-                          fit: BoxFit.cover,
-                        ),
+                  child: FadeInImage.assetNetwork(
+                    placeholder: placeholder,
+                    image: auth.user.photo,
+                    height: 100,
+                    width: 100,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),

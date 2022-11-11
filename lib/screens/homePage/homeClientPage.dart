@@ -1,11 +1,14 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
 import 'package:projectagc/main.dart';
 import 'package:projectagc/models/classes/langages.dart';
 import 'package:projectagc/routes/route_names.dart';
+import 'package:projectagc/screens/navigationPage/navigationPage.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:projectagc/widgets/navbarClient.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../widgets/bas.dart';
 
 class HomeClientPage extends StatefulWidget {
@@ -174,42 +177,60 @@ class _HomeClientPageState extends State<HomeClientPage> {
                 ],
               ),
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 40),
-              padding: const EdgeInsets.all(18),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: AdaptiveTheme.of(context).theme.primaryColor,
-                ),
-              ),
-              child: Center(
-                child: Text(
-                  getTranslated(context, 'home_button1'),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
+            GestureDetector(
+              onTap: (() {
+                Navigator.pushNamed(context, serviceRoute);
+              }),
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 40),
+                padding: const EdgeInsets.all(18),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
                     color: AdaptiveTheme.of(context).theme.primaryColor,
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    getTranslated(context, 'home_button1'),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: AdaptiveTheme.of(context).theme.primaryColor,
+                    ),
                   ),
                 ),
               ),
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-              padding: const EdgeInsets.all(18),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: AdaptiveTheme.of(context).theme.primaryColor,
-                ),
-              ),
-              child: Center(
-                child: Text(
-                  getTranslated(context, 'home_button2'),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
+            GestureDetector(
+              onTap: (() async {
+                var urll = "https://agc-assurances.com/reclamations/";
+                if (await canLaunch(urll)) {
+                  await launch(urll);
+                } else {
+                  Fluttertoast.showToast(
+                    msg: "Error: Cannot load Url",
+                  );
+                }
+              }),
+              child: Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                padding: const EdgeInsets.all(18),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
                     color: AdaptiveTheme.of(context).theme.primaryColor,
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    getTranslated(context, 'home_button2'),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: AdaptiveTheme.of(context).theme.primaryColor,
+                    ),
                   ),
                 ),
               ),

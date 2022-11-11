@@ -6,7 +6,10 @@ class Services {
   //http://agcassurance.42web.io/api/cities/readall.php?i=4
   //http://agcassurance.42web.io/api/partners/get.php?Institution=1&Town=Douala
   //http://agcassurance.42web.io/api/customers/setPassword.php?Identifiant=test&Password=test34
-  static String urlclient = "http://agcassurance.42web.io/api/customers";
+
+
+  //http://agcassurance.42web.io/api/customers/auth2.php?Identifiant=test&Password=test34&i=2
+  static String urlclient = "http://agcassurance.42web.io/api/customers/auth2.php?";
   static String urllist =
       "http://agcassurance.42web.io/api/institution/read.php?";
   static String urlcoupon = "http://agcassurance.42web.io/api/coupon";

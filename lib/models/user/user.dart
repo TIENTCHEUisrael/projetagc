@@ -13,8 +13,12 @@ class User {
   final String remise;
   final String rang;
   final String maximum;
-  final String beneficiaires;
-  final String? createdAt;
+  final String used;
+  final String beneficial;
+  final String expireDate;
+  final String dateNaissance;
+  final String createdAt;
+  final String beginDate;
   final String? updatedAt;
 
   User({
@@ -32,8 +36,12 @@ class User {
     required this.remise,
     required this.rang,
     required this.maximum,
-    required this.beneficiaires,
-    this.createdAt,
+    required this.used,
+    required this.beneficial,
+    required this.expireDate,
+    required this.dateNaissance,
+    required this.beginDate,
+    required this.createdAt,
     this.updatedAt,
   });
 
@@ -53,13 +61,16 @@ class User {
       remise: json['discount'] as String,
       rang: json['rank'] as String,
       maximum: json['maximum'] as String,
-      beneficiaires: json['beneficial'] as String,
+      beneficial: json['beneficial'] as String,
+      used: json['used'] as String,
+      expireDate: json['expiry_date'] as String,
+      dateNaissance: json['birth_day'] as String,
       createdAt: json['CreatedAt'] as String,
+      beginDate: json['begin_date'] as String,
     );
   }
   Map<String, dynamic> toJson() => {
         "Id": idUser,
-        "Identifiant": identifiant,
         "firstname": prenom,
         "lastname": nom,
         "gender": sexe,
@@ -69,14 +80,19 @@ class User {
         "Photo": photo,
         "Telephone": telephone,
         "town": ville,
+        "CreatedAt": createdAt,
+        "Identifiant": identifiant,
         "discount": remise,
         "rank": rang,
+        "beneficial": beneficial,
         "maximum": maximum,
-        "beneficial": beneficiaires,
-        "CreatedAt": createdAt,
+        "used": used,
+        "expiry_date": expireDate,
+        "birth_day": dateNaissance,
+        "begin_date": createdAt,
       };
 
-  static List<User> usersFromSnapshot(List snapshot) {
+  static List<User> usersFromSnapshots(List snapshot) {
     return snapshot.map((data) => User.fromJson(data)).toList();
   }
 
@@ -86,6 +102,6 @@ class User {
 
   @override
   String toString() {
-    return 'User {Id:$idUser,Identifiant: $identifiant,Prenom: $prenom,Nom: $nom,Sexe: $sexe,Nom_Societe: $societe,mot_de_passe:$motdepasse,Email: $email,Photo: $photo,Telephone: $telephone,Ville: $ville,Remise:$remise,Rang:$rang,maximum:$maximum,Beneficial:$beneficiaires,CreatedAt: $createdAt}';
+    return 'User {Id:$idUser,Identifiant: $identifiant,Prenom: $prenom,Nom: $nom,Sexe: $sexe,Nom_Societe: $societe,mot_de_passe:$motdepasse,Email: $email,Photo: $photo,Telephone: $telephone,Ville: $ville,Remise:$remise,Rang:$rang,maximum:$maximum,Beneficial:$beneficial,CreatedAt: $createdAt,deginDate:$beginDate,used :$used,expiry_date:$expireDate,birth_day:$dateNaissance}';
   }
 }

@@ -1,14 +1,13 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
+import 'package:projectagc/providers/providerCustumer.dart';
 import 'package:projectagc/routes/route_names.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:provider/provider.dart';
 import '../../animations/buttonAnimation1.dart';
-import '../../providers/providerUser.dart';
+//import '../../providers/providerUser.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -45,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    AuthProvider auth = Provider.of<AuthProvider>(context);
+    ProviderCustumer auth = Provider.of<ProviderCustumer>(context);
     return Scaffold(
       backgroundColor: Colors.blue[100],
       body: SingleChildScrollView(
@@ -199,7 +198,7 @@ class _LoginPageState extends State<LoginPage> {
                                     isLoading = true;
                                   });
                                   final Future<Map<String, dynamic>?> response =
-                                      auth.loginUser(
+                                      auth.loginCustumer(
                                           identifiant.text, motdepasse.text);
                                   response.then(
                                     (value) {
@@ -210,6 +209,11 @@ class _LoginPageState extends State<LoginPage> {
                                         setState(() {
                                           isLoading = false;
                                         });
+                                        /*Navigator.pushReplacement(context,
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                          return HomeClientPage();
+                                        }));*/
                                         Navigator.pushReplacementNamed(
                                             context, homeRoute);
                                       } else {
