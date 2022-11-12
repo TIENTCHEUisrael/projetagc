@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
+import 'package:projectagc/providers/providerCustumer.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +27,7 @@ class _PopupMotdepasseState extends State<PopupMotdepasse> {
       Icons.visibility,
       color: Colors.black,
     );
-    AuthProvider auth = Provider.of<AuthProvider>(context);
+    ProviderCustumer auth = Provider.of<ProviderCustumer>(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32.0),

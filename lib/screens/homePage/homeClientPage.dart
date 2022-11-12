@@ -5,7 +5,6 @@ import 'package:projectagc/localisation/localization_constant.dart';
 import 'package:projectagc/main.dart';
 import 'package:projectagc/models/classes/langages.dart';
 import 'package:projectagc/routes/route_names.dart';
-import 'package:projectagc/screens/navigationPage/navigationPage.dart';
 import 'package:projectagc/themes/constants.dart';
 import 'package:projectagc/widgets/navbarClient.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -23,6 +22,11 @@ class _HomeClientPageState extends State<HomeClientPage> {
     print(langage.languagecode);
     Locale? _temp = await setLocale(langage.languagecode);
     MyApp.setLocale(context, _temp);
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override

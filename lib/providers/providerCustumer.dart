@@ -85,6 +85,7 @@ class ProviderCustumer extends ChangeNotifier {
 
   Future<Map<String, dynamic>?> loginCustumer(
       String identifiant, String pass) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     var _affiliaires;
     var result;
     try {
@@ -98,7 +99,12 @@ class ProviderCustumer extends ChangeNotifier {
               "////////////////////////////////////START////////////////////");
           var data = jsonDecode(response.body);
           print(data);
-          if (data['customer'][0]['Id'] == null) {
+          if (data.isEmpty) {
+            result = {
+              "statut": false,
+              "message": "Password ou Identifiant incorrect"
+            };
+          } else if (data['customer'][0]['Id'] == null) {
             result = {
               "statut": false,
               "message": "Password ou Identifiant incorrect"
@@ -123,11 +129,10 @@ class ProviderCustumer extends ChangeNotifier {
             }
 
             _beneficiaires = Beneficiaire.beneficiairesFromSnapshots(temp);
-            notifyListeners();
-
             _user = User.fromJson(data['customer'][0]);
             UserPreferences.saveUserToSharePreference(data['customer'][0]);
             notifyListeners();
+
             result = {
               "statut": true,
               "message": "User authenticated",
@@ -140,16 +145,19 @@ class ProviderCustumer extends ChangeNotifier {
             };
           }
         } else {
-          result = {"statut": false, "message": "Statut code !=200"};
+          result = {"statut": false, "message": "User not authenticated"};
         }
       }
     } on SocketException catch (_) {
       result = {"statut": false, "message": "Connexion failed"};
+    } on StackTrace catch (_) {
+      result = {"statut": false, "message": "Email or password doesn't exist"};
     }
     return result;
   }
 
-  /*Future<Map<String, dynamic>?> updateUser(String id, String newPass) async {
+  Future<Map<String, dynamic>?> updateCustumer(
+      String id, String newPass) async {
     var result;
     try {
       var urlPass =
@@ -161,11 +169,16 @@ class ProviderCustumer extends ChangeNotifier {
       final response = await http.post(urlPass);
       if (response.statusCode == 200) {
         _logStatus = Statut.updated;
+        notifyListeners();
         var data = jsonDecode(response.body);
-        _user = User.fromJson(data);
+        _custumer = Custumer.fromJson(data);
+        _user = User.fromJson(data['customer'][0]);
+        await CustumerPreferences.removeCustumerToSharePreference();
         await UserPreferences.removeUserToSharePreference();
-        UserPreferences.saveUserToSharePreference(data);
-        print(_user);
+        notifyListeners();
+        print('Removed');
+        CustumerPreferences.saveCustumerToSharePreference(data);
+        UserPreferences.saveUserToSharePreference(data['customer'][0]);
         notifyListeners();
         result = {
           "statut": true,
@@ -187,37 +200,42 @@ class ProviderCustumer extends ChangeNotifier {
       };
     }
     return result;
-  }*/
+  }
 
   Future<bool> tryAutoLogin() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final bool result;
 
     if (prefs.getString('customertoken') == null ||
-        prefs.getString('currentCustumer') == null) {
+        prefs.getString('currentCustumer') == null ||
+        prefs.getString('currentUser') == null) {
       print('...........NOT LOGGING..............');
       result = false;
     } else {
       var extractCustomer = jsonDecode(prefs.getString('currentCustumer')!);
-      print(prefs.getString('customertoken')!);
-      _custumer = Custumer.fromJson(extractCustomer);
-
+      var extractUser = jsonDecode(prefs.getString('currentUser')!);
       var extractToken = prefs.getString('customertoken')!;
+      _custumer = Custumer.fromJson(extractCustomer);
+      _user = User.fromJson(extractUser);
       _token = extractToken;
       notifyListeners();
+      print(
+          'Custumer :' + _custumer!.toString() + 'User :' + _user!.toString());
       result = true;
       print('............ LOGGED..............');
     }
     return result;
   }
 
-  Future<Map<String, dynamic>?> logOutUser() async {
+  Future<Map<String, dynamic>?> logOutCustumer() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var result;
     try {
+      await CustumerPreferences.removeCustumerToSharePreference();
       await UserPreferences.removeUserToSharePreference();
       notifyListeners();
-      if (prefs.getString('currentCustumer') == null) {
+      if (prefs.getString('currentCustumer') == null &&
+          prefs.getString('currentUser') == null) {
         result = {"status": true, "message": "User removed"};
       } else {
         result = {
@@ -232,28 +250,3 @@ class ProviderCustumer extends ChangeNotifier {
     return result;
   }
 }
-
-
-/**List _temp = [];
-            List _temps = [];
-            for (var i in data['customer']) {
-              _user = User.fromJson(i);
-              UserPreferences.saveUserToSharePreference(i);
-              notifyListeners();
-              _temp.add(i);
-            }
-            print('user :' + _user!.toString());
-            _users = User.usersFromSnapshots(_temp);
-            print('users :' + _users!.toString());
-            print('.....................................................');
-            notifyListeners();
-
-            for (var i in data['affiliates']) {
-              _temps.add(i);
-            }
-            _beneficiaires = Beneficiaire.beneficiairesFromSnapshots(_temps);
-            notifyListeners();
-
-            print('affiliaires :' + _beneficiaires!.toString());
-            print('......................................................');
-            CustumerPreferences.saveCustumerToSharePreference(data); */

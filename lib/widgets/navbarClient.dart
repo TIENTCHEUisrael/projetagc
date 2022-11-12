@@ -81,13 +81,17 @@ class _NavBarClientState extends State<NavBarClient> {
               ),
               currentAccountPicture: CircleAvatar(
                 child: ClipOval(
-                  child: FadeInImage.assetNetwork(
-                    placeholder: placeholder,
-                    image: auth.user.photo,
-                    height: 100,
-                    width: 100,
-                    fit: BoxFit.cover,
-                  ),
+                  child: auth.user.photo == "null"
+                      ? Image.asset(
+                          "assets/images/png/profile.png",
+                          width: 100,
+                          height: 100,
+                        )
+                      : Image.network(
+                          auth.user.photo,
+                          width: 100,
+                          height: 100,
+                        ),
                 ),
               ),
             ),
@@ -262,7 +266,7 @@ class _NavBarClientState extends State<NavBarClient> {
                   return;
                 },
                 onTap: () {
-                  auth.logOutUser().then(
+                  auth.logOutCustumer().then(
                     (value) {
                       if (value!['status'] == true) {
                         Fluttertoast.showToast(

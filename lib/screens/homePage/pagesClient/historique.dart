@@ -44,31 +44,34 @@ class _HistoriquePageState extends State<HistoriquePage> {
       body: SingleChildScrollView(
           child: Column(
         children: [
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: scaffoldbackground),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "      Search ....",
-                    style: TextStyle(fontSize: 18, color: blue_color),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      showSearch(
-                        context: context,
-                        delegate: MysearchDelegate(),
-                      );
-                    },
-                    icon: Icon(
-                      Icons.search,
-                      color: Colors.black,
+          GestureDetector(
+            onTap: () {
+              showSearch(
+                context: context,
+                delegate: MysearchDelegate(),
+              );
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: scaffoldbackground),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "      Search ....",
+                      style: TextStyle(fontSize: 18, color: blue_color),
                     ),
-                  )
-                ]),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      ),
+                    )
+                  ]),
+            ),
           ),
           Container(
             margin: EdgeInsets.only(top: 10),

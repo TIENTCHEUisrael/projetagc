@@ -6,6 +6,7 @@ import 'package:projectagc/models/BonDePriseEnCharge/coupon.dart';
 import 'package:projectagc/models/BonDePriseEnCharge/institution.dart';
 import 'package:projectagc/models/BonDePriseEnCharge/locale.dart';
 import 'package:projectagc/providers/providerBpc.dart';
+import 'package:projectagc/providers/providerCustumer.dart';
 import 'package:projectagc/widgets/popup.dart';
 import 'package:provider/provider.dart';
 import '../../../animations/custum.dart';
@@ -33,11 +34,11 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
   bool _isloading2 = true;
   bool _isgetting = false;
   String? beneficiaire;
-  List beneficiaires = ["bene1", "bene2"];
 
   bool t1 = true;
   bool t2 = true;
   bool t3 = true;
+  bool t4 = true;
   bool button = true;
   bool getPartenaire = false;
   @override
@@ -106,7 +107,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
               ),
             )
           : SingleChildScrollView(
-              child: Consumer<AuthProvider>(builder: (context, auth, _) {
+              child: Consumer<ProviderCustumer>(builder: (context, auth, _) {
                 return Column(
                   children: [
                     const SizedBox(
@@ -220,7 +221,6 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                   setState(() {
                                     ville = newvalue.toString();
                                     t2 = false;
-                                    t3 = false;
                                   });
                                   getpartner(ville!);
                                 },
@@ -245,9 +245,9 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                     Border.all(color: Colors.grey, width: 1),
                                 borderRadius: BorderRadius.circular(15)),
                             child: IgnorePointer(
-                              ignoring: t2,
+                              ignoring: t3,
                               child: DropdownButton(
-                                hint: t2
+                                hint: t3
                                     ? Text(
                                         getTranslated(
                                             context, 'bpc_beneficiaire'),
@@ -271,9 +271,10 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                 onChanged: (newvalue) {
                                   setState(() {
                                     beneficiaire = newvalue.toString();
+                                    t4 = false;
                                   });
                                 },
-                                items: beneficiaires.map(
+                                items: auth.custumer.affiliate.map(
                                   (valueItem) {
                                     return DropdownMenuItem(
                                         value: valueItem,
@@ -310,7 +311,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 child: IgnorePointer(
-                                  ignoring: t3,
+                                  ignoring: t2,
                                   child: Icon(Icons.arrow_right),
                                 ),
                               ),
@@ -327,9 +328,9 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                         color: Colors.grey, width: 1),
                                     borderRadius: BorderRadius.circular(15)),
                                 child: IgnorePointer(
-                                  ignoring: t3,
+                                  ignoring: t2,
                                   child: DropdownButton(
-                                      hint: t3
+                                      hint: t2
                                           ? Text(
                                               getTranslated(context,
                                                   'bpc_partenaire_choice'),
@@ -390,7 +391,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                       ),
                       child: getPartenaire
                           ? SingleChildScrollView(
-                              child: t3
+                              child: t4
                                   ? Center(
                                       child: Column(
                                         children: [

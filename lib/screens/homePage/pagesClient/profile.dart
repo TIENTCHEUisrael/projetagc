@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
-import 'package:projectagc/models/user/user.dart';
+import 'package:projectagc/providers/providerCustumer.dart';
 import 'package:projectagc/routes/route_names.dart';
 import 'package:provider/provider.dart';
 import '../../../main.dart';
 import '../../../models/classes/langages.dart';
-import '../../../providers/providerUser.dart';
 import '../../../themes/constants.dart';
 import '../../../widgets/bas.dart';
 
@@ -34,7 +33,7 @@ class _ProfileState extends State<Profile> {
   }
 
   Future<void> calcul() async {
-    AuthProvider pro = Provider.of<AuthProvider>(context);
+    ProviderCustumer pro = Provider.of<ProviderCustumer>(context);
     if (pro.user.maximum as double > 100000) {
       setState(() {
         t2 = 0.8;
@@ -85,7 +84,7 @@ class _ProfileState extends State<Profile> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Consumer<AuthProvider>(builder: (context, auth, _) {
+        child: Consumer<ProviderCustumer>(builder: (context, auth, _) {
           return Column(
             children: [
               Container(
@@ -100,7 +99,7 @@ class _ProfileState extends State<Profile> {
                       Center(
                         child: Container(
                           child: ClipOval(
-                            child: auth.user.photo == null
+                            child: auth.user.photo == "null"
                                 ? Image.asset(
                                     "assets/images/png/profile.png",
                                     width: 150,
@@ -307,13 +306,15 @@ class _ProfileState extends State<Profile> {
                                   width: 5,
                                 ),
                                 Text(
-                                  auth.user.maximum,
+                                  auth.user.used,
                                   style: TextStyle(
                                     color: blue_color,
                                   ),
                                 ),
-                                const SizedBox(
-                                  width: 5,
+                                Text('/'),
+                                Text(
+                                  auth.user.maximum,
+                                  style: TextStyle(color: blue_color),
                                 ),
                               ],
                             )
@@ -436,13 +437,13 @@ class _ProfileState extends State<Profile> {
                                                   });
                                                   String identifiant =
                                                       auth.user.identifiant;
-
+                                                  print(identifiant);
                                                   auth
-                                                      .updateUser(identifiant,
+                                                      .updateCustumer(
+                                                          auth.user.identifiant,
                                                           motdepasse.text)
                                                       .then((value) {
-                                                    if (value!['statut'] ==
-                                                        true) {
+                                                    if (value!['statut']) {
                                                       Fluttertoast.showToast(
                                                         msg:
                                                             "${value['message']}",

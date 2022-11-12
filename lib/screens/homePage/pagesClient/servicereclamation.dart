@@ -207,18 +207,7 @@ class _ServicePageState extends State<ServicePage> {
                         text: getTranslated(context, 'service_message_end')),
                     TextSpan(
                       style: linkText,
-                      text: "reclamationsclients@agc-assurances.com",
-                      /*recognizer: TapGestureRecognizer()
-                        ..onTap = () async {
-                          var urll = "reclamationsclients@agc-assurances.com";
-                          if (await canLaunch(urll)) {
-                            await launch(urll);
-                          } else {
-                            Fluttertoast.showToast(
-                              msg: "Error: Cannot load Url",
-                            );
-                          }
-                        },*/
+                      text: " reclamationsclients@agc-assurances.com ",
                     ),
                     TextSpan(
                         style: defaultText,
