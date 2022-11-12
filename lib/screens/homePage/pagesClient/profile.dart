@@ -32,6 +32,12 @@ class _ProfileState extends State<Profile> {
     MyApp.setLocale(context, _locale);
   }
 
+  @override
+  void initState() {
+    super.initState();
+    calcul();
+  }
+
   Future<void> calcul() async {
     ProviderCustumer pro = Provider.of<ProviderCustumer>(context);
     if (pro.user.maximum as double > 100000) {
@@ -50,12 +56,6 @@ class _ProfileState extends State<Profile> {
         _isloading = false;
       });
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    calcul();
   }
 
   bool generate = false;
@@ -452,6 +452,10 @@ class _ProfileState extends State<Profile> {
                                                         _isloading2 = false;
                                                       });
                                                       Navigator.pop(context);
+                                                      Navigator
+                                                          .pushReplacementNamed(
+                                                              context,
+                                                              loginRoute);
                                                     } else {
                                                       Fluttertoast.showToast(
                                                         msg:

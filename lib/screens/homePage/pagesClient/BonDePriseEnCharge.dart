@@ -5,6 +5,7 @@ import 'package:projectagc/localisation/localization_constant.dart';
 import 'package:projectagc/models/BonDePriseEnCharge/coupon.dart';
 import 'package:projectagc/models/BonDePriseEnCharge/institution.dart';
 import 'package:projectagc/models/BonDePriseEnCharge/locale.dart';
+import 'package:projectagc/models/beneficiaire/beneficiaire.dart';
 import 'package:projectagc/providers/providerBpc.dart';
 import 'package:projectagc/providers/providerCustumer.dart';
 import 'package:projectagc/widgets/popup.dart';
@@ -34,6 +35,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
   bool _isloading2 = true;
   bool _isgetting = false;
   String? beneficiaire;
+  List<Beneficiaire>? _beneficiaires;
 
   bool t1 = true;
   bool t2 = true;
@@ -46,6 +48,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
     super.initState();
     getLocales();
     gettown();
+    getBeneficiaire();
   }
 
   Future<void> getLocales() async {
@@ -54,6 +57,10 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
 
   Future<void> gettown() async {
     town = await BPCProvider.getTowns();
+  }
+
+  Future<void> getBeneficiaire() async {
+    _beneficiaires = await ProviderCustumer().beneficiaires;
     setState(() {
       _isloading = false;
     });

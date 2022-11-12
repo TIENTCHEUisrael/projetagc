@@ -13,7 +13,6 @@ class _HistoriquePageState extends State<HistoriquePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         backgroundColor: blue_color,
         title: Center(
@@ -32,13 +31,6 @@ class _HistoriquePageState extends State<HistoriquePage> {
           const SizedBox(
             width: 5,
           ),
-          /*IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.e_mobiledata,
-              color: Colors.transparent,
-            ),
-          ),*/
         ],
       ),
       body: SingleChildScrollView(

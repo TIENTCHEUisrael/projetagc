@@ -171,19 +171,13 @@ class ProviderCustumer extends ChangeNotifier {
         _logStatus = Statut.updated;
         notifyListeners();
         var data = jsonDecode(response.body);
-        _custumer = Custumer.fromJson(data);
-        _user = User.fromJson(data['customer'][0]);
         await CustumerPreferences.removeCustumerToSharePreference();
         await UserPreferences.removeUserToSharePreference();
         notifyListeners();
         print('Removed');
-        CustumerPreferences.saveCustumerToSharePreference(data);
-        UserPreferences.saveUserToSharePreference(data['customer'][0]);
-        notifyListeners();
         result = {
           "statut": true,
-          "message": "User updated",
-          "user": _user!,
+          "message": data['message'] + ":User updated",
         };
       } else {
         _logStatus = Statut.notupdated;

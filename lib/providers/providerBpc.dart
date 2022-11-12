@@ -93,6 +93,7 @@ class BPCProvider extends ChangeNotifier {
 
         _var = Locales.recipesFromSnapshot(_temp);
       } else {
+        _var = [];
         print('False');
       }
     } on SocketException catch (_) {
@@ -107,7 +108,9 @@ class BPCProvider extends ChangeNotifier {
     var url = Uri.parse("${Services.urlvillepartenaire}");
     try {
       final response = await http.post(url);
+      print('...................StART..............');
       if (response.statusCode == 200) {
+        print('..................ENter..............');
         var data = jsonDecode(response.body);
         List _temp = [];
         for (var i in data) {
