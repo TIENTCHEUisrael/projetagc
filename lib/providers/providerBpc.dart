@@ -46,7 +46,7 @@ class BPCProvider extends ChangeNotifier {
     try {
       notifyListeners();
       var url = Uri.parse(
-          '${Services.urlcoupon}/newcoupon.php?ville=${cpn.ville}&partenaire=${cpn.partenaire}&client=${cpn.identifiantclient}&beneficial=${cpn.beneficial}');
+          '${Services.urlcoupon}ville=${cpn.ville}&partenaire=${cpn.partenaire}&client=${cpn.identifiantclient}&statut=1&beneficial=${cpn.beneficial}');
 
       print('............................BEGIN.........................');
       registerStatus = Statut.registing;
@@ -83,7 +83,6 @@ class BPCProvider extends ChangeNotifier {
       var url = Uri.parse('${Services.urllist}?id=1');
       final response = await http.post(url);
       if (response.statusCode == 200) {
-        print('GOOD');
         var data = jsonDecode(response.body);
         List _temp = [];
 
@@ -92,6 +91,7 @@ class BPCProvider extends ChangeNotifier {
         }
 
         _var = Locales.recipesFromSnapshot(_temp);
+        print(_var);
       } else {
         _var = [];
         print('False');

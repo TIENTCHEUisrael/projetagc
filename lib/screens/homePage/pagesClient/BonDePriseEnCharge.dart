@@ -34,6 +34,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
   bool _isloading2 = true;
   bool _isgetting = false;
   Beneficiaire? beneficiaire;
+  int number = 0;
 
   bool t1 = true;
   bool t2 = true;
@@ -51,6 +52,10 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
 
   Future<void> getLocales() async {
     _locales = await BPCProvider.getlocales();
+    setState(() {
+      _isloading = false;
+      _isloading = true;
+    });
   }
 
   Future<void> gettown() async {
@@ -512,10 +517,28 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                       child: GestureDetector(
                         onTap: getPartenaire
                             ? () {
+                                for (var i in auth.beneficiaires) {
+                                  if (beneficiaire == i) {
+                                    setState(() {
+                                      number = number;
+                                    });
+                                  } else if (beneficiaire == null) {
+                                    setState(() {
+                                      number = -1;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      number++;
+                                    });
+                                  }
+                                }
+                                print(
+                                    "+++++++++++++++++++++$number++++++++++++++++");
                                 var coupon = Coupon(
                                     ville: ville!,
                                     partenaire: 1,
-                                    identifiantclient: auth.user.identifiant);
+                                    identifiantclient: auth.user.identifiant,
+                                    beneficial: number);
                                 showDialog(
                                     context: context,
                                     builder: (context) {
