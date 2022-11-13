@@ -536,7 +536,6 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                       _isgetting = true;
                                       t1 = true;
                                       t3 = true;
-                                      t4 = true;
                                       t5 = true;
                                       button = true;
                                     });
