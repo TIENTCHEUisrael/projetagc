@@ -11,7 +11,6 @@ import 'package:projectagc/providers/providerCustumer.dart';
 import 'package:projectagc/widgets/popup.dart';
 import 'package:provider/provider.dart';
 import '../../../animations/custum.dart';
-import '../../../providers/providerUser.dart';
 import '../../../themes/constants.dart';
 import '../../../widgets/bas.dart';
 import '../../../widgets/pageRoute.dart';
@@ -34,13 +33,13 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
   bool _isloading = true;
   bool _isloading2 = true;
   bool _isgetting = false;
-  String? beneficiaire;
-  List<Beneficiaire>? _beneficiaires;
+  Beneficiaire? beneficiaire;
 
   bool t1 = true;
   bool t2 = true;
   bool t3 = true;
   bool t4 = true;
+  bool t5 = true;
   bool button = true;
   bool getPartenaire = false;
   @override
@@ -48,7 +47,6 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
     super.initState();
     getLocales();
     gettown();
-    getBeneficiaire();
   }
 
   Future<void> getLocales() async {
@@ -57,10 +55,6 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
 
   Future<void> gettown() async {
     town = await BPCProvider.getTowns();
-  }
-
-  Future<void> getBeneficiaire() async {
-    _beneficiaires = await ProviderCustumer().beneficiaires;
     setState(() {
       _isloading = false;
     });
@@ -227,7 +221,9 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                 onChanged: (newvalue) {
                                   setState(() {
                                     ville = newvalue.toString();
+                                    t1 = true;
                                     t2 = false;
+                                    t3 = false;
                                   });
                                   getpartner(ville!);
                                 },
@@ -252,9 +248,9 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                     Border.all(color: Colors.grey, width: 1),
                                 borderRadius: BorderRadius.circular(15)),
                             child: IgnorePointer(
-                              ignoring: t3,
+                              ignoring: t2,
                               child: DropdownButton(
-                                hint: t3
+                                hint: t2
                                     ? Text(
                                         getTranslated(
                                             context, 'bpc_beneficiaire'),
@@ -277,15 +273,14 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                 style: TextStyle(color: blue_color),
                                 onChanged: (newvalue) {
                                   setState(() {
-                                    beneficiaire = newvalue.toString();
-                                    t4 = false;
+                                    beneficiaire = newvalue;
                                   });
                                 },
-                                items: auth.custumer.affiliate.map(
+                                items: auth.beneficiaires.map(
                                   (valueItem) {
                                     return DropdownMenuItem(
                                         value: valueItem,
-                                        child: Text(valueItem));
+                                        child: Text(valueItem.nom));
                                   },
                                 ).toList(),
                               ),
@@ -318,7 +313,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 child: IgnorePointer(
-                                  ignoring: t2,
+                                  ignoring: t3,
                                   child: Icon(Icons.arrow_right),
                                 ),
                               ),
@@ -335,9 +330,9 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                         color: Colors.grey, width: 1),
                                     borderRadius: BorderRadius.circular(15)),
                                 child: IgnorePointer(
-                                  ignoring: t2,
+                                  ignoring: t3,
                                   child: DropdownButton(
-                                      hint: t2
+                                      hint: t3
                                           ? Text(
                                               getTranslated(context,
                                                   'bpc_partenaire_choice'),
@@ -363,6 +358,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                       onChanged: (newvalue) {
                                         setState(() {
                                           partenaire = newvalue;
+                                          t4 = false;
                                           button = false;
                                           getPartenaire = true;
                                         });
@@ -538,6 +534,11 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                     );
                                     setState(() {
                                       _isgetting = true;
+                                      t1 = true;
+                                      t3 = true;
+                                      t4 = true;
+                                      t5 = true;
+                                      button = true;
                                     });
 
                                     Navigator.of(context).pop();
@@ -562,13 +563,22 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                                     Navigator.of(context).pop();
                                                     Navigator.of(context).pop();
                                                   },
-                                                  child: Card(
-                                                    elevation: 5,
-                                                    child: Text(
-                                                      'OK',
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          color: blue_color),
+                                                  child: Container(
+                                                    height: 50,
+                                                    width: 100,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15),
+                                                        color: blue_color),
+                                                    child: Center(
+                                                      child: Text(
+                                                        ' OK ',
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            color:
+                                                                scaffoldbackground),
+                                                      ),
                                                     ),
                                                   ),
                                                 )

@@ -129,6 +129,7 @@ class ProviderCustumer extends ChangeNotifier {
             }
 
             _beneficiaires = Beneficiaire.beneficiairesFromSnapshots(temp);
+
             _user = User.fromJson(data['customer'][0]);
             UserPreferences.saveUserToSharePreference(data['customer'][0]);
             notifyListeners();
@@ -213,8 +214,17 @@ class ProviderCustumer extends ChangeNotifier {
       _user = User.fromJson(extractUser);
       _token = extractToken;
       notifyListeners();
+      print('......................;;Beneficiare....................');
+      List temp = [];
+      for (var i in extractCustomer['affiliates']) {
+        temp.add(i);
+      }
+
+      _beneficiaires = Beneficiaire.beneficiairesFromSnapshots(temp);
+      notifyListeners();
       print(
           'Custumer :' + _custumer!.toString() + 'User :' + _user!.toString());
+      print(_beneficiaires);
       result = true;
       print('............ LOGGED..............');
     }

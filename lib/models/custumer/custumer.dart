@@ -1,6 +1,3 @@
-import '../user/user.dart';
-import '../beneficiaire/beneficiaire.dart';
-
 class Custumer {
   final List<dynamic> clients;
   final List<dynamic> affiliate;

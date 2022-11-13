@@ -104,25 +104,22 @@ class BPCProvider extends ChangeNotifier {
   }
 
   static Future<List<dynamic>> getTowns() async {
-    var result;
+    List _temp = [];
     var url = Uri.parse("${Services.urlvillepartenaire}");
     try {
       final response = await http.post(url);
-      print('...................StART..............');
       if (response.statusCode == 200) {
-        print('..................ENter..............');
         var data = jsonDecode(response.body);
-        List _temp = [];
+
         for (var i in data) {
           _temp.add(i['town']);
         }
-
-        return _temp;
+        print(_temp);
       }
     } on SocketException catch (_) {
       print("connexion failed");
     }
-    return result;
+    return _temp;
   }
 
   static Future<List<Institutions>> getPatnersByTown(String town) async {
