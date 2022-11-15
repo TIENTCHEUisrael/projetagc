@@ -34,7 +34,8 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
   bool _isloading2 = true;
   bool _isgetting = false;
   Beneficiaire? beneficiaire;
-  int number = 0;
+  int numberBeneficiaire = 0;
+  int numberPartenaire = 0;
 
   bool t1 = true;
   bool t2 = true;
@@ -517,28 +518,41 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                       child: GestureDetector(
                         onTap: getPartenaire
                             ? () {
-                                for (var i in auth.beneficiaires) {
-                                  if (beneficiaire == i) {
+                                for (var j in _intitutionss!) {
+                                  if (partenaire == j) {
                                     setState(() {
-                                      number = number;
-                                    });
-                                  } else if (beneficiaire == null) {
-                                    setState(() {
-                                      number = -1;
+                                      numberPartenaire = numberPartenaire;
                                     });
                                   } else {
                                     setState(() {
-                                      number++;
+                                      numberPartenaire++;
+                                    });
+                                  }
+                                }
+                                for (var i in auth.beneficiaires) {
+                                  if (beneficiaire == i) {
+                                    setState(() {
+                                      numberBeneficiaire = numberBeneficiaire;
+                                    });
+                                  } else if (beneficiaire == null) {
+                                    setState(() {
+                                      numberBeneficiaire = -1;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      numberBeneficiaire++;
                                     });
                                   }
                                 }
                                 print(
-                                    "+++++++++++++++++++++$number++++++++++++++++");
+                                    "+++++++++++++++++++++$numberPartenaire++++++++++++++++");
+                                print(
+                                    "+++++++++++++++++++++$numberBeneficiaire++++++++++++++++");
                                 var coupon = Coupon(
                                     ville: ville!,
-                                    partenaire: 1,
+                                    partenaire: numberPartenaire,
                                     identifiantclient: auth.user.identifiant,
-                                    beneficial: number);
+                                    beneficial: numberBeneficiaire);
                                 showDialog(
                                     context: context,
                                     builder: (context) {

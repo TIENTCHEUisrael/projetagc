@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/localisation/localization_constant.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../themes/constants.dart';
 
@@ -25,7 +28,6 @@ class _ServicePageState extends State<ServicePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: blue_color,
         title: Center(
@@ -113,7 +115,6 @@ class _ServicePageState extends State<ServicePage> {
                           final form = _formKey.currentState;
                           if (form!.validate()) {
                             form.save();
-                            print('OK');
                           }
                         },
                         child: Container(
@@ -161,6 +162,7 @@ class _ServicePageState extends State<ServicePage> {
                       child: GestureDetector(
                         onTap: () {
                           print("object");
+                          // FlutterPhoneDirectCaller.callNumber('+692341934');
                         },
                         child: Container(
                           padding: const EdgeInsets.all(10),
@@ -200,6 +202,7 @@ class _ServicePageState extends State<ServicePage> {
             ),
             Center(
               child: RichText(
+                textAlign: TextAlign.center,
                 text: TextSpan(
                   children: [
                     TextSpan(

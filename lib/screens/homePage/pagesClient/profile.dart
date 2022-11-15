@@ -26,7 +26,6 @@ class _ProfileState extends State<Profile> {
     Icons.visibility,
     color: Colors.black,
   );
-  final _formKey = GlobalKey<FormState>();
   void _changeLanguage(language language) async {
     Locale _locale = await setLocale(language.languagecode);
     MyApp.setLocale(context, _locale);
@@ -40,19 +39,29 @@ class _ProfileState extends State<Profile> {
 
   Future<void> calcul() async {
     ProviderCustumer pro = Provider.of<ProviderCustumer>(context);
-    if (pro.user.maximum as double > 100000) {
+    if (pro.user.used as double == 0) {
       setState(() {
-        t2 = 0.8;
+        t2 = 0.0;
         _isloading = false;
       });
-    } else if (pro.user.maximum as double == 100000) {
+    } else if (pro.user.used as double < (pro.user.maximum as double) / 2) {
+      setState(() {
+        t2 = 0.3;
+        _isloading = false;
+      });
+    } else if (pro.user.used as double == pro.user.maximum as double) {
+      setState(() {
+        t2 = 1;
+        _isloading = false;
+      });
+    } else if (pro.user.used as double > (pro.user.maximum as double) / 2) {
+      setState(() {
+        t2 = 0.7;
+        _isloading = false;
+      });
+    } else if (pro.user.used as double == (pro.user.maximum as double) / 2) {
       setState(() {
         t2 = 0.5;
-        _isloading = false;
-      });
-    } else {
-      setState(() {
-        t2 = 0.4;
         _isloading = false;
       });
     }
@@ -284,7 +293,7 @@ class _ProfileState extends State<Profile> {
                                 ? LinearProgressIndicator(
                                     minHeight: 18,
                                     backgroundColor: Colors.grey,
-                                    value: 0.6,
+                                    value: 0.1,
                                   )
                                 : LinearProgressIndicator(
                                     minHeight: 18,
