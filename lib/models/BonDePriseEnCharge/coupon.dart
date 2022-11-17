@@ -1,9 +1,9 @@
 class Coupon {
   final int? id;
   final String ville;
-  final int partenaire;
+  final String partenaire;
   final String identifiantclient;
-  final int? beneficial;
+  final String? beneficial;
 
   Coupon(
       {this.id,
@@ -14,10 +14,11 @@ class Coupon {
 
   factory Coupon.fromJson(dynamic json) {
     return Coupon(
-        ville: json['ville'],
-        partenaire: json['partenaire'],
-        identifiantclient: json['identifiant'],
-        beneficial: json['beneficial']);
+      ville: json['ville'] as String,
+      partenaire: json['partenaire'] as String,
+      identifiantclient: json['identifiant'] as String,
+      beneficial: json['beneficial'] as String,
+    );
   }
   Map<String, dynamic> toJson() => {
         "ville": ville,

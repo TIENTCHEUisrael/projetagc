@@ -1,12 +1,12 @@
 class Institutions {
-  final String? id;
+  final String id;
   final String name;
   final String institutionId;
   final String ville;
   final String description;
 
   Institutions(
-      {this.id,
+      {required this.id,
       required this.name,
       required this.institutionId,
       required this.ville,
