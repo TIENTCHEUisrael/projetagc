@@ -36,6 +36,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
   Beneficiaire? beneficiaire;
   int numberBeneficiaire = 0;
   int numberPartenaire = 0;
+  int values = 0;
 
   bool t1 = true;
   bool t2 = true;
@@ -53,10 +54,6 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
 
   Future<void> getLocales() async {
     _locales = await BPCProvider.getlocales();
-    setState(() {
-      _isloading = false;
-      _isloading = true;
-    });
   }
 
   Future<void> gettown() async {
@@ -518,17 +515,28 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                       child: GestureDetector(
                         onTap: getPartenaire
                             ? () {
+                                print(
+                                    '***********************************************************');
                                 for (var j in _intitutionss!) {
-                                  if (partenaire == j) {
+                                  if (j == partenaire!) {
                                     setState(() {
-                                      numberPartenaire = numberPartenaire;
+                                      values = numberPartenaire;
                                     });
+                                    print(values);
+                                    break;
+                                  } else if (j == null) {
+                                    setState(() {
+                                      values = values;
+                                    });
+                                    print(values);
                                   } else {
                                     setState(() {
-                                      numberPartenaire++;
+                                      values++;
                                     });
+                                    print(values);
                                   }
                                 }
+                                print(values);
                                 for (var i in auth.beneficiaires) {
                                   if (beneficiaire == i) {
                                     setState(() {
@@ -545,14 +553,15 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                   }
                                 }
                                 print(
-                                    "+++++++++++++++++++++$numberPartenaire++++++++++++++++");
+                                    "+++++++++++++++++++++$values++++++++++++++++");
                                 print(
                                     "+++++++++++++++++++++$numberBeneficiaire++++++++++++++++");
                                 var coupon = Coupon(
                                     ville: ville!,
-                                    partenaire: numberPartenaire,
+                                    partenaire: values,
                                     identifiantclient: auth.user.identifiant,
                                     beneficial: numberBeneficiaire);
+                                print(coupon.toString());
                                 showDialog(
                                     context: context,
                                     builder: (context) {
@@ -628,7 +637,6 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                     Fluttertoast.showToast(
                                       msg: "Error: ${value['message']}",
                                     );
-                                    Navigator.of(context).pop();
                                   }
                                 });
                               }

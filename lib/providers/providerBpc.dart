@@ -63,10 +63,6 @@ class BPCProvider extends ChangeNotifier {
           "message": "coupon generated",
           "coupon": _coupon!
         };
-      } else {
-        _registerStatus = Statut.notregisted;
-        notifyListeners();
-        result = {"statut": false, "message": "coupon not generated"};
       }
     } on SocketException catch (_) {
       result = {
