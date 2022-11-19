@@ -59,7 +59,8 @@
    "partner_desc":"Description :",
    "partner_town":"Ville :",
    "partner_number":"Numéro a contacter :",
-   "statut_coupon":"coupon :",
+   "statut_titre":"Statut Bpc",
+   "statut_coupon":"Coupon :",
    "statut_identifiant":"Identifiant :",
    "statut_nom":"Nom et prenom : ",
    "statut_telephone":"Telephone :"

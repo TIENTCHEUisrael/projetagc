@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/models/statutCoupons/statutC.dart';
 import 'package:projectagc/models/user/user.dart';
 import 'package:projectagc/services/localisation/localization_constant.dart';
 import 'package:projectagc/services/providers/providerBpc.dart';
-import 'package:projectagc/services/providers/providerCustumer.dart';
 import 'package:projectagc/services/themes/constants.dart';
 
 class StatutBpc extends StatefulWidget {
-  const StatutBpc({super.key});
+  User user;
+  StatutBpc({required this.user});
 
   @override
   State<StatutBpc> createState() => _StatutBpcState();
@@ -28,43 +27,58 @@ class _StatutBpcState extends State<StatutBpc> {
   }
 
   Future<void> getStatus() async {
-    _user = await ProviderCustumer().user;
-    await BPCProvider.getStatuts(_user!.identifiant).then((value) {
-      if (value!['status']) {
-        setState(() {
-          result = value['result'];
-          _isloading = false;
-        });
-      } else {
-        Fluttertoast.showToast(msg: value['message']);
-      }
+    result = await BPCProvider.getStatuts(widget.user.identifiant);
+    setState(() {
+      _isloading = false;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return _isloading
-        ? Center(
-            child: const CircularProgressIndicator(
-              strokeWidth: 1,
-            ),
-          )
-        : result == []
-            ? Center(
-                child: Text(
-                  'No items there',
-                  style: GoogleFonts.poppins(color: blue_color),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: blue_color,
+        title: Center(
+          child: Text(
+            getTranslated(context, 'statut_titre'),
+            style: TextStyle(color: scaffoldbackground),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        actions: [
+          Image.asset(
+            "assets/images/png/agc1.png",
+            height: 40,
+            width: 40,
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+        ],
+      ),
+      body: _isloading
+          ? Center(
+              child: const CircularProgressIndicator(
+                strokeWidth: 1,
+              ),
+            )
+          : result == []
+              ? Center(
+                  child: Text(
+                    'No items there',
+                    style: GoogleFonts.poppins(color: blue_color),
+                  ),
+                )
+              : ListView.builder(
+                  itemCount: result!.length,
+                  itemBuilder: (((context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: cardWidget(res: result![index]),
+                    );
+                  })),
                 ),
-              )
-            : ListView.builder(
-                itemCount: result!.length,
-                itemBuilder: (((context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: cardWidget(res: result![index]),
-                  );
-                })),
-              );
+    );
   }
 
   Widget cardWidget({required StatutC res}) {
@@ -75,62 +89,26 @@ class _StatutBpcState extends State<StatutBpc> {
       child: Card(
         elevation: 0.5,
         child: ListTile(
-          title: Row(children: [
-            Text(
-              getTranslated(context, 'statut_coupon'),
-              style: GoogleFonts.poppins(
-                  color: Colors.black, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              '  ${res.coupon}',
-              style: TextStyle(fontStyle: FontStyle.italic),
-            )
-          ]),
+          title: Text(
+            getTranslated(context, 'statut_coupon') + '  ${res.coupon}',
+          ),
           subtitle: Column(
             children: [
-              Row(
-                children: [
-                  Text(getTranslated(context, 'statut_identifiant'),
-                      style: GoogleFonts.poppins(
-                          color: Colors.black, fontWeight: FontWeight.bold)),
-                  SizedBox(
-                    width: 2,
-                  ),
-                  Text(res.identifiantCustumer)
-                ],
-              ),
-              Row(
-                children: [
-                  Text(getTranslated(context, 'statut_nom'),
-                      style: GoogleFonts.poppins(
-                          color: Colors.black, fontWeight: FontWeight.bold)),
-                  SizedBox(
-                    width: 2,
-                  ),
-                  Text(res.nom + ' ' + res.prenom)
-                ],
-              ),
-              Row(
-                children: [
-                  Text(getTranslated(context, 'statut_telephone'),
-                      style: GoogleFonts.poppins(
-                          color: Colors.black, fontWeight: FontWeight.bold)),
-                  SizedBox(
-                    width: 2,
-                  ),
-                  Text(res.telephone)
-                ],
-              ),
+              Text('Identifiant :' + res.identifiantCustumer),
+              Text(getTranslated(context, 'statut_nom') +
+                  res.nom +
+                  ' ' +
+                  res.prenom),
+              Text(getTranslated(context, 'statut_telephone') + res.telephone),
             ],
           ),
           leading: Icon(
             Icons.share,
             color: red_color,
-            size: 18,
           ),
           trailing: res.status == "On analysis"
               ? const Text(
-                  "En analyse..",
+                  "Analyse..",
                   style: TextStyle(color: Colors.blue),
                 )
               : res.status == "refused"

@@ -141,8 +141,6 @@ class ProviderCustumer extends ChangeNotifier {
               "token": _token!,
               "beneficiaires": _beneficiaires!,
               "user": _user
-              /*"beneficiare": _beneficiaires!,
-              "count": _count!*/
             };
           }
         } else {

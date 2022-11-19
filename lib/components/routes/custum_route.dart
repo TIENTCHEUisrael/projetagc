@@ -19,9 +19,9 @@ class CustomRoute {
       case compteRoute:
         r = MaterialPageRoute(builder: (_) => Profile());
         break;
-      case statutRoute:
+      /*case statutRoute:
         r = MaterialPageRoute(builder: (_) => StatutBpc());
-        break;
+        break;*/
       case historiqueROute:
         r = MaterialPageRoute(builder: (_) => HistoriquePage());
         break;

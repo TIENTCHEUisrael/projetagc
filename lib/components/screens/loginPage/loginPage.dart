@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projectagc/models/user/user.dart';
 import 'package:projectagc/services/localisation/localization_constant.dart';
 import 'package:projectagc/services/providers/providerCustumer.dart';
 import 'package:projectagc/components/routes/route_names.dart';
@@ -24,9 +25,9 @@ class _LoginPageState extends State<LoginPage> {
     Icons.visibility,
     color: Colors.black,
   );
-
   final identifiant = TextEditingController();
   final motdepasse = TextEditingController();
+  static User? user;
 
   void zero() {
     setState(() {
@@ -209,13 +210,10 @@ class _LoginPageState extends State<LoginPage> {
                                         setState(() {
                                           isLoading = false;
                                         });
-                                        /*Navigator.pushReplacement(context,
-                                            MaterialPageRoute(
-                                                builder: (context) {
-                                          return HomeClientPage();
-                                        }));*/
+                                        user = value['user'];
                                         Navigator.pushReplacementNamed(
                                             context, homeRoute);
+                                        print(user);
                                       } else {
                                         setState(() {
                                           isLoading = false;

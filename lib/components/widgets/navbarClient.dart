@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:projectagc/components/screens/homePage/pagesClient/statutB.dart';
 import 'package:projectagc/components/screens/loginPage/loginPage.dart';
 import 'package:projectagc/services/localisation/localization_constant.dart';
 import 'package:projectagc/services/providers/providerCustumer.dart';
@@ -144,7 +145,9 @@ class _NavBarClientState extends State<NavBarClient> {
                 },
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, statutRoute);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return StatutBpc(user: auth.user);
+                  }));
                 },
               ),
             ),

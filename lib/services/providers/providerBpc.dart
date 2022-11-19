@@ -100,7 +100,7 @@ class BPCProvider extends ChangeNotifier {
     return _var;
   }
 
-  static Future<Map<String, dynamic>?> getStatuts(String identifiant) async {
+  static Future<List<StatutC>> getStatuts(String identifiant) async {
     var listresult;
     List temp = [];
     var result;
@@ -130,7 +130,7 @@ class BPCProvider extends ChangeNotifier {
         "message": "Connexion failed",
       };
     }
-    return result;
+    return listresult;
   }
 
   static Future<List<dynamic>> getTowns() async {
