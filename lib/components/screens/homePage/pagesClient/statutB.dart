@@ -108,7 +108,7 @@ class _StatutBpcState extends State<StatutBpc> {
           ),
           trailing: res.status == "On analysis"
               ? const Text(
-                  "Analyse..",
+                  "En analyse..",
                   style: TextStyle(color: Colors.blue),
                 )
               : res.status == "refused"
