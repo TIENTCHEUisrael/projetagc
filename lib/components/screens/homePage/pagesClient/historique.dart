@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projectagc/localisation/localization_constant.dart';
-import 'package:projectagc/themes/constants.dart';
+import 'package:projectagc/services/localisation/localization_constant.dart';
+import 'package:projectagc/services/themes/constants.dart';
 
 class HistoriquePage extends StatefulWidget {
   const HistoriquePage({super.key});

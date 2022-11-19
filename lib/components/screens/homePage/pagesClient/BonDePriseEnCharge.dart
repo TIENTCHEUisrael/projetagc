@@ -1,17 +1,17 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:projectagc/localisation/localization_constant.dart';
+import 'package:projectagc/components/widgets/popup.dart';
+import 'package:projectagc/services/localisation/localization_constant.dart';
 import 'package:projectagc/models/BonDePriseEnCharge/coupon.dart';
 import 'package:projectagc/models/BonDePriseEnCharge/institution.dart';
 import 'package:projectagc/models/BonDePriseEnCharge/locale.dart';
 import 'package:projectagc/models/beneficiaire/beneficiaire.dart';
-import 'package:projectagc/providers/providerBpc.dart';
-import 'package:projectagc/providers/providerCustumer.dart';
-import 'package:projectagc/widgets/popup.dart';
+import 'package:projectagc/services/providers/providerBpc.dart';
+import 'package:projectagc/services/providers/providerCustumer.dart';
+import 'package:projectagc/services/themes/constants.dart';
 import 'package:provider/provider.dart';
 import '../../../animations/custum.dart';
-import '../../../themes/constants.dart';
 import '../../../widgets/bas.dart';
 import '../../../widgets/pageRoute.dart';
 

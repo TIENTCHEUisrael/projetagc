@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:projectagc/themes/constants.dart';
+import 'package:projectagc/services/themes/constants.dart';
 
 class Page2 extends StatefulWidget {
   const Page2({super.key});

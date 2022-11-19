@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:projectagc/screens/navigationPage/navigationPage.dart';
-import 'package:projectagc/themes/constants.dart';
+
+import 'package:projectagc/components/screens/navigationPage/navigationPage.dart';
+import 'package:projectagc/services/themes/constants.dart';
 
 import '../../widgets/bas.dart';
 

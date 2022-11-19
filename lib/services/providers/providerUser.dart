@@ -6,9 +6,9 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/user/shareduser.dart';
-import '../models/user/user.dart';
-import '../services/services.dart';
+import '../../models/user/shareduser.dart';
+import '../../models/user/user.dart';
+import '../services.dart';
 
 enum Statut {
   registing,

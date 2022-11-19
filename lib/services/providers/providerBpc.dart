@@ -5,9 +5,10 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:projectagc/models/BonDePriseEnCharge/institution.dart';
-import '../models/BonDePriseEnCharge/coupon.dart';
-import '../models/BonDePriseEnCharge/locale.dart';
-import '../services/services.dart';
+import 'package:projectagc/models/statutCoupons/statutC.dart';
+import '../../models/BonDePriseEnCharge/coupon.dart';
+import '../../models/BonDePriseEnCharge/locale.dart';
+import '../services.dart';
 
 enum Statut {
   registing,
@@ -97,6 +98,39 @@ class BPCProvider extends ChangeNotifier {
     }
 
     return _var;
+  }
+
+  static Future<Map<String, dynamic>?> getStatuts(String identifiant) async {
+    var listresult;
+    List temp = [];
+    var result;
+    try {
+      var urlstatut =
+          Uri.parse('${Services.urlstatut}Identifiant=$identifiant&i=1');
+
+      final response = await http.post(urlstatut);
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+
+        for (var i in data) {
+          temp.add(i);
+        }
+        print(temp);
+        listresult = StatutC.statutCFromSnapshots(temp);
+      } else {
+        result = {
+          "statut": true,
+          "message": "Your status",
+          "result": listresult
+        };
+      }
+    } on SocketException catch (_) {
+      result = {
+        "statut": false,
+        "message": "Connexion failed",
+      };
+    }
+    return result;
   }
 
   static Future<List<dynamic>> getTowns() async {

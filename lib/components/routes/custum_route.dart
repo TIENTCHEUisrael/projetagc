@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:projectagc/screens/homePage/pagesClient/historique.dart';
-import 'package:projectagc/screens/homePage/pagesClient/servicereclamation.dart';
-import 'package:projectagc/screens/loginPage/loginPage.dart';
-import '../screens/NotFoundPage.dart';
-import '../screens/homePage/homeClientPage.dart';
-import '../screens/homePage/pagesClient/BonDePriseEnCharge.dart';
-import '../screens/homePage/pagesClient/profile.dart';
-import '../screens/homePage/pagesClient/statutB.dart';
+import 'package:projectagc/components/screens/NotFoundPage.dart';
+import 'package:projectagc/components/screens/homePage/homeClientPage.dart';
+import 'package:projectagc/components/screens/homePage/pagesClient/BonDePriseEnCharge.dart';
+import 'package:projectagc/components/screens/homePage/pagesClient/historique.dart';
+import 'package:projectagc/components/screens/homePage/pagesClient/profile.dart';
+import 'package:projectagc/components/screens/homePage/pagesClient/servicereclamation.dart';
+import 'package:projectagc/components/screens/homePage/pagesClient/statutB.dart';
+import 'package:projectagc/components/screens/loginPage/loginPage.dart';
 import 'route_names.dart';
 
 class CustomRoute {

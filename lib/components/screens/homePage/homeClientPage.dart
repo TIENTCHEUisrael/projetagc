@@ -1,12 +1,12 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:projectagc/localisation/localization_constant.dart';
+import 'package:projectagc/components/widgets/navbarClient.dart';
+import 'package:projectagc/services/localisation/localization_constant.dart';
 import 'package:projectagc/main.dart';
 import 'package:projectagc/models/classes/langages.dart';
-import 'package:projectagc/routes/route_names.dart';
-import 'package:projectagc/themes/constants.dart';
-import 'package:projectagc/widgets/navbarClient.dart';
+import 'package:projectagc/components/routes/route_names.dart';
+import 'package:projectagc/services/themes/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../widgets/bas.dart';
 

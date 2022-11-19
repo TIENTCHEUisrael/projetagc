@@ -9,8 +9,8 @@ import 'package:projectagc/models/custumer/sharedCustumer.dart';
 import 'package:projectagc/services/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/user/shareduser.dart';
-import '../models/user/user.dart';
+import '../../models/user/shareduser.dart';
+import '../../models/user/user.dart';
 
 enum Statut {
   registing,

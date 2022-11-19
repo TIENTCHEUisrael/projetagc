@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:projectagc/localisation/localization_constant.dart';
-import 'package:projectagc/providers/providerCustumer.dart';
-import 'package:projectagc/themes/constants.dart';
+import 'package:projectagc/services/localisation/localization_constant.dart';
+import 'package:projectagc/services/providers/providerCustumer.dart';
+import 'package:projectagc/services/providers/providerUser.dart';
+import 'package:projectagc/services/themes/constants.dart';
 import 'package:provider/provider.dart';
 
 import '../animations/custum.dart';
-import '../providers/providerUser.dart';
 
 const String heroAddTodo = 'add-todo-hero';
 

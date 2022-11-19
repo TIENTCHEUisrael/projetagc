@@ -5,8 +5,8 @@ class Services {
   //http://agcassurance.42web.io/api/cities/readall.php?i=4
   //http://agcassurance.42web.io/api/partners/get.php?Institution=1&Town=Douala
   //http://agcassurance.42web.io/api/customers/setPassword.php?Identifiant=test&Password=test34
-//http://agcassurance.42web.io/api/coupon/newcoupon.php?ville=Douala&partenaire=1&client=202120TTAD092067&statut=1&i=3&beneficial=4
-
+  //http://agcassurance.42web.io/api/coupon/newcoupon.php?ville=Douala&partenaire=1&client=202120TTAD092067&statut=1&i=3&beneficial=4
+  //http://agcassurance.42web.io/api/bpc/read.php?Identifiant=2212131KaFo01890&i=1
   //http://agcassurance.42web.io/api/customers/auth2.php?Identifiant=test&Password=test34&i=2
   static String urlclient =
       "http://agcassurance.42web.io/api/customers/auth2.php?";
@@ -23,4 +23,5 @@ class Services {
       "http://agcassurance.42web.io/api/cities/readall.php?i=1";
   static String urlpartners =
       "http://agcassurance.42web.io/api/partners/get.php?Institution=1&";
+  static String urlstatut = "http://agcassurance.42web.io/api/bpc/read.php?";
 }

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:projectagc/localisation/localization_constant.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
-
-import '../../../themes/constants.dart';
+import 'package:projectagc/services/localisation/localization_constant.dart';
+import 'package:projectagc/services/themes/constants.dart';
 
 class ServicePage extends StatefulWidget {
   const ServicePage({super.key});

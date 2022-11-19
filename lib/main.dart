@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:projectagc/localisation/localisation.dart';
-import 'package:projectagc/providers/providerCustumer.dart';
-import 'package:projectagc/providers/providerUser.dart';
-import 'package:projectagc/routes/custum_route.dart';
-import 'package:projectagc/screens/homePage/homeClientPage.dart';
-import 'package:projectagc/screens/navigationPage/navigationPage.dart';
+import 'package:projectagc/components/routes/custum_route.dart';
+import 'package:projectagc/components/screens/homePage/homeClientPage.dart';
+import 'package:projectagc/components/screens/navigationPage/navigationPage.dart';
+import 'package:projectagc/services/localisation/localisation.dart';
+import 'package:projectagc/services/providers/providerCustumer.dart';
+import 'package:projectagc/services/providers/providerUser.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:projectagc/themes/constants.dart';
+import 'package:projectagc/services/themes/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'localisation/localization_constant.dart';
-import 'providers/providerBpc.dart';
+import 'services/localisation/localization_constant.dart';
+import 'services/providers/providerBpc.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 
 void main() {
