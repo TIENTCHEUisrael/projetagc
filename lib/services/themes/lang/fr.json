@@ -58,5 +58,9 @@
    "partner_name":"Nom du partenaire :",
    "partner_desc":"Description :",
    "partner_town":"Ville :",
-   "partner_number":"Numéro a contacter :"
+   "partner_number":"Numéro a contacter :",
+   "statut_coupon":"coupon :",
+   "statut_identifiant":"Identifiant :",
+   "statut_nom":"Nom et prenom : ",
+   "statut_telephone":"Telephone :"
 }

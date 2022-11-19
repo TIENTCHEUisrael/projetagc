@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/models/statutCoupons/statutC.dart';
 import 'package:projectagc/models/user/user.dart';
 import 'package:projectagc/services/localisation/localization_constant.dart';
 import 'package:projectagc/services/providers/providerBpc.dart';
 import 'package:projectagc/services/providers/providerCustumer.dart';
 import 'package:projectagc/services/themes/constants.dart';
-import 'package:provider/provider.dart';
 
 class StatutBpc extends StatefulWidget {
   const StatutBpc({super.key});
@@ -43,6 +43,107 @@ class _StatutBpcState extends State<StatutBpc> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return _isloading
+        ? Center(
+            child: const CircularProgressIndicator(
+              strokeWidth: 1,
+            ),
+          )
+        : result == []
+            ? Center(
+                child: Text(
+                  'No items there',
+                  style: GoogleFonts.poppins(color: blue_color),
+                ),
+              )
+            : ListView.builder(
+                itemCount: result!.length,
+                itemBuilder: (((context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: cardWidget(res: result![index]),
+                  );
+                })),
+              );
+  }
+
+  Widget cardWidget({required StatutC res}) {
+    return InkWell(
+      onTap: () {
+        print('tapp this');
+      },
+      child: Card(
+        elevation: 0.5,
+        child: ListTile(
+          title: Row(children: [
+            Text(
+              getTranslated(context, 'statut_coupon'),
+              style: GoogleFonts.poppins(
+                  color: Colors.black, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              '  ${res.coupon}',
+              style: TextStyle(fontStyle: FontStyle.italic),
+            )
+          ]),
+          subtitle: Column(
+            children: [
+              Row(
+                children: [
+                  Text(getTranslated(context, 'statut_identifiant'),
+                      style: GoogleFonts.poppins(
+                          color: Colors.black, fontWeight: FontWeight.bold)),
+                  SizedBox(
+                    width: 2,
+                  ),
+                  Text(res.identifiantCustumer)
+                ],
+              ),
+              Row(
+                children: [
+                  Text(getTranslated(context, 'statut_nom'),
+                      style: GoogleFonts.poppins(
+                          color: Colors.black, fontWeight: FontWeight.bold)),
+                  SizedBox(
+                    width: 2,
+                  ),
+                  Text(res.nom + ' ' + res.prenom)
+                ],
+              ),
+              Row(
+                children: [
+                  Text(getTranslated(context, 'statut_telephone'),
+                      style: GoogleFonts.poppins(
+                          color: Colors.black, fontWeight: FontWeight.bold)),
+                  SizedBox(
+                    width: 2,
+                  ),
+                  Text(res.telephone)
+                ],
+              ),
+            ],
+          ),
+          leading: Icon(
+            Icons.share,
+            color: red_color,
+            size: 18,
+          ),
+          trailing: res.status == "On analysis"
+              ? const Text(
+                  "En analyse..",
+                  style: TextStyle(color: Colors.blue),
+                )
+              : res.status == "refused"
+                  ? const Text(
+                      "Refused",
+                      style: TextStyle(color: Colors.red),
+                    )
+                  : const Text(
+                      "Finished",
+                      style: TextStyle(color: Colors.green),
+                    ),
+        ),
+      ),
+    );
   }
 }
