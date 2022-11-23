@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/services/localisation/localization_constant.dart';
 import 'package:projectagc/main.dart';
 import 'package:projectagc/models/classes/langages.dart';
@@ -7,6 +8,7 @@ import 'package:projectagc/services/providers/providerCustumer.dart';
 import 'package:projectagc/components/routes/route_names.dart';
 import 'package:projectagc/services/themes/constants.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../widgets/bas.dart';
 
 class Profile extends StatefulWidget {
@@ -67,7 +69,6 @@ class _ProfileState extends State<Profile> {
     }
   }
 
-  bool generate = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,6 +130,12 @@ class _ProfileState extends State<Profile> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
+                                getTranslated(context, 'compte_fu'),
+                                style: GoogleFonts.poppins(
+                                  color: blue_color,
+                                ),
+                              ),
+                              Text(
                                 auth.user.prenom,
                                 style: TextStyle(
                                     color: blue_color,
@@ -153,7 +160,8 @@ class _ProfileState extends State<Profile> {
                         margin: const EdgeInsets.only(top: 8),
                         child: Center(
                           child: Text(
-                            auth.user.email,
+                            getTranslated(context, 'compte_em') +
+                                auth.user.email,
                             style: TextStyle(
                               color: blue_color,
                               fontSize: 18,
@@ -212,8 +220,8 @@ class _ProfileState extends State<Profile> {
                       ),
                       Container(
                         margin: const EdgeInsets.only(top: 10),
-                        height: 2,
-                        width: 300,
+                        height: 0.5,
+                        width: MediaQuery.of(context).size.width / 1.5,
                         color: blue_color,
                       ),
                       Padding(
@@ -222,8 +230,14 @@ class _ProfileState extends State<Profile> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
+                              getTranslated(context, 'compte_se'),
+                            ),
+                            Text(
                               auth.user.sexe,
                               style: TextStyle(color: blue_color, fontSize: 16),
+                            ),
+                            Text(
+                              getTranslated(context, 'compte_nu'),
                             ),
                             Text(
                               auth.user.telephone,
@@ -291,12 +305,12 @@ class _ProfileState extends State<Profile> {
                             ),
                             _isloading
                                 ? LinearProgressIndicator(
-                                    minHeight: 18,
+                                    minHeight: 5,
                                     backgroundColor: Colors.grey,
-                                    value: 0.1,
+                                    value: 0.05,
                                   )
                                 : LinearProgressIndicator(
-                                    minHeight: 18,
+                                    minHeight: 5,
                                     backgroundColor: Colors.grey,
                                     value: t2,
                                   ),
@@ -540,6 +554,17 @@ class _ProfileState extends State<Profile> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             GestureDetector(
+                              onTap: (() async {
+                                var urll =
+                                    "https://agc-assurances.com/reclamations/";
+                                if (await canLaunch(urll)) {
+                                  await launch(urll);
+                                } else {
+                                  Fluttertoast.showToast(
+                                    msg: "Error: Cannot load Url",
+                                  );
+                                }
+                              }),
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 25, vertical: 12),
@@ -556,6 +581,9 @@ class _ProfileState extends State<Profile> {
                               ),
                             ),
                             GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, apropos);
+                              },
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 25, vertical: 12),

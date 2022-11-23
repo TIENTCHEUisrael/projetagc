@@ -13,6 +13,10 @@ class StatutC {
   final String coupon;
   final String amount;
   final String type;
+  String? discount;
+  final String namePartenaire;
+  final String villePartenaire;
+  final String descriptionPartenaire;
 
   StatutC({
     required this.idStatut,
@@ -29,6 +33,10 @@ class StatutC {
     required this.amount,
     required this.type,
     required this.createdAt,
+    required this.namePartenaire,
+    required this.villePartenaire,
+    required this.descriptionPartenaire,
+    this.discount,
   });
 
   factory StatutC.fromJson(dynamic json) {
@@ -46,7 +54,10 @@ class StatutC {
         coupon: json['coupon'],
         amount: json['amount'],
         type: json['type'],
-        createdAt: json['CreatedAt']);
+        createdAt: json['CreatedAt'],
+        namePartenaire: json['name'],
+        villePartenaire: json['town'],
+        descriptionPartenaire: json['description']);
   }
 
   static List<StatutC> statutCFromSnapshots(List snapshot) {
@@ -59,6 +70,6 @@ class StatutC {
 
   @override
   String toString() {
-    return 'StatutC{id:$idStatut,firstname:$nom,lastname:$prenom,telephone:$telephone,category:$category,customer:$identifiantCustumer,sickness:$sickness,status:$status,doctor:$doctor,prescription:$prescription,coupon:$coupon,amount:$amount,type:$type,createdAt:$createdAt}';
+    return 'StatutC{id:$idStatut,firstname:$nom,lastname:$prenom,telephone:$telephone,category:$category,customer:$identifiantCustumer,sickness:$sickness,status:$status,doctor:$doctor,prescription:$prescription,coupon:$coupon,amount:$amount,type:$type,createdAt:$createdAt,namePartenaire:$namePartenaire,villePartenaire:$villePartenaire,}';
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projectagc/components/screens/NotFoundPage.dart';
 import 'package:projectagc/components/screens/homePage/homeClientPage.dart';
+import 'package:projectagc/components/screens/homePage/pagesClient/AproposPage.dart';
 import 'package:projectagc/components/screens/homePage/pagesClient/BonDePriseEnCharge.dart';
 import 'package:projectagc/components/screens/homePage/pagesClient/historique.dart';
 import 'package:projectagc/components/screens/homePage/pagesClient/profile.dart';
@@ -19,9 +20,9 @@ class CustomRoute {
       case compteRoute:
         r = MaterialPageRoute(builder: (_) => Profile());
         break;
-      /*case statutRoute:
-        r = MaterialPageRoute(builder: (_) => StatutBpc());
-        break;*/
+      case apropos:
+        r = MaterialPageRoute(builder: (_) => AproposPage());
+        break;
       case historiqueROute:
         r = MaterialPageRoute(builder: (_) => HistoriquePage());
         break;

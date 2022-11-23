@@ -32,6 +32,10 @@
     "compte_aide":"Help",
     "compte_propos":"About",
     "compte_deconnexion":"LogOut",
+    "compte_nu":"Phone number :", 
+    "compte_se":"Sex :",
+    "compte_em":"Email :",
+    "compte_fu":"Fullname :",
     "statut_title":"Status of receipts",
     "historique_title":"Support voucher history",
     "service_title":"Complaint service",
@@ -63,5 +67,7 @@
     "statut_titre":"Statut Bpc",
     "statut_identifiant":"Identifiant :",
     "statut_nom":"Name and lastname : ",
-    "statut_telephone":"phone :"
+    "statut_telephone":"phone :",
+    "apropos_titretext":"20 YEARS OF PROFESSIONNALISME",
+    "apropos_text":"AGC Approved by the Ministry of Economy and Finance by Order No. 00295/MINEFI/DCE/A of June 07, 2001 on the favorable opinion of CIMA, the Company “Assurances Générales du Cameroun S.A” began its activities in January 2002 in the non-life branch (IARDT). This approval responds to the desire of major Cameroonian groups operating in various sectors of the economy to build a solid insurance company capable of guaranteeing better protection of people and property."
  }

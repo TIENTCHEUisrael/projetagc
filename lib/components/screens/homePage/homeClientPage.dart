@@ -126,7 +126,7 @@ class _HomeClientPageState extends State<HomeClientPage> {
                                     const EdgeInsets.only(left: 80, right: 10),
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: Color(0XF4682B4).withOpacity(0.6),
+                                  color: Color(0XF4682B4).withOpacity(0.7),
                                 ),
                                 child: Column(
                                   children: [
@@ -144,29 +144,16 @@ class _HomeClientPageState extends State<HomeClientPage> {
                                       ),
                                     ),
                                     const SizedBox(
-                                      height: 15,
+                                      height: 5,
                                     ),
                                     GestureDetector(
                                       onTap: () {
                                         Navigator.pushNamed(context, bpcRoute);
                                       },
-                                      child: Card(
-                                        elevation: 3.2,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(60),
-                                          ),
-                                        ),
-                                        child: Container(
-                                          height: 90,
-                                          width: 90,
-                                          alignment: Alignment.center,
-                                          child: const Icon(
-                                            Icons.list_alt,
-                                            color: blue_color,
-                                            size: 50,
-                                          ),
-                                        ),
+                                      child: Image.asset(
+                                        "assets/images/png/doc2.png",
+                                        height: 105,
+                                        width: 130,
                                       ),
                                     ),
                                   ],

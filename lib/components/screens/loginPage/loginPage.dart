@@ -39,8 +39,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    identifiant.text = "2212131KaFo01890";
-    motdepasse.text = "foyang";
+    /*identifiant.text = "2212131KaFo01890";
+    motdepasse.text = "foyang";*/
   }
 
   @override
