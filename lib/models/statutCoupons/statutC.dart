@@ -9,7 +9,6 @@ class StatutC {
   final String createdAt;
   final String status;
   final String doctor;
-  final String prescription;
   final String coupon;
   final String amount;
   final String type;
@@ -28,7 +27,6 @@ class StatutC {
     required this.sickness,
     required this.status,
     required this.doctor,
-    required this.prescription,
     required this.coupon,
     required this.amount,
     required this.type,
@@ -50,7 +48,6 @@ class StatutC {
         sickness: json['sickness'],
         status: json['status'],
         doctor: json['doctor'],
-        prescription: json['prescription'],
         coupon: json['coupon'],
         amount: json['amount'],
         type: json['type'],
@@ -70,6 +67,6 @@ class StatutC {
 
   @override
   String toString() {
-    return 'StatutC{id:$idStatut,firstname:$nom,lastname:$prenom,telephone:$telephone,category:$category,customer:$identifiantCustumer,sickness:$sickness,status:$status,doctor:$doctor,prescription:$prescription,coupon:$coupon,amount:$amount,type:$type,createdAt:$createdAt,namePartenaire:$namePartenaire,villePartenaire:$villePartenaire,}';
+    return 'StatutC{id:$idStatut,firstname:$nom,lastname:$prenom,telephone:$telephone,category:$category,customer:$identifiantCustumer,sickness:$sickness,status:$status,doctor:$doctor,coupon:$coupon,amount:$amount,type:$type,createdAt:$createdAt,namePartenaire:$namePartenaire,villePartenaire:$villePartenaire,}';
   }
 }

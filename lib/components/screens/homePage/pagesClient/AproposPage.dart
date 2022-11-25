@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projectagc/components/widgets/bas.dart';
 import 'package:projectagc/services/localisation/localization_constant.dart';
 import 'package:projectagc/services/themes/constants.dart';
 
@@ -149,6 +150,7 @@ class _AproposPageState extends State<AproposPage> {
                 child: Text(
                   'Le partenariat avec les réassureurs Internationaux renforce notre solvabilité et améliore la qualité de notre service. Pour mener à bien cette mission, nous nous sommes entourées des réassureurs de renom à l’instar de : AFRICA RE, TRUST RE, CICA-RE, CONTINANTAL-RE, ZEP-RE, NCARe, GHANARE, AVENI RE.',
                   textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(),
                 ),
               ),
               Container(
@@ -172,6 +174,7 @@ class _AproposPageState extends State<AproposPage> {
                   ],
                 ),
               ),
+              bas(),
             ],
           ),
         ),

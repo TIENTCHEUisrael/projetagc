@@ -94,12 +94,9 @@ class _StatutBpcState extends State<StatutBpc> {
           ),
           subtitle: Column(
             children: [
-              Text('Identifiant :' + res.identifiantCustumer),
-              Text(getTranslated(context, 'statut_nom') +
-                  res.nom +
-                  ' ' +
-                  res.prenom),
-              Text(getTranslated(context, 'statut_telephone') + res.telephone),
+              Text(getTranslated(context, 'statut_nom') + res.namePartenaire),
+              Text(getTranslated(context, 'statut_ville') +
+                  res.descriptionPartenaire),
             ],
           ),
           leading: Icon(
@@ -111,13 +108,13 @@ class _StatutBpcState extends State<StatutBpc> {
                   "En analyse..",
                   style: TextStyle(color: Colors.blue),
                 )
-              : res.status == "refused"
+              : res.status == "Refused"
                   ? const Text(
                       "Refused",
                       style: TextStyle(color: Colors.red),
                     )
                   : const Text(
-                      "Finished",
+                      "Validated",
                       style: TextStyle(color: Colors.green),
                     ),
         ),
