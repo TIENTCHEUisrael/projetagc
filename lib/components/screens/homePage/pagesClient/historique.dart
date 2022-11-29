@@ -78,7 +78,7 @@ class _HistoriquePageState extends State<HistoriquePage> {
 }
 
 class MysearchDelegate extends SearchDelegate {
-  List<String> searchresults = ['Brasil', 'Congo', 'India', 'Ruusta', 'USA'];
+  List<String> searchresults = [];
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [

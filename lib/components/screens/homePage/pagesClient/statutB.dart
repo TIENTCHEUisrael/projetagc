@@ -95,22 +95,22 @@ class _StatutBpcState extends State<StatutBpc> {
           subtitle: Column(
             children: [
               Text(getTranslated(context, 'statut_nom') + res.namePartenaire),
-              Text(getTranslated(context, 'statut_ville') +
-                  res.descriptionPartenaire),
+              Text(
+                  getTranslated(context, 'statut_ville') + res.villePartenaire),
             ],
           ),
           leading: Icon(
-            Icons.share,
-            color: red_color,
+            Icons.gpp_good_sharp,
+            color: blue_color,
           ),
           trailing: res.status == "On analysis"
               ? const Text(
                   "En analyse..",
                   style: TextStyle(color: Colors.blue),
                 )
-              : res.status == "Refused"
+              : res.status == "Rejected"
                   ? const Text(
-                      "Refused",
+                      "Rejected",
                       style: TextStyle(color: Colors.red),
                     )
                   : const Text(

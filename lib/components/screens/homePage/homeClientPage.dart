@@ -1,6 +1,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/components/widgets/navbarClient.dart';
 import 'package:projectagc/services/localisation/localization_constant.dart';
 import 'package:projectagc/main.dart';
@@ -112,6 +113,7 @@ class _HomeClientPageState extends State<HomeClientPage> {
                     ),
                   ),
                   Stack(
+                    alignment: Alignment.centerLeft,
                     children: [
                       Center(
                         child: Column(
@@ -121,12 +123,12 @@ class _HomeClientPageState extends State<HomeClientPage> {
                               padding:
                                   const EdgeInsets.only(top: 140.0, left: 50),
                               child: Container(
-                                padding: const EdgeInsets.all(40),
-                                margin:
-                                    const EdgeInsets.only(left: 80, right: 10),
+                                padding: const EdgeInsets.all(50),
+                                margin: const EdgeInsets.only(
+                                    left: 80, right: 10, top: 20),
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: Color(0XF4682B4).withOpacity(0.7),
+                                  color: Color(0XF4682B4).withOpacity(0.6),
                                 ),
                                 child: Column(
                                   children: [
@@ -134,26 +136,38 @@ class _HomeClientPageState extends State<HomeClientPage> {
                                       child: Text(
                                         //'Requerir un bon de prise en charge',
                                         getTranslated(context, 'home_info'),
-                                        style: TextStyle(
-                                          color: AdaptiveTheme.of(context)
-                                              .theme
-                                              .primaryColor,
-                                          fontSize: 20,
-                                        ),
+                                        style: GoogleFonts.poppins(
+                                            color: AdaptiveTheme.of(context)
+                                                .theme
+                                                .primaryColor,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold),
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
                                     const SizedBox(
                                       height: 5,
                                     ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.pushNamed(context, bpcRoute);
-                                      },
-                                      child: Image.asset(
-                                        "assets/images/png/doc2.png",
-                                        height: 105,
-                                        width: 130,
+                                    Center(
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            padding: EdgeInsets.all(10),
+                                            fixedSize: Size(100, 100),
+                                            shape: CircleBorder(),
+                                            side: BorderSide(
+                                                color: Colors.black12,
+                                                width: 1),
+                                            elevation: 10,
+                                            shadowColor: Color(0XF4682B4)
+                                                .withOpacity(0.7),
+                                            primary: Color(0XF4682B4)
+                                                .withOpacity(0.3)),
+                                        onPressed: () {},
+                                        child: Image.asset(
+                                          "assets/images/png/doc2.png",
+                                          height: 70,
+                                          width: 70,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -233,3 +247,59 @@ class _HomeClientPageState extends State<HomeClientPage> {
     );
   }
 }
+
+/** Stack(
+                    alignment: Alignment.centerLeft,
+                    children: [
+                      Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 140.0, left: 50),
+                              child: Container(
+                                padding: const EdgeInsets.all(40),
+                                margin:
+                                    const EdgeInsets.only(left: 80, right: 10),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Color(0XF4682B4).withOpacity(0.7),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Center(
+                                      child: Text(
+                                        //'Requerir un bon de prise en charge',
+                                        getTranslated(context, 'home_info'),
+                                        style: TextStyle(
+                                          color: AdaptiveTheme.of(context)
+                                              .theme
+                                              .primaryColor,
+                                          fontSize: 20,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.pushNamed(context, bpcRoute);
+                                      },
+                                      child: Image.asset(
+                                        "assets/images/png/doc2.png",
+                                        height: 105,
+                                        width: 130,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ), */
