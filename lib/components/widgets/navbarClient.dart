@@ -154,7 +154,7 @@ class _NavBarClientState extends State<NavBarClient> {
             const SizedBox(
               height: 8,
             ),
-            Container(
+            /*Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
@@ -181,7 +181,7 @@ class _NavBarClientState extends State<NavBarClient> {
             ),
             const SizedBox(
               height: 8,
-            ),
+            ),*/
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(

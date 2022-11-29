@@ -6,7 +6,6 @@ import 'package:projectagc/components/screens/homePage/pagesClient/BonDePriseEnC
 import 'package:projectagc/components/screens/homePage/pagesClient/historique.dart';
 import 'package:projectagc/components/screens/homePage/pagesClient/profile.dart';
 import 'package:projectagc/components/screens/homePage/pagesClient/servicereclamation.dart';
-import 'package:projectagc/components/screens/homePage/pagesClient/statutB.dart';
 import 'package:projectagc/components/screens/loginPage/loginPage.dart';
 import 'route_names.dart';
 
