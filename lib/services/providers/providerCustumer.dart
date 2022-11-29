@@ -88,6 +88,7 @@ class ProviderCustumer extends ChangeNotifier {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var _affiliaires;
     var result;
+
     try {
       final res = await InternetAddress.lookup('google.com');
       if (res.isNotEmpty && res[0].rawAddress.isNotEmpty) {
