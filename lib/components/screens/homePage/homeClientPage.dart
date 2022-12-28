@@ -7,7 +7,6 @@ import 'package:projectagc/services/localisation/localization_constant.dart';
 import 'package:projectagc/main.dart';
 import 'package:projectagc/models/classes/langages.dart';
 import 'package:projectagc/components/routes/route_names.dart';
-import 'package:projectagc/services/themes/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../widgets/bas.dart';
 
@@ -139,7 +138,7 @@ class _HomeClientPageState extends State<HomeClientPage> {
                                         style: GoogleFonts.poppins(
                                             color: AdaptiveTheme.of(context)
                                                 .theme
-                                                .primaryColor,
+                                                .hintColor,
                                             fontSize: 17,
                                             fontWeight: FontWeight.bold),
                                         textAlign: TextAlign.center,
@@ -162,7 +161,10 @@ class _HomeClientPageState extends State<HomeClientPage> {
                                                 .withOpacity(0.7),
                                             primary: Color(0XF4682B4)
                                                 .withOpacity(0.3)),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, bpcRoute);
+                                        },
                                         child: Image.asset(
                                           "assets/images/png/doc2.png",
                                           height: 70,

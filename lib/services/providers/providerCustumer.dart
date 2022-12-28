@@ -93,7 +93,7 @@ class ProviderCustumer extends ChangeNotifier {
       final res = await InternetAddress.lookup('google.com');
       if (res.isNotEmpty && res[0].rawAddress.isNotEmpty) {
         var urlLogin = Uri.parse(
-            '${Services.urlclient}Identifiant=$identifiant&Password=$pass&i=2');
+            '${Services.urlclient}Identifiant=$identifiant&Password=$pass');
         var response = await http.post(urlLogin);
         if (response.statusCode == 200) {
           print(

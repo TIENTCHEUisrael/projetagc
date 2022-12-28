@@ -1,27 +1,27 @@
 class Services {
-  //http://agcassurance.42web.io/api/customers/auth.php?Identifiant=test&Password=test
-  //http://agcassurance.42web.io/api/client/update.php?Prenom=israel&Nom=braselin&Sexe=Masculin&Nom_Societe=untest&Password=test&Email=test&Photo=test&Telephone=test&Ville=test&Identifiant=test
-  //http://agcassurance.42web.io/api/cities/readall.php
-  //http://agcassurance.42web.io/api/cities/readall.php?i=4
-  //http://agcassurance.42web.io/api/partners/get.php?Institution=1&Town=Douala
-  //http://agcassurance.42web.io/api/customers/setPassword.php?Identifiant=test&Password=test34
-  //http://agcassurance.42web.io/api/coupon/newcoupon.php?ville=Douala&partenaire=1&client=202120TTAD092067&statut=1&i=3&beneficial=4
-  //http://agcassurance.42web.io/api/bpc/read.php?Identifiant=2212131KaFo01890&i=1
-  //http://agcassurance.42web.io/api/customers/auth2.php?Identifiant=test&Password=test34&i=2
+  //https://agcassurance.site/api/customers/auth.php?Identifiant=test&Password=test
+  //https://agcassurance.site/api/client/update.php?Prenom=israel&Nom=braselin&Sexe=Masculin&Nom_Societe=untest&Password=test&Email=test&Photo=test&Telephone=test&Ville=test&Identifiant=test
+  //https://agcassurance.site/api/cities/readall.php
+  //https://agcassurance.site/api/cities/readall.php?i=4
+  //https://agcassurance.site/api/partners/get.php?Institution=1&Town=Douala
+  //https://agcassurance.site/api/customers/setPassword.php?Identifiant=test&Password=test34
+  //https://agcassurance.site/api/coupon/newcoupon.php?ville=Douala&partenaire=1&client=202120TTAD092067&statut=1&i=3&beneficial=4
+  //https://agcassurance.site/api/bpc/read.php?Identifiant=2212131KaFo01890&i=1
+  //https://agcassurance.site/api/customers/auth2.php?Identifiant=test&Password=test34&i=2
+  //https://agcassurance.site/api/customers/auth2.php?Identifiant=test&Password=test
   static String urlclient =
-      "http://agcassurance.42web.io/api/customers/auth2.php?";
-  static String urllist =
-      "http://agcassurance.42web.io/api/institution/read.php?";
+      "https://agcassurance.site/api/customers/auth2.php?";
+  static String urllist = "https://agcassurance.site/api/institution/read.php?";
   static String urlcoupon =
-      "http://agcassurance.42web.io/api/coupon/newcoupon.php?";
-  static String urlinstitut = "http://agcassurance.42web.io/api/partners";
+      "https://agcassurance.site/api/coupon/newcoupon.php?";
+  static String urlinstitut = "https://agcassurance.site/api/partners";
   static String urlgetallinstitut =
-      "http://agcassurance.42web.io/api/partners/read.php";
+      "https://agcassurance.site/api/partners/read.php";
   static String urlupdate =
-      "http://agcassurance.42web.io/api/customers/setPassword.php?";
+      "https://agcassurance.site/api/customers/setPassword.php?";
   static String urlvillepartenaire =
-      "http://agcassurance.42web.io/api/cities/readall.php?i=1";
+      "https://agcassurance.site/api/cities/readall.php?i=1";
   static String urlpartners =
-      "http://agcassurance.42web.io/api/partners/get.php?Institution=1&";
-  static String urlstatut = "http://agcassurance.42web.io/api/bpc/read.php?";
+      "https://agcassurance.site/api/partners/get.php?Institution=1&";
+  static String urlstatut = "https://agcassurance.site/api/bpc/read.php?";
 }
