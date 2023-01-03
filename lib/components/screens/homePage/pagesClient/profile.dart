@@ -403,7 +403,7 @@ class _ProfileState extends State<Profile> {
                                                   border: InputBorder.none,
                                                   hintText: "Mot de passe",
                                                   icon: const Icon(Icons.key),
-                                                  suffixIcon: IconButton(
+                                                  /*suffixIcon: IconButton(
                                                     icon: _iconchange,
                                                     onPressed: () {
                                                       if (_obscureText) {
@@ -429,7 +429,7 @@ class _ProfileState extends State<Profile> {
                                                         });
                                                       }
                                                     },
-                                                  ),
+                                                  ),*/
                                                 ),
                                                 keyboardType:
                                                     TextInputType.name,
