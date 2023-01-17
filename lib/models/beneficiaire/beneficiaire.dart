@@ -1,5 +1,5 @@
 class Beneficiaire {
-  final String? idBeneficiaire;
+  final int? idBeneficiaire;
   final String nom;
   final String prenom;
   final String client;
@@ -21,7 +21,7 @@ class Beneficiaire {
 
   factory Beneficiaire.fromJson(dynamic json) {
     return Beneficiaire(
-        idBeneficiaire: json['id'] as String,
+        idBeneficiaire: json['id'] as int,
         nom: json['firstname'] as String,
         prenom: json['lastname'] as String,
         client: json['customer'] as String,

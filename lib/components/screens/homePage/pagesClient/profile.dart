@@ -329,14 +329,14 @@ class _ProfileState extends State<Profile> {
                                   width: 5,
                                 ),
                                 Text(
-                                  auth.user.used,
+                                  auth.user.used.toString(),
                                   style: TextStyle(
                                     color: blue_color,
                                   ),
                                 ),
                                 Text('/'),
                                 Text(
-                                  auth.user.maximum,
+                                  auth.user.maximum.toString(),
                                   style: TextStyle(color: blue_color),
                                 ),
                               ],

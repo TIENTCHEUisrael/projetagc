@@ -51,6 +51,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
   }
 
   Future<void> getLocales() async {
+    print("..........Get ...........");
     _locales = await BPCProvider.getlocales();
   }
 
@@ -466,8 +467,9 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                             subtitle: Padding(
                                               padding: const EdgeInsets.only(
                                                   top: 2, left: 45),
-                                              child: Text(
-                                                  partenaire!.institutionId),
+                                              child: Text(partenaire!
+                                                  .institutionId
+                                                  .toString()),
                                             ),
                                           )
                                         ],
@@ -516,7 +518,8 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                 for (var i in auth.beneficiaires) {
                                   if (beneficiaire == i) {
                                     setState(() {
-                                      numberBeneficiaire = i.idBeneficiaire!;
+                                      numberBeneficiaire =
+                                          i.idBeneficiaire!.toString();
                                     });
                                   } else if (beneficiaire == null) {
                                     setState(() {

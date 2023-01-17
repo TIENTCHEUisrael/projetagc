@@ -10,11 +10,11 @@ class User {
   final String photo;
   final String telephone;
   final String ville;
-  final String remise;
+  final int remise;
   final String rang;
-  final String maximum;
-  final String used;
-  final String beneficial;
+  final int maximum;
+  final int used;
+  final int beneficial;
   final String expireDate;
   final String dateNaissance;
   final String createdAt;
@@ -58,11 +58,11 @@ class User {
       photo: json['Photo'] as String,
       telephone: json['Telephone'] as String,
       ville: json['town'] as String,
-      remise: json['discount'] as String,
+      remise: json['discount'] as int,
       rang: json['rank'] as String,
-      maximum: json['maximum'] as String,
-      beneficial: json['beneficial'] as String,
-      used: json['used'] as String,
+      maximum: json['maximum'] as int,
+      beneficial: json['beneficial'] as int,
+      used: json['used'] as int,
       expireDate: json['expiry_date'] as String,
       dateNaissance: json['birth_day'] as String,
       createdAt: json['CreatedAt'] as String,

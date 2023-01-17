@@ -1,7 +1,7 @@
 class Institutions {
-  final String id;
+  final int id;
   final String name;
-  final String institutionId;
+  final int institutionId;
   final String ville;
   final String description;
 
@@ -14,9 +14,9 @@ class Institutions {
 
   factory Institutions.fromJson(dynamic json) {
     return Institutions(
-        id: json['id'] as String,
+        id: json['id'] as int,
         name: json['name'] as String,
-        institutionId: json['institution'] as String,
+        institutionId: json['institution'] as int,
         ville: json['town'] as String,
         description: json['description'] as String);
   }

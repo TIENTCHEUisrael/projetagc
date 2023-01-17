@@ -1,7 +1,7 @@
 class Coupon {
   final int? id;
   final String ville;
-  final String partenaire;
+  final int partenaire;
   final String identifiantclient;
   final String? beneficial;
 
@@ -15,7 +15,7 @@ class Coupon {
   factory Coupon.fromJson(dynamic json) {
     return Coupon(
       ville: json['ville'] as String,
-      partenaire: json['partenaire'] as String,
+      partenaire: json['partenaire'] as int,
       identifiantclient: json['identifiant'] as String,
       beneficial: json['beneficial'] as String,
     );
