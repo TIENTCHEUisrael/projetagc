@@ -154,34 +154,6 @@ class _NavBarClientState extends State<NavBarClient> {
             const SizedBox(
               height: 8,
             ),
-            /*Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: AdaptiveTheme.of(context).theme.primaryColor,
-                ),
-              ),
-              child: ListTile(
-                leading: const Icon(
-                  Icons.search_sharp,
-                  color: blue_color,
-                ),
-                title: Text(
-                  getTranslated(context, 'nav_historique'),
-                ),
-                onLongPress: () {
-                  return;
-                },
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, historiqueROute);
-                },
-              ),
-            ),
-            const SizedBox(
-              height: 8,
-            ),*/
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(

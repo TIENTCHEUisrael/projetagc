@@ -22,4 +22,5 @@ class Services {
   static String urlpartners =
       "https://agc.levegi.com/api/partners/get.php?Institution=1&";
   static String urlstatut = "https://agc.levegi.com/api/bpc/read.php?";
+  static String urlpdf = "https://agc.levegi.com/pdfs/generated";
 }

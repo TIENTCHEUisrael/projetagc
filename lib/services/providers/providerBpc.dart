@@ -133,6 +133,23 @@ class BPCProvider extends ChangeNotifier {
     return listresult;
   }
 
+  static Future<List<dynamic>> downoaldpdf(StatutC status) async {
+    var result;
+    var urlpdf = Uri.parse("${Services.urlpdf}/${status.idStatut}.pdf");
+    try {
+      var response = await http.post(urlpdf);
+      if (response.statusCode == 200) {
+        result = {"statut": true, "message": "get pdf"};
+      }
+    } on SocketException catch (_) {
+      result = {
+        "statut": false,
+        "message": "Connexion failed",
+      };
+    }
+    return result;
+  }
+
   static Future<List<dynamic>> getTowns() async {
     List _temp = [];
     var url = Uri.parse("${Services.urlvillepartenaire}");
