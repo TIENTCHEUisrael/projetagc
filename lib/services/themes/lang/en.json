@@ -63,14 +63,15 @@
     "partner_desc":"Description :",
     "partner_town":"Town :",
     "partner_number":"Number to contact :",
-    "statut_coupon":"Coupon :",
+    "statut_coupon":"Coupon: ",
     "statut_titre":"Statut Bpc",
     "statut_identifiant":"Identifiant :",
-    "statut_nom":"Name partner : ",
-    "statut_desc":"Description :",
-    "statut_ville":"City :",
-    "statut_doctor":"Doctor :",
+    "statut_nom":"Partner: ",
+    "statut_desc":"Description: ",
+    "statut_ville":"City: ",
+    "statut_doctor":"Doctor: ",
     "apropos_titretext":"20 YEARS OF PROFESSIONNALISME",
     "apropos_text":"AGC Approved by the Ministry of Economy and Finance by Order No. 00295/MINEFI/DCE/A of June 07, 2001 on the favorable opinion of CIMA, the Company “Assurances Générales du Cameroun S.A” began its activities in January 2002 in the non-life branch (IARDT). This approval responds to the desire of major Cameroonian groups operating in various sectors of the economy to build a solid insurance company capable of guaranteeing better protection of people and property.",
-    "apropos_titretext1":"AGC in number"
+    "apropos_titretext1":"AGC in number",
+    "no_items":"No statut started!"
 }

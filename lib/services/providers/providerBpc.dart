@@ -70,7 +70,7 @@ class BPCProvider extends ChangeNotifier {
         "statut": false,
         "message": "Connexion failed",
       };
-    }
+    } catch (e) {}
     return result;
   }
 
@@ -133,19 +133,16 @@ class BPCProvider extends ChangeNotifier {
     return listresult;
   }
 
-  static Future<List<dynamic>> downoaldpdf(StatutC status) async {
+  static Future<String> downoaldpdf(StatutC status) async {
     var result;
     var urlpdf = Uri.parse("${Services.urlpdf}/${status.idStatut}.pdf");
     try {
-      var response = await http.post(urlpdf);
+      var response = await http.get(urlpdf);
       if (response.statusCode == 200) {
-        result = {"statut": true, "message": "get pdf"};
+        result = "${Services.urlpdf}/${status.idStatut}.pdf";
       }
     } on SocketException catch (_) {
-      result = {
-        "statut": false,
-        "message": "Connexion failed",
-      };
+      result = "";
     }
     return result;
   }

@@ -11,7 +11,7 @@ class Services {
   //https://agc.levegi.com/api/customers/auth2.php?Identifiant=test&Password=test
   static String urlclient = "https://agc.levegi.com/api/customers/auth2.php?";
   static String urllist = "https://agc.levegi.com/api/institution/read.php?";
-  static String urlcoupon = "https://agc.levegi.com/api/coupon/newcoupon.php?";
+  static String urlcoupon = "https://agcassurance.site/api/coupon/newcoupon.php?";
   static String urlinstitut = "https://agc.levegi.com/api/partners";
   static String urlgetallinstitut =
       "https://agc.levegi.com/api/partners/read.php";

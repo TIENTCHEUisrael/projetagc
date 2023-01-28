@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_file_downloader/flutter_file_downloader.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/models/statutCoupons/statutC.dart';
 import 'package:projectagc/models/user/user.dart';
@@ -15,10 +17,28 @@ class StatutBpc extends StatefulWidget {
 }
 
 class _StatutBpcState extends State<StatutBpc> {
+  StatutC c = StatutC(
+      idStatut: "idStatut",
+      nom: "nom",
+      prenom: "prenom",
+      telephone: "232323",
+      category: "category",
+      identifiantCustumer: "identifiantCustumer",
+      sickness: "sickness",
+      status: "status",
+      doctor: "doctor",
+      coupon: "coupon",
+      amount: "amount",
+      type: "type",
+      createdAt: "createdAt",
+      namePartenaire: "namePartenaire",
+      villePartenaire: "villePartenaire",
+      descriptionPartenaire: "descriptionPartenaire");
   bool _isloading = true;
   List<StatutC>? result;
   String? identifiant;
   User? _user;
+  String? _link;
 
   @override
   void initState() {
@@ -28,6 +48,7 @@ class _StatutBpcState extends State<StatutBpc> {
 
   Future<void> getStatus() async {
     result = await BPCProvider.getStatuts(widget.user.identifiant);
+    print(result);
     setState(() {
       _isloading = false;
     });
@@ -62,13 +83,14 @@ class _StatutBpcState extends State<StatutBpc> {
                 strokeWidth: 1,
               ),
             )
-          : result == []
-              ? Center(
+          : result!.isEmpty
+              ? /*Center(
                   child: Text(
-                    'No items there',
+                    getTranslated(context, 'no_items'),
                     style: GoogleFonts.poppins(color: blue_color),
                   ),
-                )
+                )*/
+              cardWidget(res: c)
               : ListView.builder(
                   itemCount: result!.length,
                   itemBuilder: (((context, index) {
@@ -82,21 +104,35 @@ class _StatutBpcState extends State<StatutBpc> {
   }
 
   Widget cardWidget({required StatutC res}) {
+    double? _progress;
     return InkWell(
       onTap: () {
         print('tapp this');
       },
       child: Card(
-        elevation: 0.5,
+        elevation: 2.5,
         child: ListTile(
-          title: Text(
-            getTranslated(context, 'statut_coupon') + '  ${res.coupon}',
+          title: Row(
+            children: [
+              Text(
+                getTranslated(context, 'statut_coupon'),
+              ),
+              Text(
+                res.coupon,
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            ],
           ),
           subtitle: Column(
             children: [
-              Text(getTranslated(context, 'statut_nom') + res.namePartenaire),
               Text(
-                  getTranslated(context, 'statut_ville') + res.villePartenaire),
+                getTranslated(context, 'statut_nom') + res.namePartenaire,
+              ),
+              Text(
+                getTranslated(context, 'statut_ville') + res.villePartenaire,
+              ),
             ],
           ),
           leading: Icon(
@@ -113,9 +149,58 @@ class _StatutBpcState extends State<StatutBpc> {
                       "Rejected",
                       style: TextStyle(color: Colors.red),
                     )
-                  : const Text(
-                      "Validated",
-                      style: TextStyle(color: Colors.green),
+                  : Column(
+                      children: [
+                        const Text(
+                          "Validated",
+                          style: TextStyle(color: Colors.green),
+                        ),
+                        _progress != null
+                            ? const CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 1,
+                              )
+                            : GestureDetector(
+                                onTap: () async {
+                                  _link = await BPCProvider.downoaldpdf(res);
+                                  if (_link!.isNotEmpty) {
+                                    FileDownloader.downloadFile(
+                                        url: _link!.trim(),
+                                        onProgress: ((fileName, progress) {
+                                          setState(() {
+                                            _progress = progress;
+                                          });
+                                        }),
+                                        onDownloadCompleted: (value) {
+                                          print("$value");
+                                          Fluttertoast.showToast(
+                                            msg: "Your path:$value",
+                                          );
+                                          setState(() {
+                                            _progress = null;
+                                          });
+                                        });
+                                  } else {
+                                    print('error');
+                                  }
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                    top: 10,
+                                  ),
+                                  padding: EdgeInsets.all(7),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: red_color,
+                                  ),
+                                  child: Text(
+                                    'Downoald',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 9),
+                                  ),
+                                ),
+                              ),
+                      ],
                     ),
         ),
       ),

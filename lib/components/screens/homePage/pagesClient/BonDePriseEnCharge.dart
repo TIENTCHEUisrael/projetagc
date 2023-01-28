@@ -51,7 +51,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
   }
 
   Future<void> getLocales() async {
-    print("..........Get ...........");
+    print("..........Get Locale...........");
     _locales = await BPCProvider.getlocales();
   }
 
@@ -137,7 +137,9 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                             child: DropdownButton(
                               hint: Text(
                                 getTranslated(context, 'bpc_type_choice'),
-                                style: TextStyle(color: Colors.black),
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                ),
                               ),
                               value: locale,
                               dropdownColor: Colors.white,
@@ -216,9 +218,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                 underline: SizedBox(),
                                 //isExpanded: true,
                                 style: TextStyle(
-                                  color: AdaptiveTheme.of(context)
-                                      .theme
-                                      .primaryColor,
+                                  color: blue_color,
                                 ),
                                 onChanged: (newvalue) {
                                   setState(() {

@@ -64,20 +64,27 @@ class _NavBarClientState extends State<NavBarClient> {
                   ),
                 ],
               ),
-              accountEmail: Row(
-                children: [
-                  Text(
-                    getTranslated(context, 'nav_email'),
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      color: scaffoldbackground,
+              accountEmail: Expanded(
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          getTranslated(context, 'nav_email'),
+                          style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            color: scaffoldbackground,
+                          ),
+                        ),
+                        Text(
+                          auth.user.email,
+                          style: TextStyle(color: Colors.white70),
+                        ),
+                      ],
                     ),
-                  ),
-                  Text(
-                    auth.user.email,
-                    style: TextStyle(color: Colors.white70),
-                  ),
-                ],
+                  ],
+                ),
               ),
               currentAccountPicture: CircleAvatar(
                 child: ClipOval(
