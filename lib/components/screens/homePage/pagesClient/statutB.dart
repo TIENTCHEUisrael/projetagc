@@ -84,13 +84,13 @@ class _StatutBpcState extends State<StatutBpc> {
               ),
             )
           : result!.isEmpty
-              ? /*Center(
+              ? Center(
                   child: Text(
                     getTranslated(context, 'no_items'),
                     style: GoogleFonts.poppins(color: blue_color),
                   ),
-                )*/
-              cardWidget(res: c)
+                )
+              //cardWidget(res: c)
               : ListView.builder(
                   itemCount: result!.length,
                   itemBuilder: (((context, index) {
@@ -181,7 +181,9 @@ class _StatutBpcState extends State<StatutBpc> {
                                           });
                                         });
                                   } else {
-                                    print('error');
+                                    Fluttertoast.showToast(
+                                      msg: "Error: Not found file",
+                                    );
                                   }
                                 },
                                 child: Container(

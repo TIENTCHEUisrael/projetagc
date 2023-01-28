@@ -140,6 +140,8 @@ class BPCProvider extends ChangeNotifier {
       var response = await http.get(urlpdf);
       if (response.statusCode == 200) {
         result = "${Services.urlpdf}/${status.idStatut}.pdf";
+      } else {
+        result = "";
       }
     } on SocketException catch (_) {
       result = "";

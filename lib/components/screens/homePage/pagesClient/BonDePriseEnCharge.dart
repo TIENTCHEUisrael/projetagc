@@ -26,7 +26,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
   bool value = false;
   List<dynamic>? town;
   String? ville;
-  List<Locales>? _locales;
+  List<Locales> _locales = [];
   Locales? locale;
   List<Institutions>? _intitutionss;
   Institutions? partenaire;
@@ -157,7 +157,7 @@ class _BonPriseChargeState extends State<BonPriseCharge> {
                                   t1 = false;
                                 });
                               },
-                              items: _locales!.map(
+                              items: _locales.map(
                                 (valueItem) {
                                   return DropdownMenuItem(
                                       value: valueItem,

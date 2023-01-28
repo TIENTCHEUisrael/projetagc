@@ -235,6 +235,19 @@ class _NavBarClientState extends State<NavBarClient> {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
               child: ListTile(
+                  leading: const Icon(
+                    Icons.info,
+                    color: blue_color,
+                  ),
+                  title: Text(getTranslated(context, 'compte_propos')),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, apropos);
+                  }),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              child: ListTile(
                 leading: const Icon(
                   Icons.exit_to_app,
                   color: blue_color,
