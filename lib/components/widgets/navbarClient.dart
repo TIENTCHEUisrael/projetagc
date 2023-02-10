@@ -98,6 +98,10 @@ class _NavBarClientState extends State<NavBarClient> {
                           auth.user.photo,
                           width: 100,
                           height: 100,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.asset('assets/images/png/profile.png',
+                                width: 100, height: 100, fit: BoxFit.cover);
+                          },
                         ),
                 ),
               ),
@@ -189,31 +193,6 @@ class _NavBarClientState extends State<NavBarClient> {
             ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
-              child: SwitchListTile(
-                title: Text('Mode sombre'),
-                secondary: Icon(
-                  Icons.nightlight_round,
-                  color: blue_color,
-                ),
-                value: darkmode,
-                onChanged: (value) {
-                  print(value);
-                  if (value == true) {
-                    AdaptiveTheme.of(context).setDark();
-                  } else {
-                    AdaptiveTheme.of(context).setLight();
-                  }
-                  setState(() {
-                    darkmode = value;
-                  });
-                },
-              ),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
               child: ListTile(
                 leading: const Icon(
                   Icons.design_services,
@@ -244,6 +223,34 @@ class _NavBarClientState extends State<NavBarClient> {
                     Navigator.pop(context);
                     Navigator.pushNamed(context, apropos);
                   }),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              child: SwitchListTile(
+                title: Text('Mode sombre'),
+                secondary: Icon(
+                  Icons.nightlight_round,
+                  color: blue_color,
+                ),
+                value: darkmode,
+                onChanged: (value) {
+                  print(value);
+                  if (value == true) {
+                    AdaptiveTheme.of(context).setDark();
+                  } else {
+                    AdaptiveTheme.of(context).setLight();
+                  }
+                  setState(() {
+                    darkmode = value;
+                  });
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 8,
             ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),

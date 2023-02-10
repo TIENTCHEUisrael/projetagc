@@ -101,7 +101,7 @@ class _ProfileState extends State<Profile> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
                     color: scaffoldbackground),
-                margin: const EdgeInsets.only(left: 20, right: 20, top: 30),
+                margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: SingleChildScrollView(
                   child: Column(
@@ -119,6 +119,13 @@ class _ProfileState extends State<Profile> {
                                     auth.user.photo,
                                     width: 150,
                                     height: 100,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Image.asset(
+                                          'assets/images/png/profile.png',
+                                          width: 100,
+                                          height: 150,
+                                          fit: BoxFit.contain);
+                                    },
                                   ),
                           ),
                         ),
