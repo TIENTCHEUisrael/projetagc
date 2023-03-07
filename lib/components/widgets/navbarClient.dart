@@ -178,7 +178,9 @@ class _NavBarClientState extends State<NavBarClient> {
                   Icons.handshake,
                   color: blue_color,
                 ),
-                title: Text(getTranslated(context, 'nav_service')),
+                title: Text(
+                  getTranslated(context, 'nav_service'),
+                ),
                 onLongPress: () {
                   return;
                 },
