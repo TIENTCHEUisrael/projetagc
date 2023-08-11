@@ -126,7 +126,7 @@ class _PopupMotdepasseState extends State<PopupMotdepasse> {
                               borderRadius: BorderRadius.circular(20),
                               color: blue_color),
                           child: _isloading
-                              ? Center(child: const CircularProgressIndicator())
+                              ? Center(child: CircularProgressIndicator())
                               : Text(
                                   getTranslated(
                                       context, 'compte_modifier_button'),

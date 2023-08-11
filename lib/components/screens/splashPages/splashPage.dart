@@ -6,8 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:projectagc/components/screens/navigationPage/navigationPage.dart';
 import 'package:projectagc/services/themes/constants.dart';
 
-import '../../widgets/bas.dart';
-
 const blue = "#182983";
 const rouge = "#E3001B";
 
